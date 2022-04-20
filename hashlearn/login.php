@@ -18,13 +18,13 @@
 
     if(empty($username)){
         //when username field is empty
-        header("Location:index.php?error=Username is required");
+        header("Location:login.php?error=Username is required");
         exit();
     }
 
     else if(empty($password)){
         //when password field is empty
-        header("Location:index.php>error=Password is required");
+        header("Location:login.php>error=Password is required");
         exit();
     }
 
@@ -80,13 +80,13 @@
             }
 
             else{
-                header("Location:index.php?error=Incorrect username or password");
+                header("Location:login.php?error=Incorrect username or password");
                 exit();
             }
         }
 
         else{
-            header("Location:index.php?error=Incorrect username or password");
+            header("Location:login.php?error=Incorrect username or password");
         }
     }
 ?>
