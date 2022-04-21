@@ -81,7 +81,7 @@
                 font-weight: 300;
                 text-align: center;
                 user-select: none;
-                margin-bottom: 10px;
+                margin-bottom: -40px;
             }
             #left-container #form-wrapper{
                 position: relative;
@@ -91,21 +91,22 @@
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                margin-bottom: 15px;
+                margin-bottom: 60px;
             }
             #left-container #form-wrapper #form-proper{
-                position: relative;
-                width: 95%;
-                margin-top: 4%;
-                height: 13%;
-            }
-            
-            #left-container #form-wrapper #form-proper #submit-button{
-                width: 100%;
-                height: 100%;
                 position: absolute;
                 left: 0%;
                 top: 0%;
+                right: 0%;
+                height: 100%;
+            }
+            
+            #left-container #form-wrapper #form-proper #submit-button{
+                height: 13%;
+                width: 95.5%;
+                position: absolute;
+                bottom: 5%;
+                left: 2%;
                 background-color: #F12929;
                 border-radius: 15px;
                 border: none;
@@ -126,10 +127,10 @@
                 transform: scale(0.96);
             }
 
-            #left-container #form-wrapper .inputs{
+            #left-container #form-wrapper #form-proper .inputs{
                 position: absolute;
-                width: 91%;
-                height: 100%;
+                width: 87%;
+                height: 13%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 color: black;
@@ -224,8 +225,8 @@
                     <img src="images/password.png" id="password-icon" alt="password-icon"/>
                 </div>
                 <form method="POST" id="form-proper">
-                    <input type="text" class="inputs" name="username" style="left: 8%; top:-450%;" placeholder="Enter username" required>
-                    <input type="text" class="inputs" name="password" style="left: 8%; top:-256%;" placeholder="Enter password" required>
+                    <input type="text" class="inputs" name="username" style="left: 9.5%; top:25.3%;" placeholder="Enter username" required>
+                    <input type="text" class="inputs" name="password" style="left: 9.5%; top:50.8%;" placeholder="Enter password" required>
                     <input type="submit" id="submit-button" value="SIGN IN">
                 </form>
             </div>
