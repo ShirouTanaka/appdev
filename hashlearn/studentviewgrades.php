@@ -215,7 +215,7 @@
                 transition: 0.2s ease-in-out;
             }
 
-            .assignments-container .date{
+            .assignments-container .due-date{
                 position: absolute;
                 font-size: 2.2vw;
                 color: black;
@@ -226,20 +226,13 @@
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .hw-icon{
-                position: absolute;
-                left: 23%;
-                height: 75%;
-                top: 13%;
-                user-select: none;
-                max-width: auto;
-            }
+
             .assignments-container .hw-title{
                 position: absolute;
                 font-size: 2.3vw;
                 color: black;
-                top: -2%;
-                left: 32%;
+                top: 27%;
+                left: 23%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 600;
                 text-align: left;
@@ -249,19 +242,41 @@
                 position: absolute;
                 font-size: 2vw;
                 color: black;
-                top: 32%;
-                left: 32%;
+                top: 27%;
+                left: 50%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .due-date{
+            .assignments-container .grade{
+                position: absolute;
+                font-size: 3vw;
+                color: black;
+                top: 24%;
+                left: 67.5%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+            .assignments-container .datepassed-title{
                 position: absolute;
                 font-size: 2vw;
                 color: black;
-                bottom:0%;
-                left: 32%;
+                top: 10%;
+                left: 80%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+            .assignments-container .datepassed{
+                position: absolute;
+                font-size: 2vw;
+                color: black;
+                top: 40%;
+                left: 80%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
@@ -301,7 +316,7 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVITY STREAM</span>
+        <span id="pagemast">VIEW GRADES</span>
         <div id="horizontalline"></div>
         <?php
             $baseTop = 44;
@@ -309,11 +324,12 @@
             
             for($i = 0; $i < $assignmentNum; $i++){
                 Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
+                    Print '<span class="due-date">September 29, 2022</span>';
                     Print '<span class="hw-title">OOP Introductory HW</span>';
                     Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
+                    Print '<span class="grade">100/100</span>';
+                    Print '<span class="datepassed-title">Date Passed & Time: </span>';
+                    Print '<span class="datepassed"> 03/29/2022 4:59 PM</span>';
                 Print '</div>';
                 
                 $baseTop = $baseTop + 15 + 3.4;

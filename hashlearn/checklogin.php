@@ -29,64 +29,45 @@
     }
 
     else{
-        //this is now for validation and cross referencing the database for existing account
-        $sql_query_student = "SELECT * FROM students WHERE username='$username' AND password='$password'";
-        $sql_query_professor = "SELECT * FROM professors WHERE username='$username' AND password='$password'";
+        //this is the area for the username and password validation
+        $sql_query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+        $result = mysqli_query($con, $sql_query);
 
-        $result_student = mysqli_query($con, $sql_query_student);
-        $result_professor = mysqli_query($con, $sql_query_professor);
+        //checking whether the username and password corresponds to the database
+        if(mysqli_num_rows($result) === 1){
+            $row = mysqli_fetch_assoc($result);
 
-        //case where student account returns a result
-        if(mysqli_num_rows($result_student) === 1){
-            $row = mysqli_fetch_assoc($result_student);
-
-            if($row['username' === $username && $row['password'] === $password]){
-                //login and redirect to student page
-                //not sure how to use $_SESSION properly :(
-                //the things under may not be complete 
+            //checks whether entered credentials are correct
+            if($row['username'] === $username && $row['password'] === $password){
+                //pls help with how to use the $_SESSION properly
+                $_SESSION['user_id'] = $row['user_id'];
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['student_id'] = $row['student_id'];
-                $_SESSION['fName'] = $row['fName'];
-                $_SESSION['mName'] = $row['mName'];
-                $_SESSION['lName'] = $row['lName'];
+                $_SESSION['f_name'] = $row['f_name'];
+                $_SESSION['m_name'] = $row['m_name'];
+                $_SESSION['l_name'] = $row['l_name'];
+                $_SESSION['section'] = $row['section'];
+                $_SESSION['icon'] = $row['icon'];
+                $_SESSION['user_type'] = $row['user_type'];
 
-                //redirects to the student dashboard
-                header("Location:studentHome.php");
+                //now to check the user_type for proper redirection
+                if($_SESSION['user_type'] === 'student'){
+                    echo "going to student page";
+                    exit();
+                }
+
+                if($_SESSION['user_type'] === 'professor'){
+                    echo "going to instructor page";
+                    exit();
+                }
+                
+                //not sure if the exit() should be here
                 exit();
             }
 
+            //when credentials are wrong
             else{
-                header("Location:index.php?error=Incorrect username or password");
-                exit();
+                echo "Incorrect username or password";
             }
-        }
-
-        //case where professor account returns a result
-        else if(mysqli_num_rows($result_professor) === 1){
-            $row = mysqli_fetch_assoc($result_professor);
-
-            if($row['username' === $username && $row['password'] === $password]){
-                //login and redirect to professor page
-                //not sure how to use $_SESSION properly :(
-                //the things under may not be complete 
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['professor_id'] = $row['professor_id'];
-                $_SESSION['fName'] = $row['fName'];
-                $_SESSION['mName'] = $row['mName'];
-                $_SESSION['lName'] = $row['lName'];
-
-                header("Location:professorHome.php");
-                exit();
-            }
-
-            else{
-                header("Location:login.php?error=Incorrect username or password");
-                exit();
-            }
-        }
-
-        else{
-            header("Location:login.php?error=Incorrect username or password");
         }
     }
 ?>

@@ -73,7 +73,7 @@
                 user-select: none;
             }
             /*TABS SELECTION*/
-            #activitystream{
+            #viewsection{
                 position: fixed;
                 left: 0%;
                 top: 5%;
@@ -91,7 +91,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #activitystream #activitystream-text{
+            #viewsection #viewsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -101,10 +101,10 @@
                 user-select: none;
                 text-align: center;
             }
-            #activitystream:hover{
+            #viewsection:hover{
                 cursor: pointer;
             }
-            #viewgrades{
+            #addsection{
                 position: fixed;
                 left: 20.5%;
                 top: 5%;
@@ -122,7 +122,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #viewgrades #viewgrades-text{
+            #addsection #addsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -132,7 +132,7 @@
                 text-align: center;
                 user-select: none;
             }
-            #viewgrades:hover{
+            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -288,11 +288,11 @@
             <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="activitystream" onclick="navButtonHandle('activity stream')">
-            <span id="activitystream-text">ACTIVITY STREAM</span>
+        <div id="viewsection" onclick="navButtonHandle('view section')">
+            <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
-        <div id="viewgrades" onclick="navButtonHandle('view grades')">
-            <span id="viewgrades-text">VIEW GRADES</span>
+        <div id="addsection" onclick="navButtonHandle('add section')">
+            <span id="addsection-text">ADD SECTION</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -301,7 +301,7 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVITY STREAM</span>
+        <span id="pagemast">BM1 ASSIGNMENTS</span>
         <div id="horizontalline"></div>
         <?php
             $baseTop = 44;
@@ -324,19 +324,19 @@
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
-        if(tag === "activity stream"){
-            document.getElementById("viewgrades").style.top = "5%";
-            document.getElementById("viewgrades").style.opacity = "0.8";
+        if(tag === "view section"){
+            document.getElementById("addsection").style.top = "5%";
+            document.getElementById("addsection").style.opacity = "0.9";
 
-            document.getElementById("activitystream").style.top = "7%";
-            document.getElementById("activitystream").style.opacity = "0.9";
+            document.getElementById("viewsection").style.top = "7%";
+            document.getElementById("viewsection").style.opacity = "1";
 
-        }else if(tag === "view grades"){
-            document.getElementById("activitystream").style.top = "5%";
-            document.getElementById("activitystream").style.opacity = "0.8";
+        }else if(tag === "add section"){
+            document.getElementById("viewsection").style.top = "5%";
+            document.getElementById("viewsection").style.opacity = "0.9";
 
-            document.getElementById("viewgrades").style.top = "7%";
-            document.getElementById("viewgrades").style.opacity = "0.9";
+            document.getElementById("addsection").style.top = "7%";
+            document.getElementById("addsection").style.opacity = "1";
         }
     }
 

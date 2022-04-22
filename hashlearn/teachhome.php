@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Teacher Specific Section Page</title>
+        <title>Teacher Home Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,10 +73,10 @@
                 user-select: none;
             }
             /*TABS SELECTION*/
-            #activitystream{
+            #viewsection{
                 position: fixed;
                 left: 0%;
-                top: 5%;
+                top: 7%;
                 width: 20%;
                 height: 15%;
                 background-color: #F02222;
@@ -91,7 +91,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #activitystream #activitystream-text{
+            #viewsection #viewsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -101,10 +101,10 @@
                 user-select: none;
                 text-align: center;
             }
-            #activitystream:hover{
+            #viewsection:hover{
                 cursor: pointer;
             }
-            #viewgrades{
+            #addsection{
                 position: fixed;
                 left: 20.5%;
                 top: 5%;
@@ -112,7 +112,7 @@
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.9;
+                opacity: 0.8;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -122,7 +122,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #viewgrades #viewgrades-text{
+            #addsection #addsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -132,7 +132,7 @@
                 text-align: center;
                 user-select: none;
             }
-            #viewgrades:hover{
+            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -204,83 +204,64 @@
                 left: 10%;
                 top: 38%;
             }
-            .assignments-container{
+            .sections-container{
                 position: absolute;
+                top: 47%;
                 right: 10%;
                 left: 10%;
-                height: 15%;
+                height: 40%;
+                max-height: 120%;
+                display: grid;
+                grid-template-columns: auto auto auto auto;
+                column-gap: 20px;
+            }
+            .sections-container .slot{
                 border: 2px solid rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-                opacity: 0.7;
+                box-sizing: border-box;
+                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
                 transition: 0.2s ease-in-out;
             }
-
-            .assignments-container .date{
-                position: absolute;
-                font-size: 2.2vw;
-                color: black;
-                top: 27%;
-                left: 2%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
+            .sections-container .slot:hover{
+                border: 2px solid rgba(240, 34, 34, 0.70);
+                cursor: pointer;
             }
-            .assignments-container .hw-icon{
-                position: absolute;
-                left: 23%;
-                height: 75%;
-                top: 13%;
-                user-select: none;
+            .sections-container .slot:active{
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+                transform: scale(0.96);
+            }
+            .sections-container .slot #sectionicon{
+                position: relative;
                 max-width: auto;
+                height: 35%;
+                margin-bottom: 20px;
             }
-            .assignments-container .hw-title{
-                position: absolute;
-                font-size: 2.3vw;
+            .sections-container .slot #sectionname{
+                position: relative;
+                font-size: 2.7vw;
                 color: black;
-                top: -2%;
-                left: 32%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 600;
-                text-align: left;
+                text-align: center;
                 user-select: none;
             }
-            .assignments-container .hw-code{
-                position: absolute;
-                font-size: 2vw;
+            .sections-container .slot #studentcount{
+                position: relative;
+                font-size: 2.3vw;
                 color: black;
-                top: 32%;
-                left: 32%;
                 font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
+                font-weight: 300;
+                text-align: center;
                 user-select: none;
-            }
-            .assignments-container .due-date{
-                position: absolute;
-                font-size: 2vw;
-                color: black;
-                bottom:0%;
-                left: 32%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container:hover{
-                cursor: pointer;   
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                opacity: 1;
-                border: 2px solid rgba(240, 34, 34, 0.70);
-            }
-            .assignments-container:active{
-                transform: scale(0.96);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
         </style>
     </head>
     <body>
-        <!-- NAVBAR -->
+        <!-- NAV BAR -->
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
@@ -288,11 +269,11 @@
             <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="activitystream" onclick="navButtonHandle('activity stream')">
-            <span id="activitystream-text">ACTIVITY STREAM</span>
+        <div id="viewsection" onclick="navButtonHandle('view section')">
+            <span id="viewsection-text">VIEW SECTION</span>
         </div>
-        <div id="viewgrades" onclick="navButtonHandle('view grades')">
-            <span id="viewgrades-text">VIEW GRADES</span>
+        <div id="addsection" onclick="navButtonHandle('add section')">
+            <span id="addsection-text">ADD SECTION</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -301,42 +282,58 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVITY STREAM</span>
+        <span id="pagemast">ACTIVE SECTIONS</span>
         <div id="horizontalline"></div>
         <?php
-            $baseTop = 44;
-            $assignmentNum = 5;
-            
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
+            $numSections = 4;
+            $numSectionContainer = ceil($numSections / 4);
+            $baseTop = 47; // 47%
+
+            for($i = 0; $i < $numSectionContainer; $i++){
+                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
+                    Print '<div class="slot">';
+                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                        Print '<span id="sectionname">AS123</span>';
+                        Print '<span id="studentcount">STUDENT COUNT: 45</span>';
+                    Print '</div>';
+                    Print '<div class="slot">';
+                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                        Print '<span id="sectionname">AS125</span>';
+                        Print '<span id="studentcount">STUDENT COUNT: 12</span>';
+                    Print '</div>';
+                    Print '<div class="slot">';
+                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                        Print '<span id="sectionname">BM1</span>';
+                        Print '<span id="studentcount">STUDENT COUNT: 100</span>';
+                    Print '</div>';
+                    Print '<div class="slot">';
+                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                        Print '<span id="sectionname">BM5</span>';
+                        Print '<span id="studentcount">STUDENT COUNT: 36</span>';
+                    Print '</div>';
                 Print '</div>';
-                
-                $baseTop = $baseTop + 15 + 3.4;
-            }
+
+                $baseTop = $baseTop + 40 + 5;
+            }            
         ?>
     </body>
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
-        if(tag === "activity stream"){
-            document.getElementById("viewgrades").style.top = "5%";
-            document.getElementById("viewgrades").style.opacity = "0.8";
+        if(tag === "view section"){
+            document.getElementById("addsection").style.top = "5%";
+            document.getElementById("addsection").style.opacity = "0.9";
 
-            document.getElementById("activitystream").style.top = "7%";
-            document.getElementById("activitystream").style.opacity = "0.9";
+            document.getElementById("viewsection").style.top = "7%";
+            document.getElementById("viewsection").style.opacity = "1";
 
-        }else if(tag === "view grades"){
-            document.getElementById("activitystream").style.top = "5%";
-            document.getElementById("activitystream").style.opacity = "0.8";
+        }else if(tag === "add section"){
+            document.getElementById("viewsection").style.top = "5%";
+            document.getElementById("viewsection").style.opacity = "0.9";
 
-            document.getElementById("viewgrades").style.top = "7%";
-            document.getElementById("viewgrades").style.opacity = "0.9";
+            document.getElementById("addsection").style.top = "7%";
+            document.getElementById("addsection").style.opacity = "1";
         }
     }
 
