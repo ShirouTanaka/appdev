@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Teacher Home Page</title>
+        <title>Teacher Specific Section Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,7 +76,7 @@
             #viewsection{
                 position: fixed;
                 left: 0%;
-                top: 7%;
+                top: 5%;
                 width: 20%;
                 height: 15%;
                 background-color: #F02222;
@@ -112,7 +112,7 @@
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.8;
+                opacity: 0.9;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -204,64 +204,83 @@
                 left: 10%;
                 top: 38%;
             }
-            .sections-container{
+            .assignments-container{
                 position: absolute;
-                top: 47%;
                 right: 10%;
                 left: 10%;
-                height: 40%;
-                max-height: 120%;
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                column-gap: 20px;
-            }
-            .sections-container .slot{
+                height: 15%;
                 border: 2px solid rgba(0, 0, 0, 0.25);
-                box-sizing: border-box;
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
+                border-radius: 20px;
+                opacity: 0.7;
                 transition: 0.2s ease-in-out;
             }
-            .sections-container .slot:hover{
-                border: 2px solid rgba(240, 34, 34, 0.70);
-                cursor: pointer;
-            }
-            .sections-container .slot:active{
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                transform: scale(0.96);
-            }
-            .sections-container .slot #sectionicon{
-                position: relative;
-                max-width: auto;
-                height: 35%;
-                margin-bottom: 20px;
-            }
-            .sections-container .slot #sectionname{
-                position: relative;
-                font-size: 2.7vw;
+
+            .assignments-container .date{
+                position: absolute;
+                font-size: 2.2vw;
                 color: black;
+                top: 27%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 600;
-                text-align: center;
+                font-weight: 400;
+                text-align: left;
                 user-select: none;
             }
-            .sections-container .slot #studentcount{
-                position: relative;
+            .assignments-container .hw-icon{
+                position: absolute;
+                left: 23%;
+                height: 75%;
+                top: 13%;
+                user-select: none;
+                max-width: auto;
+            }
+            .assignments-container .hw-title{
+                position: absolute;
                 font-size: 2.3vw;
                 color: black;
+                top: -2%;
+                left: 32%;
                 font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
+                font-weight: 600;
+                text-align: left;
                 user-select: none;
+            }
+            .assignments-container .hw-code{
+                position: absolute;
+                font-size: 2vw;
+                color: black;
+                top: 32%;
+                left: 32%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+            .assignments-container .due-date{
+                position: absolute;
+                font-size: 2vw;
+                color: black;
+                bottom:0%;
+                left: 32%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+            .assignments-container:hover{
+                cursor: pointer;   
+                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
+                opacity: 1;
+                border: 2px solid rgba(240, 34, 34, 0.70);
+            }
+            .assignments-container:active{
+                transform: scale(0.96);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
         </style>
     </head>
     <body>
-        <!-- NAV BAR -->
+        <!-- NAVBAR -->
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
@@ -270,7 +289,7 @@
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SECTION</span>
+            <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
         <div id="addsection" onclick="navButtonHandle('add section')">
             <span id="addsection-text">ADD SECTION</span>
@@ -282,39 +301,23 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVE SECTIONS</span>
+        <span id="pagemast">BM1 ASSIGNMENTS</span>
         <div id="horizontalline"></div>
         <?php
-            $numSections = 4;
-            $numSectionContainer = ceil($numSections / 4);
-            $baseTop = 47; // 47%
-
-            for($i = 0; $i < $numSectionContainer; $i++){
-                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">AS123</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 45</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">AS125</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 12</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">BM1</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 100</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">BM5</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 36</span>';
-                    Print '</div>';
+            $baseTop = 44;
+            $assignmentNum = 5;
+            
+            for($i = 0; $i < $assignmentNum; $i++){
+                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
+                    Print '<span class="date">September 29, 2022</span>';
+                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
+                    Print '<span class="hw-title">OOP Introductory HW</span>';
+                    Print '<span class="hw-code">HW Code: HW1.1</span>';
+                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
                 Print '</div>';
-
-                $baseTop = $baseTop + 40 + 5;
-            }            
+                
+                $baseTop = $baseTop + 15 + 3.4;
+            }
         ?>
     </body>
 </html>
