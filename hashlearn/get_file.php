@@ -7,6 +7,7 @@
     if($sql_query->num_rows > 0){
         while($row = $sql_query->fetch_assoc()){
             $file_path = "uploads/".$row["file_name"];
+            echo gettype($file_path);
             echo readfile($file_path);
         }
     }

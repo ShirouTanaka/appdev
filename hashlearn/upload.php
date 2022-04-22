@@ -27,7 +27,8 @@
 
                 if($sql_query){
                     $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-                }else{
+                }
+                else{
                     $statusMsg = "File upload failed, please try again.";
                 } 
             }
