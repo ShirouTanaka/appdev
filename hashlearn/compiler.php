@@ -20,7 +20,7 @@
                 if($sql_query->num_rows > 0){
                     while($row = $sql_query->fetch_assoc()){
                         $file_path = "uploads/".$row["file_name"];
-                        echo readfile($file_path);
+                        readfile($file_path);
                     }
                 }
                     
