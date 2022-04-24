@@ -14,10 +14,11 @@
         }
     }
 
+    //applying the data validation to make sure that the string is formatted
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
 
-    //we may not need this anymore
+    //we may not need this anymore since the form is required
     if(empty($username)){
         //when username field is empty
         echo "test";
@@ -25,7 +26,7 @@
         exit();
     }
 
-    //we can remove this
+    //we can remove this since the form is required
     else if(empty($password)){
         //when password field is empty
         echo "test";
