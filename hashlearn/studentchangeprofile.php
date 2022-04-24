@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Student Home Page</title>
+        <title>Student Change Profile Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -205,79 +205,129 @@
                 left: 10%;
                 top: 38%;
             }
-            .assignments-container{
+            #change-form-container{
                 position: absolute;
-                right: 10%;
-                left: 10%;
-                height: 15%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-                opacity: 0.7;
-                transition: 0.2s ease-in-out;
+                left: 6%;
+                top:0%;
+                width: 53%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #change-form-container #form-wrapper{
+                position: relative;
+                width: 90%;
+                height: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                margin-bottom: 60px;
+            }
+            #change-form-container #form-wrapper #form-proper{
+                position: absolute;
+                left: 0%;
+                top: 0%;
+                right: 0%;
+                height: 100%;
+            }
+            
+            #change-form-container #form-wrapper #form-proper #submit-button{
+                height: 13%;
+                width: 95.5%;
+                position: absolute;
+                top: 120%;
+                bottom: 5%;
+                left: 2%;
+                background-color: #F12929;
+                border-radius: 15px;
+                border: none;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 2vw;
+                box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            #change-form-container #form-wrapper #form-proper #submit-button:hover{
+                opacity: 1;
+                cursor: pointer;
+            }
+            #change-form-container #form-wrapper #form-proper #submit-button:active{
+                box-shadow: 0px 0px 0px black;
+                transform: scale(0.96);
             }
 
-            .assignments-container .date{
+            #change-form-container #form-wrapper #form-proper .inputs{
+                position: absolute;
+                width: 87%;
+                height: 13%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                color: black;
+                border: none;
+                font-size: 2vw;
+                background: transparent;
+                outline: none;
+                border-radius: 10px;
+            }
+            #change-form-container #form-wrapper #change-username{
                 position: absolute;
                 font-size: 2.2vw;
                 color: black;
-                top: 27%;
+                top: 35%;
                 left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .hw-icon{
+            #change-form-container #form-wrapper #username{
+                position: relative;
+                border: 2px solid #aaa9a9;
+                top:22%;
+                height: 13%;
+                width: 95%;
+                border-radius: 15px;
+                margin-bottom: 5%;
+            }
+            #change-form-container #form-wrapper #username #username-icon{
                 position: absolute;
-                left: 23%;
-                height: 75%;
-                top: 13%;
-                user-select: none;
+                left: 1%;
+                top: 5%;
                 max-width: auto;
+                height: 90%;
             }
-            .assignments-container .hw-title{
+            #change-form-container #form-wrapper #change-password{
                 position: absolute;
-                font-size: 2.3vw;
+                font-size: 2.2vw;
                 color: black;
-                top: -2%;
-                left: 32%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 600;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container .hw-code{
-                position: absolute;
-                font-size: 2vw;
-                color: black;
-                top: 32%;
-                left: 32%;
+                top: 73%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .due-date{
+            #change-form-container #form-wrapper #password{
+                position: relative;
+                border: 2px solid #aaa9a9;
+                top: 37%;
+                height: 13%;
+                width: 95%;
+                border-radius: 15px;
+                margin-bottom: 5%;
+            }
+            #change-form-container #form-wrapper #password #password-icon{
                 position: absolute;
-                font-size: 2vw;
-                color: black;
-                bottom:0%;
-                left: 32%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
+                left: 1%;
+                top: 5%;
+                max-width: auto;
+                height: 90%;
             }
-            .assignments-container:hover{
-                cursor: pointer;   
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                opacity: 1;
-                border: 2px solid rgba(240, 34, 34, 0.70);
-            }
-            .assignments-container:active{
-                transform: scale(0.96);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-            }
+
         </style>
     </head>
     <body>
@@ -302,24 +352,25 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVITY STREAM</span>
+        <span id="pagemast">Change Profile</span>
         <div id="horizontalline"></div>
-        <?php
-            $baseTop = 44;
-            $assignmentNum = 5;
-            
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
-                
-                $baseTop = $baseTop + 15 + 3.4;
-            }
-        ?>
+        <div id="change-form-container">
+            <div id="form-wrapper">
+                <span id="change-username">Change Username</span>
+                <div id="username" style="margin-bottom: 5%;">
+                    <img src="images/user.png" id="username-icon" alt="username-icon"/>
+                </div>
+                <span id="change-password">Change Password:</span>
+                <div id="password" style="margin-bottom: 5%;">
+                    <img src="images/password.png" id="password-icon" alt="password-icon"/>
+                </div>
+                <form action="checkLogin2.php" method="POST" id="form-proper">
+                    <input type="text" class="inputs" name="username" style="left: 9.5%; top:48.8%;" placeholder="Enter new username" required>
+                    <input type="text" class="inputs" name="password" style="left: 9.5%; top:86.8%;" placeholder="Enter new password" required>
+                    <input type="submit" id="submit-button" value="SIGN IN">
+                </form>
+            </div>
+        </div>
     </body>
 </html>
 <script>

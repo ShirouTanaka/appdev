@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Teacher Specific Section Page</title>
+        <title>Student View Assignment Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -157,6 +157,7 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -347,14 +348,12 @@
                 border-radius: 20px;
             }
 
-            .hw-submission-icon{
+            .assignments-container .hw-submissionbox .hw-submission-icon{
                 position: absolute;
-                top: 68%;
-                left: 30%;
+                left: 50%;
+                top: 5%;
                 max-width: auto;
-                height: 20%;
-                transition: 0.2s ease-in-out;
-                opacity: 0;
+                height: 90%;
             }
 
             .assignments-container .hw-submissionbox:hover{
@@ -367,6 +366,33 @@
                 transform: scale(0.96);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
+
+            .assignment-container .submit-button{
+                height: 13%;
+                width: 95.5%;
+                position: absolute;
+                top: 120%;
+                bottom: 5%;
+                left: 2%;
+                background-color: #F12929;
+                border-radius: 15px;
+                border: none;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 2vw;
+                box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            .assignment-container .submit-button:hover{
+                opacity: 1;
+                cursor: pointer;
+            }
+            .assignment-container .submit-button:active{
+                box-shadow: 0px 0px 0px black;
+                transform: scale(0.96);
+            } 
 
         </style>
     </head>
@@ -387,7 +413,7 @@
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
@@ -407,7 +433,9 @@
                     print '<span class="hw-info-description">First Submission for the Student</span>';
                     Print '<span class="hw-submission-title">Assignment Submission</span>';
                     print '<span class="hw-submission-line"></span>';
-                    print '<span class="hw-submissionbox"><img src="images/submit.png" id="hw-submission-icon" alt="submit assignment"/></span>';
+                    print '<div class="hw-submissionbox">';
+                    print '<img src="images/submit.png" class="hw-submission-icon" alt="hw-submission-icon"/>';
+                    print '</div>';
                 Print '</div>';
         ?>
     </body>
