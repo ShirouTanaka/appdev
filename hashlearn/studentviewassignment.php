@@ -187,7 +187,7 @@
             #pagemast{
                 position: absolute;
                 left: 10%;
-                top: 30%;
+                top: 20%;
                 width: 50%;
                 font-size: 2.7vw;
                 color: black;
@@ -202,20 +202,20 @@
                 width: 40%;
                 height: 0%;
                 left: 10%;
-                top: 38%;
+                top: 28%;
             }
             .assignments-container{
                 position: absolute;
                 right: 10%;
                 left: 10%;
-                height: 15%;
+                top:32%;
+                height: 65%;
                 border: 2px solid rgba(0, 0, 0, 0.25);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
                 border-radius: 20px;
-                opacity: 0.7;
-                transition: 0.2s ease-in-out;
             }
 
-            .assignments-container .due-date{
+            .assignments-container .hw-info-title{
                 position: absolute;
                 font-size: 2.2vw;
                 color: black;
@@ -227,12 +227,32 @@
                 user-select: none;
             }
 
+            .assignments-container .hw-info-line{
+                position: absolute;
+                border-bottom: 2px solid black;
+                width: 80%;
+                height: 0%;
+                left: 18%;
+                top: 31.5%;
+            }
+
+            .assignments-container .hw-info-description{
+                position: absolute;
+                font-size: 1.2vw;
+                color: black;
+                top: 36%;
+                left: 2%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+
             .assignments-container .hw-title{
                 position: absolute;
                 font-size: 2.3vw;
                 color: black;
-                top: 27%;
-                left: 23%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 600;
                 text-align: left;
@@ -242,56 +262,112 @@
                 position: absolute;
                 font-size: 2vw;
                 color: black;
-                top: 27%;
-                left: 50%;
+                top: 9%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
+
+            .assignments-container .grade-title{
+                position: absolute;
+                font-size: 2vw;
+                color: black;
+                top: 18%;
+                left: 83%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+
             .assignments-container .grade{
                 position: absolute;
                 font-size: 3vw;
                 color: black;
-                top: 24%;
-                left: 67.5%;
+                top: 18%;
+                left: 90%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .datepassed-title{
+            .assignments-container .due-date-title{
                 position: absolute;
                 font-size: 2vw;
                 color: black;
-                top: 10%;
-                left: 80%;
+                top: 18%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .datepassed{
+            .assignments-container .due-date{
                 position: absolute;
                 font-size: 2vw;
                 color: black;
-                top: 40%;
-                left: 80%;
+                top: 18%;
+                left: 11%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container:hover{
+
+            .assignments-container .hw-submission-title{
+                position: absolute;
+                font-size: 2.2vw;
+                color: black;
+                top: 67%;
+                left: 2%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+
+            .assignments-container .hw-submission-line{
+                position: absolute;
+                border-bottom: 2px solid black;
+                width: 73%;
+                height: 0%;
+                left: 25%;
+                top: 71.5%;
+            }
+            .assignments-container .hw-submissionbox{
+                position: absolute;
+                left: 2%;
+                top:77%;
+                height: 15%;
+                width: 80%;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            }
+
+            .hw-submission-icon{
+                position: absolute;
+                top: 68%;
+                left: 30%;
+                max-width: auto;
+                height: 20%;
+                transition: 0.2s ease-in-out;
+                opacity: 0;
+            }
+
+            .assignments-container .hw-submissionbox:hover{
                 cursor: pointer;   
                 box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
                 opacity: 1;
                 border: 2px solid rgba(240, 34, 34, 0.70);
             }
-            .assignments-container:active{
+            .assignments-container .hw-submissionbox:active{
                 transform: scale(0.96);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
+
         </style>
     </head>
     <body>
@@ -316,24 +392,23 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">VIEW GRADES</span>
+        <span id="pagemast">VIEW ASSIGNMENT</span>
         <div id="horizontalline"></div>
         <?php
-            $baseTop = 44;
-            $assignmentNum = 5;
-            
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="due-date">September 29, 2022</span>';
+                Print '<div class="assignments-container">';
                     Print '<span class="hw-title">OOP Introductory HW</span>';
                     Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="grade">100/100</span>';
-                    Print '<span class="datepassed-title">Date Passed & Time: </span>';
-                    Print '<span class="datepassed"> 03/29/2022 4:59 PM</span>';
+                    Print '<span class="grade-title">Points:</span>';
+                    Print '<span class="grade">100</span>';
+                    Print '<span class="due-date-title">Due Date: </span>';
+                    Print '<span class="due-date"> 03/29/2022 11:59 PM</span>';
+                    Print '<span class="hw-info-title">Assignment Info</span>';
+                    print '<span class="hw-info-line"></span>';
+                    print '<span class="hw-info-description">First Submission for the Student</span>';
+                    Print '<span class="hw-submission-title">Assignment Submission</span>';
+                    print '<span class="hw-submission-line"></span>';
+                    print '<span class="hw-submissionbox"><img src="images/submit.png" id="hw-submission-icon" alt="submit assignment"/></span>';
                 Print '</div>';
-                
-                $baseTop = $baseTop + 15 + 3.4;
-            }
         ?>
     </body>
 </html>

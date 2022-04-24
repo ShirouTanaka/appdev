@@ -330,13 +330,14 @@
 
             document.getElementById("activitystream").style.top = "7%";
             document.getElementById("activitystream").style.opacity = "0.9";
-
+            window.location.href = "studenthome.php";
         }else if(tag === "view grades"){
             document.getElementById("activitystream").style.top = "5%";
             document.getElementById("activitystream").style.opacity = "0.8";
 
             document.getElementById("viewgrades").style.top = "7%";
             document.getElementById("viewgrades").style.opacity = "0.9";
+            window.location.href = "studentviewgrades.php";
         }
     }
 
