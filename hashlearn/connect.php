@@ -11,5 +11,5 @@
     }
 
     //for easy access to the database, just make write include 'connect.php';
-    //this automatically runs
+    //make the connection using the $con variable
 ?>

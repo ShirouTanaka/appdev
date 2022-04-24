@@ -1,4 +1,5 @@
 <?php
+    $login_error = "<script>alert('Incorrect username or password');</script>";
     session_start();
     include 'connect.php';
 
@@ -16,15 +17,19 @@
     $username = validate($_POST['username']);
     $password = validate($_POST['password']);
 
+    //we may not need this anymore
     if(empty($username)){
         //when username field is empty
-        header("Location:login.php?error=Username is required");
+        echo "test";
+        // header("Location:login.php?error=Username is required");
         exit();
     }
 
+    //we can remove this
     else if(empty($password)){
         //when password field is empty
-        header("Location:login.php>error=Password is required");
+        echo "test";
+        // header("Location:login.php>error=Password is required");
         exit();
     }
 
