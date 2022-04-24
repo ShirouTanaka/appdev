@@ -5,52 +5,52 @@
         <input type="submit" id="submitbtn" name="submit" value="Upload">
     </form>
     <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
-  import { getStorage, ref, uploadBytes} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
+        import { getStorage, ref, uploadBytes} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyA8JTIoITfG5DOYoLy29CnqDi_55-KlqV0",
-    authDomain: "hashlearn-f0b12.firebaseapp.com",
-    projectId: "hashlearn-f0b12",
-    storageBucket: "hashlearn-f0b12.appspot.com",
-    messagingSenderId: "913464562490",
-    appId: "1:913464562490:web:9a2391b6c50aa49f413603",
-    measurementId: "G-V2Z5CJ8TEN"
-  };
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8JTIoITfG5DOYoLy29CnqDi_55-KlqV0",
+            authDomain: "hashlearn-f0b12.firebaseapp.com",
+            projectId: "hashlearn-f0b12",
+            storageBucket: "hashlearn-f0b12.appspot.com",
+            messagingSenderId: "913464562490",
+            appId: "1:913464562490:web:9a2391b6c50aa49f413603",
+            measurementId: "G-V2Z5CJ8TEN"
+        };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
 
-  const btn = document.querySelector('#submitbtn');
+        const btn = document.querySelector('#submitbtn');
 
-  btn.addEventListener('click', function(e){
-    e.preventDefault();
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
 
-    const storage = getStorage(app);
-    var file = document.querySelector('#filedata').files[0];
-    var name = file.name;
-    const storageRef = ref(storage, name);
+            const storage = getStorage(app);
+            var file = document.querySelector('#filedata').files[0];
+            var name = file.name;
+            const storageRef = ref(storage, name);
 
-   
+        
 
-    var metadata ={
-        contentType: file.type
-    }
+            var metadata ={
+                contentType: file.type
+            }
 
-    uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('Uploaded a blob or file!');
-});
+            uploadBytes(storageRef, file).then((snapshot) => {
+            console.log('Uploaded a blob or file!');
+        });
 
-    
-  })
-</script>
+            
+        })
+    </script>
 </html>
 
 <?php
