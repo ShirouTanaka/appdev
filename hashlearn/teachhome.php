@@ -304,7 +304,7 @@
                     Print '<div class="slot">';
                         Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
                         Print '<span id="sectionname">BM1</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 100</span>';
+                        Print '<span id="studentcount">STUDENT COUNT: 69</span>';
                     Print '</div>';
                     Print '<div class="slot">';
                         Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
@@ -334,6 +334,8 @@
 
             document.getElementById("addsection").style.top = "7%";
             document.getElementById("addsection").style.opacity = "1";
+
+            window.location.assign("teachaddsection.php");
         }
     }
 

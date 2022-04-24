@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Teacher Specific Section Page</title>
+        <title>Specific Section</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -292,7 +292,7 @@
             <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
         <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
+            <span id="addsection-text">EDIT SECTION MEMBERS</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -301,7 +301,7 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">BM1 ASSIGNMENTS</span>
+        <span id="pagemast">BM1 TASKS | 69 STUDENTS</span>
         <div id="horizontalline"></div>
         <?php
             $baseTop = 44;
@@ -331,6 +331,8 @@
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
+            window.location.assign("teachhome.php");
+            
         }else if(tag === "add section"){
             document.getElementById("viewsection").style.top = "5%";
             document.getElementById("viewsection").style.opacity = "0.9";
