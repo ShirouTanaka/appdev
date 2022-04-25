@@ -1,4 +1,8 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
         <title>Teacher Home Page</title>
         <meta charset="UTF-8">
@@ -265,8 +269,20 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -285,32 +301,52 @@
         <span id="pagemast">ACTIVE SECTIONS</span>
         <div id="horizontalline"></div>
         <?php
-            $numSections = 4;
+            $user_id_temp = $_SESSION['user_id'];
+            $sql_query = "
+                    SELECT * 
+                    FROM user_section
+                    JOIN users ON user_section.user_id=users.user_id
+                    JOIN sections ON user_section.section_id=sections.section_id
+                    WHERE user_section.user_id = $user_id_temp
+            ";
+
+            $result = mysqli_query($con, $sql_query);
+            $total = mysqli_num_rows($result);
+            
+
+            $numSections = $total;
             $numSectionContainer = ceil($numSections / 4);
             $baseTop = 47; // 47%
 
+            $cnt = 0;
+            
+            while($row = mysqli_fetch_assoc($result)){
+                $section[] = $row['section_name'];
+                $current_section_id = $row['section_id']; 
+                
+                $sql_query_num = "SELECT * FROM user_section
+                    JOIN users ON user_section.user_id=users.user_id
+                    WHERE user_section.section_id =".$current_section_id." AND users.user_type = 'student' 
+                ";
+        
+                $num_result = mysqli_query($con, $sql_query_num);
+
+                $num[] = mysqli_num_rows($num_result);
+            }
+
+            $k = 0;
             for($i = 0; $i < $numSectionContainer; $i++){
                 Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">AS123</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 45</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">AS125</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 12</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">BM1</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 69</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">BM5</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 36</span>';
-                    Print '</div>';
+                    for($j = 0; $j < 4; $j++){
+                        if($k >= $numSections) break;
+                        Print '<div class="slot">';
+                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                            Print '<span id="sectionname">'.$section[$k].'</span>';
+                            Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
+                        Print '</div>';
+
+                        $k++;
+                    }
                 Print '</div>';
 
                 $baseTop = $baseTop + 40 + 5;

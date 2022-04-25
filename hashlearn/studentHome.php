@@ -1,4 +1,8 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
         <title>Student Home Page</title>
         <meta charset="UTF-8">
@@ -285,8 +289,21 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="activitystream" onclick="navButtonHandle('activity stream')">
@@ -307,21 +324,23 @@
         <?php
             $baseTop = 44;
             $assignmentNum = 5;
+            $sql_query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
             
             for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
+                Print '<a onclick="assignmentLink()"><div class="assignments-container" style="top:'.$baseTop.'%;">';
                     Print '<span class="date">September 29, 2022</span>';
                     Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
                     Print '<span class="hw-title">OOP Introductory HW</span>';
                     Print '<span class="hw-code">HW Code: HW1.1</span>';
                     Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
+                Print '</div></a>';
                 
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
     </body>
 </html>
+
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
@@ -357,5 +376,10 @@
 
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
+    }
+
+    function assignmentLink(){
+        //testing please change to proper assignment page
+        window.location.href = "login.php";
     }
 </script>
