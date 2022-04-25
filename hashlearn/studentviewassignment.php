@@ -1,4 +1,8 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
         <title>Student View Assignment Page</title>
         <meta charset="UTF-8">
@@ -408,8 +412,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="activitystream" onclick="navButtonHandle('activity stream')">
@@ -428,16 +443,17 @@
         <span id="pagemast">VIEW ASSIGNMENT</span>
         <div id="horizontalline"></div>
         <?php
+            $num = $_COOKIE['number'];
                 Print '<div class="assignments-container">';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
+                    Print '<span class="hw-title">'.$_SESSION['assignment_name'][$num].'</span>';
+                    Print '<span class="hw-code">HW Code: '.$_SESSION['assignment_code'][$num].'</span>';
                     Print '<span class="grade-title">Points:</span>';
                     Print '<span class="grade">100</span>';
                     Print '<span class="due-date-title">Due Date: </span>';
-                    Print '<span class="due-date"> 03/29/2022 11:59 PM</span>';
+                    Print '<span class="due-date">'. $_SESSION['assignment_dl'][$num].'</span>';
                     Print '<span class="hw-info-title">Assignment Info</span>';
                     print '<span class="hw-info-line"></span>';
-                    print '<span class="hw-info-description">First Submission for the Student</span>';
+                    print '<span class="hw-info-description">'.$_SESSION['assignment_desc'][$num].'</span>';
                     Print '<span class="hw-submission-title">Assignment Submission</span>';
                     print '<span class="hw-submission-line"></span>';
                     print '<input type="file" class="hw-submissionbox" value="CHOOSE FILE">';

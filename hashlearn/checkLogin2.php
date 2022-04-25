@@ -34,7 +34,6 @@
             $_SESSION['f_name'] = $row['f_name']; //needed
             $_SESSION['m_name'] = $row['m_name']; //needed
             $_SESSION['l_name'] = $row['l_name']; //needed
-            $_SESSION['section'] = $row['section']; //section is used as a reference to what section is displayed
             $_SESSION['icon'] = $row['icon']; //debataeble
             $_SESSION['email'] = $row['email']; //important for the dashboards
             $_SESSION['user_type'] = $row['user_type']; //important for redirection
