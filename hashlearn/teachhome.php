@@ -15,6 +15,16 @@
             body{
                 overflow-x: hidden;
             }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
+            }
             #navbar-body{
                 position: fixed;
                 top: 0%;
