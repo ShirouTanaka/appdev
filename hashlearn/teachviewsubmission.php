@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Specific Section</title>
+        <title>View Submission</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,68 +104,6 @@
             #viewsection:hover{
                 cursor: pointer;
             }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
-                cursor: pointer;
-            }
-            #addhw{
-                position: fixed;
-                left: 41.1%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addhw #addhw-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addhw:hover{
-                cursor: pointer;
-            }
             /* EDIT AND LOGOUT CARD */
             #rightcard{
                 position: fixed;
@@ -235,79 +173,163 @@
                 left: 10%;
                 top: 38%;
             }
-            .assignments-container{
-                position: absolute;
-                right: 10%;
-                left: 10%;
-                height: 15%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-                opacity: 0.7;
-                transition: 0.2s ease-in-out;
-            }
 
-            .assignments-container .date{
+            .submission-container{
                 position: absolute;
-                font-size: 2.2vw;
+                right: 8%;
+                left: 8%;
+                top: 40%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+                max-height: 1500px;
+                padding: 0.4em;
+                margin: 0.2em auto;
+            }
+            .submission-container #left-info-box{
+                width: 890px;
+                height: 130px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: flex-start;
+                margin-right: 1em;
+                margin-bottom: 1.2em;
+            }
+            .submission-container #left-info-box .mast-info{
+                width: 100%;
+                font-size: 1.6em;
                 color: black;
-                top: 27%;
-                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 text-align: left;
                 user-select: none;
+                padding: 0.15em;
             }
-            .assignments-container .hw-icon{
-                position: absolute;
-                left: 23%;
-                height: 75%;
-                top: 13%;
-                user-select: none;
-                max-width: auto;
+            .submission-container #right-info-box{
+                width: 150px;
+                height: 130px;
+                border: 2px solid #F84646;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-bottom: 1.2em;
             }
-            .assignments-container .hw-title{
-                position: absolute;
-                font-size: 2.3vw;
+            .submission-container #right-info-box #grade-mast{
+                font-size: 1.4em;
                 color: black;
-                top: -2%;
-                left: 32%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                width: 100%;
+                text-align: center;
+                user-select: none;
+            }
+            .submission-container #right-info-box #grade{
+                font-size: 3.5em;
+                color: black;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 600;
-                text-align: left;
+                text-align: center;
                 user-select: none;
             }
-            .assignments-container .hw-code{
-                position: absolute;
-                font-size: 2vw;
+            .submission-container #center-info-box{
+                width: 1055px;
+                border-top: 2px solid black;
+                height: 500px;
+                margin-bottom: 1em;
+                margin-top: 1em;
+                display: block;
+            }
+            .submission-container #center-info-box #info-mast{
+                max-width: 1000px;
+                max-height: 300px;
+                font-size: 2em;
                 color: black;
-                top: 32%;
-                left: 32%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                text-align: center;
+                display: block;
+                user-select: none;
+                padding-top: 1em;
+                margin: 0 auto;
+            }
+            .submission-container #center-info-box #info{
+                max-width: 1000px;
+                max-height: 300px;
+                font-size: 1.9em;
+                color: black;
+                display: block;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 300;
+                text-align: center;
+                user-select: none;
+                padding: 0.8em 2.5em;
+            }
+            .submission-container #center-info-box #form-wrapper{
+                max-width: 50%;
+                min-height: 200px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+                margin: 0 auto;
+
+                padding: 0.25em;
+            }
+            .submission-container #center-info-box #form-wrapper #grade-input{
+                width: 95%;
+                min-height: 40px;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container .due-date{
-                position: absolute;
-                font-size: 2vw;
                 color: black;
-                bottom:0%;
-                left: 32%;
+                border: none;
+                font-size: 1.5em;
+                border-radius: 15px;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                outline: none;
+                margin: 1em auto;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons{ 
+                width: 200px;
+                min-height: 40px;
+                border-radius: 15px;
+                background-color:#F84646;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
-                text-align: left;
-                user-select: none;
+                margin: 1em;
+                color: white;
+                font-size: 1.5em;
+                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
+                outline: none;
+                border: none;
+                transition: 0.2s ease-in-out;
             }
-            .assignments-container:hover{
-                cursor: pointer;   
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                opacity: 1;
-                border: 2px solid rgba(240, 34, 34, 0.70);
+            .submission-container #center-info-box #form-wrapper .buttons:hover{
+                cursor: pointer;
+                background-color: #F02222;
             }
-            .assignments-container:active{
+            .submission-container #center-info-box #form-wrapper .buttons:active{
                 transform: scale(0.96);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
+            @media screen and (max-width: 600px) {
+                .submission-container #left-info-box{
+                    height: 110px;
+                }
+                .submission-container #left-info-box .mast-info{
+                    font-size: 1.3em;
+                }
+                .submission-container #center-info-box #info-mast{
+                    font-size: 1.9em;
+                }
+                .submission-container #center-info-box #info{
+                    font-size: 1.6em;
+                }
+            }
+            
         </style>
     </head>
     <body>
@@ -320,13 +342,7 @@
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">BACK TO SECTIONS</span>
-        </div>
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION MEMBERS</span>
-        </div>
-        <div id="addhw" onclick="navButtonHandle('add hw')">
-            <span id="addhw-text">ADD ASSIGNMENT</span>
+            <span id="viewsection-text">VIEW SUBMISSIONS</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -334,51 +350,55 @@
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
-        <!-- BODY PROPER -->
-        <span id="pagemast">BM1 TASKS | 69 STUDENTS</span>
+        <span id="pagemast">OOP Introductory HW</span>
         <div id="horizontalline"></div>
-        <?php
-            $baseTop = 44;
-            $assignmentNum = 5;
-            
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
-                
-                $baseTop = $baseTop + 15 + 3.4;
-            }
-        ?>
-    </body>
+
+        <div class="submission-container">
+            <div id="left-info-box">
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">ASSIGNMENT CODE:</span>
+                    <?php Print '<span style="margin-left: 0.6em">FA1.1</span>'; ?>
+                </span>
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">DATE SUBMITTED:</span>
+                    <?php Print '<span style="margin-left: 1.2em">03/29/2022 10:50 P.M.</span>'; ?>
+                </span>
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">SUBMITTED BY:</span>
+                    <?php Print '<span style="margin-left: 2em">Bobby Bobbers B. Bobbingston</span>'; ?>
+                </span>
+            </div>
+            <div id="right-info-box">
+                <span id="grade-mast">Total Points:</span>
+                <?php Print '<span id="grade">100</span>';?>
+            </div>
+            <div id="center-info-box">
+                <span id="info-mast">ASSIGNMENT INFO </span>
+                <?php Print '<span id="info">Referring to the lectures about DI Approaches and Sample GUI App, develop your own application using the sample program attached hereto (SpringGui). Your application should create a different object that is made up of the existing objects (rectangle and circle).</span>'; ?>
+                <!-- GRADING FORM -->
+                <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
+                    <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
+                    <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="VIEW CODE" name="view-code" class="buttons"></a>
+                    <input type="submit" value="GRADE" name="submit" class="buttons">
+                </form>
+                <?php
+                    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                        $grade = $_POST['grade'];
+                        echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
+                    }
+                ?>
+            </div>
+        </div>
+    </body> 
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
-            window.location.assign("teachhome.php");
-            
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
-
-        }else if(tag === "add hw"){
-            document.getElementById("addhw").style.top = "7%";
-            document.getElementById("addhw").style.opacity = "1";
-
-            window.location.assign("teachaddhw.php");
+            window.location.assign("teachpassedhws.php");
         }
     }
 

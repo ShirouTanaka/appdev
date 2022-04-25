@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Specific Section</title>
+        <title>Create Assignment</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,68 +104,6 @@
             #viewsection:hover{
                 cursor: pointer;
             }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
-                cursor: pointer;
-            }
-            #addhw{
-                position: fixed;
-                left: 41.1%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addhw #addhw-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addhw:hover{
-                cursor: pointer;
-            }
             /* EDIT AND LOGOUT CARD */
             #rightcard{
                 position: fixed;
@@ -235,78 +173,8 @@
                 left: 10%;
                 top: 38%;
             }
-            .assignments-container{
-                position: absolute;
-                right: 10%;
-                left: 10%;
-                height: 15%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-                opacity: 0.7;
-                transition: 0.2s ease-in-out;
-            }
-
-            .assignments-container .date{
-                position: absolute;
-                font-size: 2.2vw;
-                color: black;
-                top: 27%;
-                left: 2%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container .hw-icon{
-                position: absolute;
-                left: 23%;
-                height: 75%;
-                top: 13%;
-                user-select: none;
-                max-width: auto;
-            }
-            .assignments-container .hw-title{
-                position: absolute;
-                font-size: 2.3vw;
-                color: black;
-                top: -2%;
-                left: 32%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 600;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container .hw-code{
-                position: absolute;
-                font-size: 2vw;
-                color: black;
-                top: 32%;
-                left: 32%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container .due-date{
-                position: absolute;
-                font-size: 2vw;
-                color: black;
-                bottom:0%;
-                left: 32%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            .assignments-container:hover{
-                cursor: pointer;   
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                opacity: 1;
-                border: 2px solid rgba(240, 34, 34, 0.70);
-            }
-            .assignments-container:active{
-                transform: scale(0.96);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+            #form-wrapper{
+                
             }
         </style>
     </head>
@@ -320,13 +188,7 @@
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">BACK TO SECTIONS</span>
-        </div>
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION MEMBERS</span>
-        </div>
-        <div id="addhw" onclick="navButtonHandle('add hw')">
-            <span id="addhw-text">ADD ASSIGNMENT</span>
+            <span id="viewsection-text">BACK TO ASSIGNMENTS</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -335,50 +197,19 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">BM1 TASKS | 69 STUDENTS</span>
+        <span id="pagemast">CREATE ASSIGNMENT</span>
         <div id="horizontalline"></div>
-        <?php
-            $baseTop = 44;
-            $assignmentNum = 5;
-            
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
-                
-                $baseTop = $baseTop + 15 + 3.4;
-            }
-        ?>
+        
     </body>
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
-            window.location.assign("teachhome.php");
-            
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
-
-        }else if(tag === "add hw"){
-            document.getElementById("addhw").style.top = "7%";
-            document.getElementById("addhw").style.opacity = "1";
-
-            window.location.assign("teachaddhw.php");
+            window.location.assign("teachspecsection.php");
         }
     }
 

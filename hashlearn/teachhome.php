@@ -285,32 +285,25 @@
         <span id="pagemast">ACTIVE SECTIONS</span>
         <div id="horizontalline"></div>
         <?php
-            $numSections = 4;
+            $array = array("AS123", "AS125", "BM1", "BM5", "AS126", "BM123", "BM126", "ZXC123");
+
+            $numSections = count($array);
             $numSectionContainer = ceil($numSections / 4);
             $baseTop = 47; // 47%
 
+            $k = 0;
             for($i = 0; $i < $numSectionContainer; $i++){
                 Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">AS123</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 45</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">AS125</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 12</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">BM1</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 69</span>';
-                    Print '</div>';
-                    Print '<div class="slot">';
-                        Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                        Print '<span id="sectionname">BM5</span>';
-                        Print '<span id="studentcount">STUDENT COUNT: 36</span>';
-                    Print '</div>';
+                    for($j = 0; $j < 4; $j++){
+                        if($k >= $numSections) break;
+                        Print '<div class="slot">';
+                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                            Print '<span id="sectionname">'.$array[$k].'</span>';
+                            Print '<span id="studentcount">STUDENT COUNT: 45</span>';
+                        Print '</div>';
+
+                        $k++;
+                    }
                 Print '</div>';
 
                 $baseTop = $baseTop + 40 + 5;
