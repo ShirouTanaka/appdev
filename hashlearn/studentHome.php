@@ -334,17 +334,57 @@
         <?php
             $baseTop = 44;
             $assignmentNum = 5;
-            $sql_query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+
+            //this gets the section
+            $user_id_current = $_SESSION['user_id'];
+            $sql_query_section = "
+                    SELECT * 
+                    FROM user_section
+                    JOIN users ON user_section.user_id=users.user_id
+                    JOIN sections ON user_section.section_id=sections.section_id
+                    WHERE user_section.user_id = $user_id_current AND users.user_type = 'student'
+            ";
+            $result_section = mysqli_query($con, $sql_query_section);
+            $row_section = mysqli_fetch_assoc($result_section);
+            $section_id_current = $row_section['section_id'];
+
+            $sql_query_assignment = "
+                SELECT * 
+                FROM assignment 
+                JOIN sections ON assignment.section_id=sections.section_id
+                WHERE assignment.section_id = $section_id_current
+            ";
+
+
             
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<a onclick="assignmentLink()"><div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
+            
+            $result_assignment = mysqli_query($con, $sql_query_assignment);
+            $total = mysqli_num_rows($result_assignment);
+
+            while($row = mysqli_fetch_assoc($result_assignment)){
+                $upload_date[] = $row['uploaded_on'];
+                $assignment_name[] = $row['assignment_name'];
+                $assignment_description[] = $row['assignment_desc'];
+                $assignment_code[] = $row['assignment_code'];
+                $assignment_dl[] = $row['assignment_dl']; 
+            }
+
+            $_SESSION['assignment_desc'] = $assignment_description;
+            $_SESSION['assignment_dl'] = $assignment_dl;
+            $_SESSION['assignment_code'] = $assignment_code;
+            $_SESSION['assignment_name'] = $assignment_name;
+            
+            $k = 0;
+            for($i = 0; $i < $total; $i++){
+                Print '<a onclick="assignmentLink('.$k.')"><div class="assignments-container" style="top:'.$baseTop.'%;">';
+                    Print '<span class="date">'.$upload_date[$k].'</span>';
                     Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
+                    Print '<span class="hw-title">'.$assignment_name[$k].'</span>';
+                    Print '<span class="hw-code">'.$assignment_code[$k].'</span>';
+                    Print '<span class="due-date">Due Date & Time: '.$assignment_dl[$k].'</span>';
                 Print '</div></a>';
                 
+                $k++;
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
@@ -388,8 +428,14 @@
         }
     }
 
-    function assignmentLink(){
+    function assignmentLink(num){
         //testing please change to proper assignment page
-        window.location.href = "login.php";
+        document.cookie='number=' + num;
+        // <?php
+        //     $_SESSION['array_num'] = $_COOKIE['number']; 
+        // ?>
+        // document.cookie = "number=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        window.location.href = "studentviewassignment.php";
     }
 </script>
+

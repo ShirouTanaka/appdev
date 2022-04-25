@@ -1,4 +1,8 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
         <title>Student View Assignment Page</title>
         <meta charset="UTF-8">
@@ -348,53 +352,39 @@
                 top: 71.5%;
             }
             .assignments-container .hw-submissionbox{
+                height: 6%;
+                width: 30.5%;
                 position: absolute;
+                top: 77%;
+                bottom: 5%;
                 left: 2%;
-                top:77%;
-                height: 15%;
-                width: 80%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-            }
-
-            .assignments-container .hw-submissionbox .submssion-container{
-                position: absolute;
-                left: 0%;
-                top:0%;
-                height: 100%;
-                width: 100%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-            }
-
-            .assignments-container .hw-submissionbox .hw-submission-icon{
-                position: absolute;
-                left: 50%;
-                top: 5%;
-                max-width: auto;
-                height: 90%;
+                background-color: #F12929;
+                border: none;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 1.3vw;
+                box-shadow: -2 px 2px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
             }
 
             .assignments-container .hw-submissionbox:hover{
-                cursor: pointer;   
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
                 opacity: 1;
-                border: 2px solid rgba(240, 34, 34, 0.70);
+                cursor: pointer;
             }
             .assignments-container .hw-submissionbox:active{
+                box-shadow: 0px 0px 0px black;
                 transform: scale(0.96);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
 
             .assignments-container .submission-button{
                 height: 13%;
-                width: 10.5%;
+                width: 20.5%;
                 position: absolute;
                 top: 80%;
                 bottom: 5%;
-                left: 85%;
+                left: 75%;
                 background-color: #F12929;
                 border-radius: 15px;
                 border: none;
@@ -422,8 +412,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="activitystream" onclick="navButtonHandle('activity stream')">
@@ -442,16 +443,17 @@
         <span id="pagemast">VIEW ASSIGNMENT</span>
         <div id="horizontalline"></div>
         <?php
+            $num = $_COOKIE['number'];
                 Print '<div class="assignments-container">';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
+                    Print '<span class="hw-title">'.$_SESSION['assignment_name'][$num].'</span>';
+                    Print '<span class="hw-code">HW Code: '.$_SESSION['assignment_code'][$num].'</span>';
                     Print '<span class="grade-title">Points:</span>';
                     Print '<span class="grade">100</span>';
                     Print '<span class="due-date-title">Due Date: </span>';
-                    Print '<span class="due-date"> 03/29/2022 11:59 PM</span>';
+                    Print '<span class="due-date">'. $_SESSION['assignment_dl'][$num].'</span>';
                     Print '<span class="hw-info-title">Assignment Info</span>';
                     print '<span class="hw-info-line"></span>';
-                    print '<span class="hw-info-description">First Submission for the Student</span>';
+                    print '<span class="hw-info-description">'.$_SESSION['assignment_desc'][$num].'</span>';
                     Print '<span class="hw-submission-title">Assignment Submission</span>';
                     print '<span class="hw-submission-line"></span>';
                     print '<input type="file" class="hw-submissionbox" value="CHOOSE FILE">';
