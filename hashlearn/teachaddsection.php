@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
+    ?>
     <head>
         <title>Add Section</title>
         <meta charset="UTF-8">
@@ -539,13 +544,31 @@
                 <div id="section-line"></div>
                 <input type="text" id="name-input" name="section-name" placeholder="Enter Section Name" required>
             </div>
+            <input type="file" class="hw-submissionbox" id="filedata" name="filedata" value="CHOOSE FILE">
             <input type="submit" value="SAVE SECTION" name="submit" id="save-section-button">
         </form>
         <div id="result-dimensions">
             <?php
                 if($_SERVER['REQUEST_METHOD'] == "POST"){
+                    if(isset($_POST["submit"])){
+                        echo "<script>console.log('entered2');</script>";
+                        $fileName = $_FILES['filedata']['name'];
+                        echo var_dump($_FILES);
+                        echo $fileName;
+                    }
                     $section_name = $_POST['section-name'];
+                    $sql_query_add_section = "INSERT INTO sections (section_id, section_name, module_num, course_title, course_code)
+                    VALUES ( NULL ,'".$section_name."', 2, 'Computer Programming Laboratory 1', 'CS126L')
+                    ";
+        
+                    $result_add_section = mysqli_query($con, $sql_query_add_section);
 
+                    $last_id = $con->insert_id;
+
+                    $sql_query_add_user_section = "INSERT INTO user_section (user_section_id ,user_id, section_id)
+                    VALUES (NULL,".$current_user_id.", ".$last_id.")
+                    ";
+                    $result = mysqli_query($con, $sql_query_add_user_section);
                     Print '<span id="_mast">SECTION CREATED: </span>';
                     Print '<div id="section-card">';
                         Print '<img src="images/sectionicon.png" id="_icon" alt="sectionicon"/>';
