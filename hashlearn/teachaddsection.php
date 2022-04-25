@@ -115,37 +115,6 @@
             #viewsection:hover{
                 cursor: pointer;
             }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 7%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
-                cursor: pointer;
-            }
             /* EDIT AND LOGOUT CARD */
             #rightcard{
                 position: fixed;
@@ -555,9 +524,6 @@
         <div id="viewsection" onclick="navButtonHandle('view section')">
             <span id="viewsection-text">VIEW SECTIONS</span>
         </div> 
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
-        </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
             <img src="images/edit.png" id="edit" alt="edit profile"/>
@@ -595,20 +561,10 @@
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
             window.location.assign("teachhome.php");
-
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
         }
     }
 
