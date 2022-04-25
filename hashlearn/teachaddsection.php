@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id = $_SESSION['user_id'];
+    ?>
     <head>
         <title>Add Section</title>
         <meta charset="UTF-8">
@@ -475,57 +480,45 @@
                 <input type="text" id="name-input" name="section-name" placeholder="Enter Section Name" required>
             </div>
             <span id="av-containers-label">AVAILABLE STUDENTS</span>
-            <div id="available-students-container">
-                <?php
-                    $available_students = array("Kyle Matthew A. Degrano", "Lenz Baron S. Balita", "Andrei Daniel A. Pamoso", "Lance Williams G. Navarro", "Maria Cassandra M. Lindio");
-
-                    for($i = 0; $i < count($available_students); $i++){
-                        Print '<div class="av-students-item">';
-                            echo '<span id="student-name">'.$available_students[$i].'</span>';
-                            echo '<input type="checkbox" class="checkbox" name="studentitem[]" value="'.$available_students[$i].'">';
-                        Print '</div>';
-                    }
-                ?>
-            </div>
-            <input type="submit" value="SAVE SECTION" name="submit" id="save-section-button">
+            
+            <input type="submit" value="SAVE SECTION" name="submitbtn" id="save-section-button">
         </form>
         <?php
-            class Section{
-                public $name;
-                public $students = array(); 
+            if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submitbtn'])){
+                $section_name = $_POST['section-name'];
+                $sql_query_add_section = "INSERT INTO sections (section_id, section_name, module_num, course_title, course_code)
+                 VALUES ( NULL ,'".$section_name."', 2, 'Computer Programming Laboratory 1', 'CS126L')
+                ";
+    
+                $result_add_section = mysqli_query($con, $sql_query_add_section);
 
-                function setName($name){
-                    $this->name = $name;
-                }
-                function addStudent($student){
-                    array_push($this->students, $student);
-                }
-            }
-        
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $section = new Section();
-                $section->setName($_POST['section-name']);
+                $last_id = $con->insert_id;
 
-                if(!empty($_POST['studentitem'])){
-                    Print '<div id="results-dimensions">';
-                        Print '<span id="results-mast">SECTION CREATION DETAILS</span>';
-                        Print '<span id="results-submast">SECTION NAME: '.$section->name.' -- STUDENT COUNT: '.count($_POST['studentitem']).'</span>';
-                        Print '<span id="results-tri-submast">ACTIVE STUDENTS LIST</span>';
+                $sql_query_add_user_section = "INSERT INTO user_section (user_section_id ,user_id, section_id)
+                VALUES (NULL,".$current_user_id.", ".$last_id.")
+                ";
+                $result = mysqli_query($con, $sql_query_add_user_section);
+                
+                // if(!empty($_POST['studentitem'])){
+                //     Print '<div id="results-dimensions">';
+                //         Print '<span id="results-mast">SECTION CREATION DETAILS</span>';
+                //         Print '<span id="results-submast">SECTION NAME: '.$section->name.' -- STUDENT COUNT: '.count($_POST['studentitem']).'</span>';
+                //         Print '<span id="results-tri-submast">ACTIVE STUDENTS LIST</span>';
 
-                        Print '<div id="added-students-list">';
-                            foreach($_POST['studentitem'] as $value){
-                                // DELETE SELECTED ITEMS FIRST FROM AVAILABLE STUDENTS LIST (once database is connected)
-                                $section->addStudent($value);
-                                Print '<div class="ad-students-item">';
-                                    Print '<span id="ad-student-name">'.$value.'</span>';
-                                Print '</div>';
-                            }
-                        Print '</div>';
-                        Print '<button id="finalize" onclick="confirmation()">FINALIZE</button>';
-                    Print '</div>';
-                }else{
-                    echo '<script>alert("Atleast one student should be added to the section");</script>';
-                }
+                //         Print '<div id="added-students-list">';
+                //             foreach($_POST['studentitem'] as $value){
+                //                 // DELETE SELECTED ITEMS FIRST FROM AVAILABLE STUDENTS LIST (once database is connected)
+                //                 $section->addStudent($value);
+                //                 Print '<div class="ad-students-item">';
+                //                     Print '<span id="ad-student-name">'.$value.'</span>';
+                //                 Print '</div>';
+                //             }
+                //         Print '</div>';
+                //         Print '<button id="finalize" onclick="confirmation()">FINALIZE</button>';
+                //     Print '</div>';
+                // }else{
+                //     echo '<script>alert("Atleast one student should be added to the section");</script>';
+                // }
             }
         ?>
 
