@@ -315,6 +315,15 @@
                 transform: scale(0.96);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
+            @media screen and (max-width: 1700px) {
+                .submission-container{
+                    left: 6%;
+                    right: 6%;
+                }
+                .submission-container #left-info-box{
+                    width: 910px;
+                }
+            }
             @media screen and (max-width: 600px) {
                 .submission-container #left-info-box{
                     height: 110px;

@@ -174,7 +174,152 @@
                 top: 38%;
             }
             #form-wrapper{
+                position: absolute;
+                top: 40%;
+                left: 9%;
+                right: 9%;
+                border: 1px solid black;
+                max-height: 1500px;
+                padding: 0.5em;
+                margin: 0.5em auto;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            /*LEFT*/
+            #form-wrapper #left-container{
+                min-height: 277px;
+                width: 480px;
+                border: 1px solid black;
+                margin: 0.5em;
+                padding: 0.25em;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+            }
+            #form-wrapper #left-container .labels{
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 28px;
+                font-weight: 300;
+                margin-top: 0.9em;
+            }
+            #form-wrapper #left-container .input{
+                width: 63%;
+                min-height: 35px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 300;
+                color: black;
+                border: none;
+                font-size: 1.5em;
+                border-radius: 12px;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                outline: none;
+                margin-top: 1.05em;
+            }
+            #form-wrapper #left-container #input1{
+                margin-left: 0.5em;
+            }
+            #form-wrapper #left-container #input2{
+                margin-left: 3em;
+            }
+            #form-wrapper #left-container #input3{
+                margin-left: 3.4em;
+            }
+            /*RIGHT*/
+            #form-wrapper #right-container{
+                min-height: 250px;
+                width: 510px;
+                border: 1px solid black;
+                margin: 0.5em;
+                padding: 0.5em;
+                display: block;
+            }
+            #form-wrapper #right-container #textarea-mast{
+                width: 100%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 28px;
+                display: block;
+                margin: 0em auto;
+                text-align: center;
+                font-weight: 300;
+            }
+            #form-wrapper #right-container #textarea{
+                width: 100%;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 15px;
+                display: block;
+                font-weight: 300;
+                margin: 0.90em auto;
+                border-radius: 10px;
+            }
+            #form-wrapper #right-container #buttons-wrapper{
+                width: 100%;
+                display: block;
+                height: 45px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+            }
+            #form-wrapper #right-container #buttons-wrapper .buttons{
+                height: 75%;
+                width: 110px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 18px;
+                font-weight: 300;
+                margin: 0.3em 1.5em;
+                background-color: #F84646;
+                border: none;
+                outline: none;
+                color: white;
+                box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 8px;
+                transition: 0.2s ease-in-out;
+            }
+            #form-wrapper #right-container #buttons-wrapper .buttons:hover{
+                cursor: pointer;
+                background-color: #F02222;
+            }
+            #form-wrapper #right-container #buttons-wrapper .buttons:active{
+                transform: scale(0.96);
+                box-shadow: -0px 0px 4px rgba(0, 0, 0, 0.25);
+            }
+            /*MEDIA QUERY*/
+            @media screen and (max-width: 1750px) {
                 
+            }
+            @media screen and (max-width: 650px) {
+                #form-wrapper #left-container .labels{
+                    margin-top: 0.95em;
+                    font-size: 1.3em;                }
+                #form-wrapper #left-container .input{
+                    min-height: 30px;
+                    font-size: 1.3em;
+                    width: 59%;
+                }
+                #form-wrapper #left-container #input1{
+                    margin-left: 1em;
+                }
+                #form-wrapper #left-container #input2{
+                    margin-left: 0em auto;
+                }
+                #form-wrapper #left-container #input3{
+                    margin-left: 0em auto;
+                }
+            }
+            /*SCROLL BAR*/
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
             }
         </style>
     </head>
@@ -199,7 +344,36 @@
         <!-- BODY PROPER -->
         <span id="pagemast">CREATE ASSIGNMENT</span>
         <div id="horizontalline"></div>
-        
+        <form id="form-wrapper" action="teachaddhw.php" method="POST">
+            <div id="left-container">
+                <span class="labels">Assignment Title:</span>
+                <input type="text" name="hw-title" id="input1" placeholder="Enter title" class="input" required>
+                <span class="labels">Start Date:</span>
+                <input type="date" name="start-date" id="input2" class="input" required>
+                <span class="labels">End Date:</span>
+                <input type="date" name="end-date" id="input3" class="input" required>
+                <span class="labels">Due Time:</span>
+                <input type="time" name="due-time" id="input3" class="input" required>
+            </div>
+            <div id="right-container">
+                <span id="textarea-mast">Assignment Description:</span>
+                <textarea id="textarea" name="description" rows="8" cols="50" required>
+                </textarea>
+                <div id="buttons-wrapper">
+                    <input type="reset" value="RESET" class="buttons">
+                    <input type="submit" value="SUBMIT" class="buttons">
+                </div>
+            </div>
+        </form>
+        <?php
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                $title = $_POST['hw-title'];
+                $start_date = $_POST['start-date'];
+                $end_date = $_POST['end-date'];
+                $due_time = $_POST['due-time'];
+                $description = $_POST['description'];
+            }
+        ?>
     </body>
 </html>
 <script>
