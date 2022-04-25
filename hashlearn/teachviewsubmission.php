@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Student Change Profile Page</title>
+        <title>View Submission</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,16 +10,6 @@
         <style>
             body{
                 overflow-x: hidden;
-            }
-            ::-webkit-scrollbar{
-                width: 8px;
-            }
-            ::-webkit-scrollbar-thumb{
-                background-color: #ff5f5f;
-                border-radius: 20px;
-            }
-            ::-webkit-scrollbar-thumb:hover{
-                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -83,7 +73,7 @@
                 user-select: none;
             }
             /*TABS SELECTION*/
-            #activitystream{
+            #viewsection{
                 position: fixed;
                 left: 0%;
                 top: 5%;
@@ -101,7 +91,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #activitystream #activitystream-text{
+            #viewsection #viewsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -111,38 +101,7 @@
                 user-select: none;
                 text-align: center;
             }
-            #activitystream:hover{
-                cursor: pointer;
-            }
-            #viewgrades{
-                position: fixed;
-                left: 20.5%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #viewgrades #viewgrades-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #viewgrades:hover{
+            #viewsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -167,7 +126,6 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
-                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -215,129 +173,163 @@
                 left: 10%;
                 top: 38%;
             }
-            #change-form-container{
+
+            .submission-container{
                 position: absolute;
-                left: 6%;
-                top:0%;
-                width: 53%;
-                height: 100%;
+                right: 8%;
+                left: 8%;
+                top: 40%;
                 display: flex;
-                align-items: center;
+                flex-wrap: wrap;
+                align-content: flex-start;
                 justify-content: center;
+                max-height: 1500px;
+                padding: 0.4em;
+                margin: 0.2em auto;
             }
-            #change-form-container #form-wrapper{
-                position: relative;
-                width: 90%;
-                height: 50%;
+            .submission-container #left-info-box{
+                width: 890px;
+                height: 130px;
                 display: flex;
-                align-items: center;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: flex-start;
+                margin-right: 1em;
+                margin-bottom: 1.2em;
+            }
+            .submission-container #left-info-box .mast-info{
+                width: 100%;
+                font-size: 1.6em;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+                padding: 0.15em;
+            }
+            .submission-container #right-info-box{
+                width: 150px;
+                height: 130px;
+                border: 2px solid #F84646;
+                border-radius: 20px;
+                display: flex;
                 justify-content: center;
+                align-items: center;
                 flex-direction: column;
-                margin-bottom: 60px;
+                margin-bottom: 1.2em;
             }
-            #change-form-container #form-wrapper #form-proper{
-                position: absolute;
-                left: 0%;
-                top: 0%;
-                right: 0%;
-                height: 100%;
+            .submission-container #right-info-box #grade-mast{
+                font-size: 1.4em;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                width: 100%;
+                text-align: center;
+                user-select: none;
+            }
+            .submission-container #right-info-box #grade{
+                font-size: 3.5em;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                text-align: center;
+                user-select: none;
+            }
+            .submission-container #center-info-box{
+                width: 1055px;
+                border-top: 2px solid black;
+                height: 500px;
+                margin-bottom: 1em;
+                margin-top: 1em;
+                display: block;
+            }
+            .submission-container #center-info-box #info-mast{
+                max-width: 1000px;
+                max-height: 300px;
+                font-size: 2em;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                text-align: center;
+                display: block;
+                user-select: none;
+                padding-top: 1em;
+                margin: 0 auto;
+            }
+            .submission-container #center-info-box #info{
+                max-width: 1000px;
+                max-height: 300px;
+                font-size: 1.9em;
+                color: black;
+                display: block;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 300;
+                text-align: center;
+                user-select: none;
+                padding: 0.8em 2.5em;
+            }
+            .submission-container #center-info-box #form-wrapper{
+                max-width: 50%;
+                min-height: 200px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+                margin: 0 auto;
+
+                padding: 0.25em;
+            }
+            .submission-container #center-info-box #form-wrapper #grade-input{
+                width: 95%;
+                min-height: 40px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                color: black;
+                border: none;
+                font-size: 1.5em;
+                border-radius: 15px;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                outline: none;
+                margin: 1em auto;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons{ 
+                width: 200px;
+                min-height: 40px;
+                border-radius: 15px;
+                background-color:#F84646;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                margin: 1em;
+                color: white;
+                font-size: 1.5em;
+                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
+                outline: none;
+                border: none;
+                transition: 0.2s ease-in-out;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons:hover{
+                cursor: pointer;
+                background-color: #F02222;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons:active{
+                transform: scale(0.96);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+            }
+            @media screen and (max-width: 600px) {
+                .submission-container #left-info-box{
+                    height: 110px;
+                }
+                .submission-container #left-info-box .mast-info{
+                    font-size: 1.3em;
+                }
+                .submission-container #center-info-box #info-mast{
+                    font-size: 1.9em;
+                }
+                .submission-container #center-info-box #info{
+                    font-size: 1.6em;
+                }
             }
             
-            #change-form-container #form-wrapper #form-proper #submit-button{
-                height: 13%;
-                width: 95.5%;
-                position: absolute;
-                top: 120%;
-                bottom: 5%;
-                left: 2%;
-                background-color: #F12929;
-                border-radius: 15px;
-                border: none;
-                color: white;
-                opacity: 0.90;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                font-size: 2vw;
-                box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
-                transition: 0.3s ease-in-out;
-            }
-            #change-form-container #form-wrapper #form-proper #submit-button:hover{
-                opacity: 1;
-                cursor: pointer;
-            }
-            #change-form-container #form-wrapper #form-proper #submit-button:active{
-                box-shadow: 0px 0px 0px black;
-                transform: scale(0.96);
-            }
-
-            #change-form-container #form-wrapper #form-proper .inputs{
-                position: absolute;
-                width: 87%;
-                height: 13%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                color: black;
-                border: none;
-                font-size: 2vw;
-                background: transparent;
-                outline: none;
-                border-radius: 10px;
-            }
-            #change-form-container #form-wrapper #change-username{
-                position: absolute;
-                font-size: 2.2vw;
-                color: black;
-                top: 35%;
-                left: 2%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            #change-form-container #form-wrapper #username{
-                position: relative;
-                border: 2px solid #aaa9a9;
-                top:22%;
-                height: 13%;
-                width: 95%;
-                border-radius: 15px;
-                margin-bottom: 5%;
-            }
-            #change-form-container #form-wrapper #username #username-icon{
-                position: absolute;
-                left: 1%;
-                top: 5%;
-                max-width: auto;
-                height: 90%;
-            }
-            #change-form-container #form-wrapper #change-password{
-                position: absolute;
-                font-size: 2.2vw;
-                color: black;
-                top: 73%;
-                left: 2%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                text-align: left;
-                user-select: none;
-            }
-            #change-form-container #form-wrapper #password{
-                position: relative;
-                border: 2px solid #aaa9a9;
-                top: 37%;
-                height: 13%;
-                width: 95%;
-                border-radius: 15px;
-                margin-bottom: 5%;
-            }
-            #change-form-container #form-wrapper #password #password-icon{
-                position: absolute;
-                left: 1%;
-                top: 5%;
-                max-width: auto;
-                height: 90%;
-            }
-
         </style>
     </head>
     <body>
@@ -349,57 +341,64 @@
             <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="activitystream" onclick="navButtonHandle('activity stream')">
-            <span id="activitystream-text">ACTIVITY STREAM</span>
-        </div>
-        <div id="viewgrades" onclick="navButtonHandle('view grades')">
-            <span id="viewgrades-text">VIEW GRADES</span>
+        <div id="viewsection" onclick="navButtonHandle('view section')">
+            <span id="viewsection-text">VIEW SUBMISSIONS</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
+            <img src="images/edit.png" id="edit" alt="edit profile"/>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
-        <!-- BODY PROPER -->
-        <span id="pagemast">Change Profile</span>
+        <span id="pagemast">OOP Introductory HW</span>
         <div id="horizontalline"></div>
-        <div id="change-form-container">
-            <div id="form-wrapper">
-                <span id="change-username">Change Username</span>
-                <div id="username" style="margin-bottom: 5%;">
-                    <img src="images/user.png" id="username-icon" alt="username-icon"/>
-                </div>
-                <span id="change-password">Change Password:</span>
-                <div id="password" style="margin-bottom: 5%;">
-                    <img src="images/password.png" id="password-icon" alt="password-icon"/>
-                </div>
-                <form action="checkLogin2.php" method="POST" id="form-proper">
-                    <input type="text" class="inputs" name="username" style="left: 9.5%; top:48.8%;" placeholder="Enter new username" required>
-                    <input type="text" class="inputs" name="password" style="left: 9.5%; top:86.8%;" placeholder="Enter new password" required>
-                    <input type="submit" id="submit-button" value="SIGN IN">
+
+        <div class="submission-container">
+            <div id="left-info-box">
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">ASSIGNMENT CODE:</span>
+                    <?php Print '<span style="margin-left: 0.6em">FA1.1</span>'; ?>
+                </span>
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">DATE SUBMITTED:</span>
+                    <?php Print '<span style="margin-left: 1.2em">03/29/2022 10:50 P.M.</span>'; ?>
+                </span>
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">SUBMITTED BY:</span>
+                    <?php Print '<span style="margin-left: 2em">Bobby Bobbers B. Bobbingston</span>'; ?>
+                </span>
+            </div>
+            <div id="right-info-box">
+                <span id="grade-mast">Total Points:</span>
+                <?php Print '<span id="grade">100</span>';?>
+            </div>
+            <div id="center-info-box">
+                <span id="info-mast">ASSIGNMENT INFO </span>
+                <?php Print '<span id="info">Referring to the lectures about DI Approaches and Sample GUI App, develop your own application using the sample program attached hereto (SpringGui). Your application should create a different object that is made up of the existing objects (rectangle and circle).</span>'; ?>
+                <!-- GRADING FORM -->
+                <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
+                    <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
+                    <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="VIEW CODE" name="view-code" class="buttons"></a>
+                    <input type="submit" value="GRADE" name="submit" class="buttons">
                 </form>
+                <?php
+                    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                        $grade = $_POST['grade'];
+                        echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
+                    }
+                ?>
             </div>
         </div>
-    </body>
+    </body> 
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
-        if(tag === "activity stream"){
-            document.getElementById("viewgrades").style.top = "5%";
-            document.getElementById("viewgrades").style.opacity = "0.8";
+        if(tag === "view section"){
+            document.getElementById("viewsection").style.top = "7%";
+            document.getElementById("viewsection").style.opacity = "1";
 
-            document.getElementById("activitystream").style.top = "7%";
-            document.getElementById("activitystream").style.opacity = "0.9";
-            window.location.href = "studenthome.php";
-        }else if(tag === "view grades"){
-            document.getElementById("activitystream").style.top = "5%";
-            document.getElementById("activitystream").style.opacity = "0.8";
-
-            document.getElementById("viewgrades").style.top = "7%";
-            document.getElementById("viewgrades").style.opacity = "0.9";
-            window.location.href = "studentviewgrades.php";
+            window.location.assign("teachpassedhws.php");
         }
     }
 

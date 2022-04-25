@@ -15,6 +15,16 @@
             body{
                 overflow-x: hidden;
             }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
+            }
             #navbar-body{
                 position: fixed;
                 top: 0%;
@@ -352,6 +362,17 @@
                 border-radius: 20px;
             }
 
+            .assignments-container .hw-submissionbox .submssion-container{
+                position: absolute;
+                left: 0%;
+                top:0%;
+                height: 100%;
+                width: 100%;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            }
+
             .assignments-container .hw-submissionbox .hw-submission-icon{
                 position: absolute;
                 left: 50%;
@@ -371,13 +392,13 @@
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
 
-            .assignment-container .submit-button{
+            .assignments-container .submission-button{
                 height: 13%;
-                width: 95.5%;
+                width: 10.5%;
                 position: absolute;
-                top: 120%;
+                top: 80%;
                 bottom: 5%;
-                left: 2%;
+                left: 85%;
                 background-color: #F12929;
                 border-radius: 15px;
                 border: none;
@@ -385,15 +406,15 @@
                 opacity: 0.90;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
-                font-size: 2vw;
-                box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
+                font-size: 1.6vw;
+                box-shadow: -2 px 2px 4px rgba(0, 0, 0, 0.25);
                 transition: 0.3s ease-in-out;
             }
-            .assignment-container .submit-button:hover{
+            .assignments-container.submission-button:hover{
                 opacity: 1;
                 cursor: pointer;
             }
-            .assignment-container .submit-button:active{
+            .assignments-container .submission-button:active{
                 box-shadow: 0px 0px 0px black;
                 transform: scale(0.96);
             } 
@@ -449,9 +470,8 @@
                     print '<span class="hw-info-description">'.$_SESSION['assignment_desc'][$num].'</span>';
                     Print '<span class="hw-submission-title">Assignment Submission</span>';
                     print '<span class="hw-submission-line"></span>';
-                    print '<div class="hw-submissionbox">';
-                    print '<img src="images/submit.png" class="hw-submission-icon" alt="hw-submission-icon"/>';
-                    print '</div>';
+                    print '<input type="file" class="hw-submissionbox" value="CHOOSE FILE">';
+                    print '<input type="submit" class="submission-button" value="SUBMIT FILE">';
                 Print '</div>';
         ?>
     </body>

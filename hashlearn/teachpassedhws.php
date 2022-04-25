@@ -11,6 +11,16 @@
             body{
                 overflow-x: hidden;
             }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
+            }
             #navbar-body{
                 position: fixed;
                 top: 0%;
@@ -312,6 +322,7 @@
                     Print '<span class="submitted-by">Submitted by: Bobby Bobby</span>';
                     Print '<span class="submitted-on">Submitted on: 03/29/2022 11:59 PM</span>';
                 Print '</div>';
+                
                 
                 $baseTop = $baseTop + 15 + 3.4;
             }

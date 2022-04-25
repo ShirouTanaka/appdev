@@ -11,6 +11,16 @@
             body{
                 overflow-x: hidden;
             }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
+            }
             #navbar-body{
                 position: fixed;
                 top: 0%;
@@ -133,6 +143,37 @@
                 user-select: none;
             }
             #addsection:hover{
+                cursor: pointer;
+            }
+            #addhw{
+                position: fixed;
+                left: 41.1%;
+                top: 5%;
+                width: 20%;
+                height: 15%;
+                background-color: #F02222;
+                z-index: 1;
+                opacity: 0.9;
+                border-bottom-right-radius: 15px;
+                border-bottom-left-radius: 15px;
+                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+                border: 1.5px solid white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s ease-in-out;
+            }
+            #addhw #addhw-text{
+                position: absolute;
+                bottom: 2%;
+                font-size: 2.3vw;
+                color: white;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 300;
+                text-align: center;
+                user-select: none;
+            }
+            #addhw:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -292,7 +333,10 @@
             <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
         <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">EDIT SECTION MEMBERS</span>
+            <span id="addsection-text">ADD SECTION MEMBERS</span>
+        </div>
+        <div id="addhw" onclick="navButtonHandle('add hw')">
+            <span id="addhw-text">ADD ASSIGNMENT</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -339,6 +383,12 @@
 
             document.getElementById("addsection").style.top = "7%";
             document.getElementById("addsection").style.opacity = "1";
+
+        }else if(tag === "add hw"){
+            document.getElementById("addhw").style.top = "7%";
+            document.getElementById("addhw").style.opacity = "1";
+
+            window.location.assign("teachaddhw.php");
         }
     }
 
