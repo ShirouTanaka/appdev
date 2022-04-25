@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Teacher Specific Section Page</title>
+        <title>Student View Grades Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +10,16 @@
         <style>
             body{
                 overflow-x: hidden;
+            }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -157,6 +167,7 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -311,7 +322,7 @@
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 

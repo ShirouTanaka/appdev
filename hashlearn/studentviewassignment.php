@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Teacher Specific Section Page</title>
+        <title>Student View Assignment Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +10,16 @@
         <style>
             body{
                 overflow-x: hidden;
+            }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -157,6 +167,7 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -347,14 +358,23 @@
                 border-radius: 20px;
             }
 
-            .hw-submission-icon{
+            .assignments-container .hw-submissionbox .submssion-container{
                 position: absolute;
-                top: 68%;
-                left: 30%;
+                left: 0%;
+                top:0%;
+                height: 100%;
+                width: 100%;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 20px;
+            }
+
+            .assignments-container .hw-submissionbox .hw-submission-icon{
+                position: absolute;
+                left: 50%;
+                top: 5%;
                 max-width: auto;
-                height: 20%;
-                transition: 0.2s ease-in-out;
-                opacity: 0;
+                height: 90%;
             }
 
             .assignments-container .hw-submissionbox:hover{
@@ -367,6 +387,33 @@
                 transform: scale(0.96);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
+
+            .assignments-container .submission-button{
+                height: 13%;
+                width: 10.5%;
+                position: absolute;
+                top: 80%;
+                bottom: 5%;
+                left: 85%;
+                background-color: #F12929;
+                border-radius: 15px;
+                border: none;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 1.6vw;
+                box-shadow: -2 px 2px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            .assignments-container.submission-button:hover{
+                opacity: 1;
+                cursor: pointer;
+            }
+            .assignments-container .submission-button:active{
+                box-shadow: 0px 0px 0px black;
+                transform: scale(0.96);
+            } 
 
         </style>
     </head>
@@ -387,7 +434,7 @@
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
@@ -407,7 +454,8 @@
                     print '<span class="hw-info-description">First Submission for the Student</span>';
                     Print '<span class="hw-submission-title">Assignment Submission</span>';
                     print '<span class="hw-submission-line"></span>';
-                    print '<span class="hw-submissionbox"><img src="images/submit.png" id="hw-submission-icon" alt="submit assignment"/></span>';
+                    print '<input type="file" class="hw-submissionbox" value="CHOOSE FILE">';
+                    print '<input type="submit" class="submission-button" value="SUBMIT FILE">';
                 Print '</div>';
         ?>
     </body>

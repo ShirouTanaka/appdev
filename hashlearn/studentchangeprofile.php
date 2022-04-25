@@ -1,10 +1,6 @@
 <html>
-    <?php
-        session_start();
-        include 'connect.php';
-    ?>
     <head>
-        <title>Teacher Home Page</title>
+        <title>Student Change Profile Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,10 +83,10 @@
                 user-select: none;
             }
             /*TABS SELECTION*/
-            #viewsection{
+            #activitystream{
                 position: fixed;
                 left: 0%;
-                top: 7%;
+                top: 5%;
                 width: 20%;
                 height: 15%;
                 background-color: #F02222;
@@ -105,7 +101,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #viewsection #viewsection-text{
+            #activitystream #activitystream-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -115,10 +111,10 @@
                 user-select: none;
                 text-align: center;
             }
-            #viewsection:hover{
+            #activitystream:hover{
                 cursor: pointer;
             }
-            #addsection{
+            #viewgrades{
                 position: fixed;
                 left: 20.5%;
                 top: 5%;
@@ -126,7 +122,7 @@
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.8;
+                opacity: 0.9;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -136,7 +132,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #addsection #addsection-text{
+            #viewgrades #viewgrades-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -146,7 +142,7 @@
                 text-align: center;
                 user-select: none;
             }
-            #addsection:hover{
+            #viewgrades:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -171,6 +167,7 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -218,170 +215,191 @@
                 left: 10%;
                 top: 38%;
             }
-            .sections-container{
+            #change-form-container{
                 position: absolute;
-                top: 47%;
-                right: 10%;
-                left: 10%;
-                height: 40%;
-                max-height: 120%;
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                column-gap: 20px;
+                left: 6%;
+                top:0%;
+                width: 53%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
-            .sections-container .slot{
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-sizing: border-box;
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 15px;
+            #change-form-container #form-wrapper{
+                position: relative;
+                width: 90%;
+                height: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-                transition: 0.2s ease-in-out;
+                margin-bottom: 60px;
             }
-            .sections-container .slot:hover{
-                border: 2px solid rgba(240, 34, 34, 0.70);
+            #change-form-container #form-wrapper #form-proper{
+                position: absolute;
+                left: 0%;
+                top: 0%;
+                right: 0%;
+                height: 100%;
+            }
+            
+            #change-form-container #form-wrapper #form-proper #submit-button{
+                height: 13%;
+                width: 95.5%;
+                position: absolute;
+                top: 120%;
+                bottom: 5%;
+                left: 2%;
+                background-color: #F12929;
+                border-radius: 15px;
+                border: none;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 2vw;
+                box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            #change-form-container #form-wrapper #form-proper #submit-button:hover{
+                opacity: 1;
                 cursor: pointer;
             }
-            .sections-container .slot:active{
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+            #change-form-container #form-wrapper #form-proper #submit-button:active{
+                box-shadow: 0px 0px 0px black;
                 transform: scale(0.96);
             }
-            .sections-container .slot #sectionicon{
+
+            #change-form-container #form-wrapper #form-proper .inputs{
+                position: absolute;
+                width: 87%;
+                height: 13%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                color: black;
+                border: none;
+                font-size: 2vw;
+                background: transparent;
+                outline: none;
+                border-radius: 10px;
+            }
+            #change-form-container #form-wrapper #change-username{
+                position: absolute;
+                font-size: 2.2vw;
+                color: black;
+                top: 35%;
+                left: 2%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
+            #change-form-container #form-wrapper #username{
                 position: relative;
+                border: 2px solid #aaa9a9;
+                top:22%;
+                height: 13%;
+                width: 95%;
+                border-radius: 15px;
+                margin-bottom: 5%;
+            }
+            #change-form-container #form-wrapper #username #username-icon{
+                position: absolute;
+                left: 1%;
+                top: 5%;
                 max-width: auto;
-                height: 35%;
-                margin-bottom: 20px;
+                height: 90%;
             }
-            .sections-container .slot #sectionname{
-                position: relative;
-                font-size: 2.7vw;
+            #change-form-container #form-wrapper #change-password{
+                position: absolute;
+                font-size: 2.2vw;
                 color: black;
+                top: 73%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 600;
-                text-align: center;
+                font-weight: 400;
+                text-align: left;
                 user-select: none;
             }
-            .sections-container .slot #studentcount{
+            #change-form-container #form-wrapper #password{
                 position: relative;
-                font-size: 2.3vw;
-                color: black;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
+                border: 2px solid #aaa9a9;
+                top: 37%;
+                height: 13%;
+                width: 95%;
+                border-radius: 15px;
+                margin-bottom: 5%;
             }
+            #change-form-container #form-wrapper #password #password-icon{
+                position: absolute;
+                left: 1%;
+                top: 5%;
+                max-width: auto;
+                height: 90%;
+            }
+
         </style>
     </head>
     <body>
-        <!-- NAV BAR -->
+        <!-- NAVBAR -->
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <!-- <span id="username">Kyle Matthew Degrano</span> -->
-            <span id="username">
-                <?php
-                    $fName = $_SESSION['f_name'];
-                    $mName = $_SESSION['m_name'];
-                    $lName = $_SESSION['l_name'];
-                    echo $lName.", ".$fName." ".$mName;
-                ?>
-            </span>
-            <Span id="mail">
-                <?php
-                    echo $_SESSION['email'];
-                ?>
-            </Span>
+            <span id="username">Kyle Matthew Degrano</span>
+            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SECTION</span>
+        <div id="activitystream" onclick="navButtonHandle('activity stream')">
+            <span id="activitystream-text">ACTIVITY STREAM</span>
         </div>
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
+        <div id="viewgrades" onclick="navButtonHandle('view grades')">
+            <span id="viewgrades-text">VIEW GRADES</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVE SECTIONS</span>
+        <span id="pagemast">Change Profile</span>
         <div id="horizontalline"></div>
-        <?php
-            $user_id_temp = $_SESSION['user_id'];
-            $sql_query = "
-                    SELECT * 
-                    FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    JOIN sections ON user_section.section_id=sections.section_id
-                    WHERE user_section.user_id = $user_id_temp
-            ";
-
-            $result = mysqli_query($con, $sql_query);
-            $total = mysqli_num_rows($result);
-            
-
-            $numSections = $total;
-            $numSectionContainer = ceil($numSections / 4);
-            $baseTop = 47; // 47%
-
-            $cnt = 0;
-            
-            while($row = mysqli_fetch_assoc($result)){
-                $section[] = $row['section_name'];
-                $current_section_id = $row['section_id']; 
-                
-                $sql_query_num = "SELECT * FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    WHERE user_section.section_id =".$current_section_id." AND users.user_type = 'student' 
-                ";
-        
-                $num_result = mysqli_query($con, $sql_query_num);
-
-                $num[] = mysqli_num_rows($num_result);
-            }
-
-            $k = 0;
-            for($i = 0; $i < $numSectionContainer; $i++){
-                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    for($j = 0; $j < 4; $j++){
-                        if($k >= $numSections) break;
-                        Print '<div class="slot">';
-                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                            Print '<span id="sectionname">'.$section[$k].'</span>';
-                            Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
-                        Print '</div>';
-
-                        $k++;
-                    }
-                Print '</div>';
-
-                $baseTop = $baseTop + 40 + 5;
-            }            
-        ?>
+        <div id="change-form-container">
+            <div id="form-wrapper">
+                <span id="change-username">Change Username</span>
+                <div id="username" style="margin-bottom: 5%;">
+                    <img src="images/user.png" id="username-icon" alt="username-icon"/>
+                </div>
+                <span id="change-password">Change Password:</span>
+                <div id="password" style="margin-bottom: 5%;">
+                    <img src="images/password.png" id="password-icon" alt="password-icon"/>
+                </div>
+                <form action="checkLogin2.php" method="POST" id="form-proper">
+                    <input type="text" class="inputs" name="username" style="left: 9.5%; top:48.8%;" placeholder="Enter new username" required>
+                    <input type="text" class="inputs" name="password" style="left: 9.5%; top:86.8%;" placeholder="Enter new password" required>
+                    <input type="submit" id="submit-button" value="SIGN IN">
+                </form>
+            </div>
+        </div>
     </body>
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
-        if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
+        if(tag === "activity stream"){
+            document.getElementById("viewgrades").style.top = "5%";
+            document.getElementById("viewgrades").style.opacity = "0.8";
 
-            document.getElementById("viewsection").style.top = "7%";
-            document.getElementById("viewsection").style.opacity = "1";
+            document.getElementById("activitystream").style.top = "7%";
+            document.getElementById("activitystream").style.opacity = "0.9";
+            window.location.href = "studenthome.php";
+        }else if(tag === "view grades"){
+            document.getElementById("activitystream").style.top = "5%";
+            document.getElementById("activitystream").style.opacity = "0.8";
 
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
-
-            window.location.assign("teachaddsection.php");
+            document.getElementById("viewgrades").style.top = "7%";
+            document.getElementById("viewgrades").style.opacity = "0.9";
+            window.location.href = "studentviewgrades.php";
         }
     }
 

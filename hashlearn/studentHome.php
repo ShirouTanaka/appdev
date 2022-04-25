@@ -1,6 +1,10 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
-        <title>Teacher Specific Section Page</title>
+        <title>Student Home Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,6 +14,16 @@
         <style>
             body{
                 overflow-x: hidden;
+            }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -157,6 +171,7 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -284,8 +299,21 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="activitystream" onclick="navButtonHandle('activity stream')">
@@ -296,7 +324,7 @@
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
@@ -306,21 +334,23 @@
         <?php
             $baseTop = 44;
             $assignmentNum = 5;
+            $sql_query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
             
             for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
+                Print '<a onclick="assignmentLink()"><div class="assignments-container" style="top:'.$baseTop.'%;">';
                     Print '<span class="date">September 29, 2022</span>';
                     Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
                     Print '<span class="hw-title">OOP Introductory HW</span>';
                     Print '<span class="hw-code">HW Code: HW1.1</span>';
                     Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
+                Print '</div></a>';
                 
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
     </body>
 </html>
+
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
@@ -356,5 +386,10 @@
 
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
+    }
+
+    function assignmentLink(){
+        //testing please change to proper assignment page
+        window.location.href = "login.php";
     }
 </script>
