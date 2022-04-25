@@ -348,53 +348,39 @@
                 top: 71.5%;
             }
             .assignments-container .hw-submissionbox{
+                height: 6%;
+                width: 30.5%;
                 position: absolute;
+                top: 77%;
+                bottom: 5%;
                 left: 2%;
-                top:77%;
-                height: 15%;
-                width: 80%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-            }
-
-            .assignments-container .hw-submissionbox .submssion-container{
-                position: absolute;
-                left: 0%;
-                top:0%;
-                height: 100%;
-                width: 100%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
-            }
-
-            .assignments-container .hw-submissionbox .hw-submission-icon{
-                position: absolute;
-                left: 50%;
-                top: 5%;
-                max-width: auto;
-                height: 90%;
+                background-color: #F12929;
+                border: none;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 1.3vw;
+                box-shadow: -2 px 2px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
             }
 
             .assignments-container .hw-submissionbox:hover{
-                cursor: pointer;   
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
                 opacity: 1;
-                border: 2px solid rgba(240, 34, 34, 0.70);
+                cursor: pointer;
             }
             .assignments-container .hw-submissionbox:active{
+                box-shadow: 0px 0px 0px black;
                 transform: scale(0.96);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
 
             .assignments-container .submission-button{
                 height: 13%;
-                width: 10.5%;
+                width: 20.5%;
                 position: absolute;
                 top: 80%;
                 bottom: 5%;
-                left: 85%;
+                left: 75%;
                 background-color: #F12929;
                 border-radius: 15px;
                 border: none;
