@@ -325,6 +325,7 @@
             $baseTop = 44;
             $assignmentNum = 5;
 
+            //this gets the section
             $user_id_current = $_SESSION['user_id'];
             $sql_query_section = "
                     SELECT * 
@@ -357,11 +358,15 @@
                 $assignment_code[] = $row['assignment_code'];
                 $assignment_dl[] = $row['assignment_dl']; 
             }
+
+            $_SESSION['assignment_desc'] = $assignment_description;
+            $_SESSION['assignment_dl'] = $assignment_dl;
+            $_SESSION['assignment_code'] = $assignment_code;
+            $_SESSION['assignment_name'] = $assignment_name;
             
             $k = 0;
             for($i = 0; $i < $total; $i++){
-                echo
-                Print '<a onclick="assignmentLink()"><div class="assignments-container" style="top:'.$baseTop.'%;">';
+                Print '<a onclick="assignmentLink('.$k.')"><div class="assignments-container" style="top:'.$baseTop.'%;">';
                     Print '<span class="date">'.$upload_date[$k].'</span>';
                     Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
                     Print '<span class="hw-title">'.$assignment_name[$k].'</span>';
@@ -413,8 +418,14 @@
         }
     }
 
-    function assignmentLink(){
+    function assignmentLink(num){
         //testing please change to proper assignment page
+        document.cookie='number=' + num;
+        // <?php
+        //     $_SESSION['array_num'] = $_COOKIE['number']; 
+        // ?>
+        // document.cookie = "number=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         window.location.href = "studentviewassignment.php";
     }
 </script>
+
