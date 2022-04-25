@@ -1,9 +1,4 @@
 <html>
-    <?php
-        session_start();
-        include 'connect.php';
-        $current_user_id = $_SESSION['user_id'];
-    ?>
     <head>
         <title>Add Section</title>
         <meta charset="UTF-8">
@@ -15,6 +10,7 @@
         <style>
             body{
                 overflow-x: hidden;
+                text-rendering: optimizeLegibility;
             }
             ::-webkit-scrollbar{
                 width: 8px;
@@ -119,37 +115,6 @@
             #viewsection:hover{
                 cursor: pointer;
             }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 7%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.9;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
-                cursor: pointer;
-            }
             /* EDIT AND LOGOUT CARD */
             #rightcard{
                 position: fixed;
@@ -223,18 +188,22 @@
             #form-dimensions{
                 position: absolute;
                 right: 10%;
-                top: 44%;
+                top: 41%;
                 left: 10%;
-                height: 120%;
+                height: 8%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+                border: 1px solid black;
             }
             #form-dimensions #sectionname-container{
-                position: absolute;
-                left:10%;
-                top: 0%;
-                right:10%;
+                position: relative;
+                width: 770px;
                 border: 2px solid rgba(0, 0, 0, 0.25);
                 border-radius: 15px;
-                height: 6.5%;
+                height: 70%;
+                margin: 0.3em 0.1em;
             }
             #form-dimensions #sectionname-container #section-name-icon{
                 position: absolute;
@@ -259,10 +228,121 @@
                 font-weight: 400;
                 color: black;
                 border: none;
-                font-size: 2.1vw;
+                font-size: 23px;
                 background: transparent;
                 outline: none;
             }
+            #form-dimensions #save-section-button{
+                position: relative;
+                width: 200px;
+                height: 70%;
+                margin-top: 0.25em;
+                margin-bottom: 0.3em;
+                background-color: #F12929;
+                border-radius: 10px;
+                border: none;
+                margin-left: 1.2em;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 23px;
+                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            /**/
+            #result-dimensions{
+                position: absolute;
+                right: 10%;
+                top: 53%;
+                left: 10%;
+                max-height: 900px;
+                display: block;
+                padding: 1.5em;
+                border: 1px solid black;
+            }
+            #result-dimensions #_mast{
+                display: block;
+                width: 100%;
+                font-size: 35px;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                text-align: center;
+                margin-bottom: 0.90em;
+            }
+            #result-dimensions #section-card{
+                height: 350px;
+                width: 350px;
+                border: 2px solid #F84646;
+                box-sizing: border-box;
+                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 15px;
+                display: block;
+                margin: 0 auto;
+            }
+            #result-dimensions #section-card #_icon{
+                max-width: auto;
+                height: 25%;
+                display: block;
+                margin-top: 3.5em;
+                margin-bottom: 1em;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #result-dimensions #section-card #_sectionname{
+                font-size: 55px;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                text-align: center;
+                display: block;
+                user-select: none;
+            }
+            #result-dimensions #section-card #_studentcount{
+                position: relative;
+                font-size: 35px;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 300;
+                text-align: center;
+                display: block;
+                user-select: none;
+            }
+            /**/
+            @media screen and (max-width: 650px) {
+                #form-dimensions #sectionname-container #section-name-icon{
+                    top: 20%;
+                    height: 60%;
+                }
+                #result-dimensions{
+                    top: 65%;
+                }
+                #result-dimensions #section-card{
+                    height: 250px;
+                    width: 250px;
+                }
+                #result-dimensions #section-card #_icon{
+                    margin-top: 2.5em;
+                }
+                #result-dimensions #section-card #_sectionname{
+                    font-size: 40px;
+                }
+                #result-dimensions #section-card #_studentcount{
+                    font-size: 30px;
+                }
+            }
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
+            }
+            /**/
             #form-dimensions #av-containers-label{
                 position: absolute;
                 top: 14.5%;
@@ -284,16 +364,6 @@
                 height: 65%;
                 overflow-x: hidden;
                 overflow-y: auto;
-            }
-            ::-webkit-scrollbar{
-                width: 8px;
-            }
-            ::-webkit-scrollbar-thumb{
-                background-color: #ff5f5f;
-                border-radius: 20px;
-            }
-            ::-webkit-scrollbar-thumb:hover{
-                background-color: #F84646;
             }
             #form-dimensions #available-students-container .av-students-item{
                 position: relative;
@@ -329,23 +399,6 @@
             }
             #form-dimensions #available-students-container .av-students-item .checkbox:hover{
                 cursor: pointer;
-            }
-            #form-dimensions #save-section-button{
-                position: absolute;
-                right: 10%;
-                bottom: 6%;
-                width: 17%;
-                height: 5%;
-                background-color: #F12929;
-                border-radius: 10px;
-                border: none;
-                color: white;
-                opacity: 0.90;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 400;
-                font-size: 2vw;
-                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
-                transition: 0.3s ease-in-out;
             }
             #form-dimensions #save-section-button:hover{
                 opacity: 1;
@@ -432,11 +485,11 @@
                 box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.25);
             }
             #results-dimensions #finalize{
-                position: absolute;
-                right: 10%;
-                bottom: 7%;
-                width: 17%;
-                height: 5%;
+                position: relative;
+                width: 25%;
+                height: 70%;
+                margin-top: 0.3em;
+                margin-bottom: 0.3em;
                 background-color: #F12929;
                 border-radius: 10px;
                 border: none;
@@ -469,11 +522,8 @@
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SECTION</span>
+            <span id="viewsection-text">VIEW SECTIONS</span>
         </div> 
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
-        </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
             <img src="images/edit.png" id="edit" alt="edit profile"/>
@@ -489,69 +539,32 @@
                 <div id="section-line"></div>
                 <input type="text" id="name-input" name="section-name" placeholder="Enter Section Name" required>
             </div>
-            <span id="av-containers-label">AVAILABLE STUDENTS</span>
-            
-            <input type="submit" value="SAVE SECTION" name="submitbtn" id="save-section-button">
+            <input type="submit" value="SAVE SECTION" name="submit" id="save-section-button">
         </form>
-        <?php
-            if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submitbtn'])){
-                $section_name = $_POST['section-name'];
-                $sql_query_add_section = "INSERT INTO sections (section_id, section_name, module_num, course_title, course_code)
-                 VALUES ( NULL ,'".$section_name."', 2, 'Computer Programming Laboratory 1', 'CS126L')
-                ";
-    
-                $result_add_section = mysqli_query($con, $sql_query_add_section);
+        <div id="result-dimensions">
+            <?php
+                if($_SERVER['REQUEST_METHOD'] == "POST"){
+                    $section_name = $_POST['section-name'];
 
-                $last_id = $con->insert_id;
-
-                $sql_query_add_user_section = "INSERT INTO user_section (user_section_id ,user_id, section_id)
-                VALUES (NULL,".$current_user_id.", ".$last_id.")
-                ";
-                $result = mysqli_query($con, $sql_query_add_user_section);
-                
-                // if(!empty($_POST['studentitem'])){
-                //     Print '<div id="results-dimensions">';
-                //         Print '<span id="results-mast">SECTION CREATION DETAILS</span>';
-                //         Print '<span id="results-submast">SECTION NAME: '.$section->name.' -- STUDENT COUNT: '.count($_POST['studentitem']).'</span>';
-                //         Print '<span id="results-tri-submast">ACTIVE STUDENTS LIST</span>';
-
-                //         Print '<div id="added-students-list">';
-                //             foreach($_POST['studentitem'] as $value){
-                //                 // DELETE SELECTED ITEMS FIRST FROM AVAILABLE STUDENTS LIST (once database is connected)
-                //                 $section->addStudent($value);
-                //                 Print '<div class="ad-students-item">';
-                //                     Print '<span id="ad-student-name">'.$value.'</span>';
-                //                 Print '</div>';
-                //             }
-                //         Print '</div>';
-                //         Print '<button id="finalize" onclick="confirmation()">FINALIZE</button>';
-                //     Print '</div>';
-                // }else{
-                //     echo '<script>alert("Atleast one student should be added to the section");</script>';
-                // }
-            }
-        ?>
-
+                    Print '<span id="_mast">SECTION CREATED: </span>';
+                    Print '<div id="section-card">';
+                        Print '<img src="images/sectionicon.png" id="_icon" alt="sectionicon"/>';
+                        Print '<span id="_sectionname">'.$section_name.'</span>';
+                        Print '<span id="_studentcount">STUDENT COUNT: 0</span>';
+                    Print '</div>';
+                }
+            ?>
+        </div>
     </body>
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
             window.location.assign("teachhome.php");
-
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
         }
     }
 
@@ -572,12 +585,12 @@
         }
     }
 
-    function confirmation(){
+    /*function confirmation(){
         let text = "Finalize and return to teacher home page?";
         if(confirm(text)){
             window.location.assign("teachhome.php");
         }else{
             window.location.assign("teachaddsection.php");
         }
-    }
+    }*/
 </script>
