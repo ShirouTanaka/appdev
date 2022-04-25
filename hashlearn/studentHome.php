@@ -431,9 +431,7 @@
     function assignmentLink(num){
         //testing please change to proper assignment page
         document.cookie='number=' + num;
-        // <?php
-        //     $_SESSION['array_num'] = $_COOKIE['number']; 
-        // ?>
+        document.cookie="filename="+ "no file";
         // document.cookie = "number=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         window.location.href = "studentviewassignment.php";
     }
