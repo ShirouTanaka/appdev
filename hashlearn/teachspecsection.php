@@ -384,6 +384,8 @@
             document.getElementById("addsection").style.top = "7%";
             document.getElementById("addsection").style.opacity = "1";
 
+            window.location.assign("teachaddsecmembers.php");
+
         }else if(tag === "add hw"){
             document.getElementById("addhw").style.top = "7%";
             document.getElementById("addhw").style.opacity = "1";
