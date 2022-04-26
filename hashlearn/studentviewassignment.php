@@ -457,7 +457,7 @@
                 Print '<span class="hw-info-description">'.$_SESSION['assignment_desc'][$num].'</span>';
                 Print '<span class="hw-submission-title">Assignment Submission</span>';
                 Print '<span class="hw-submission-line"></span>';
-
+                $_SESSION['asscode'] = $_SESSION['assignment_code'][$num];
             
                 
         ?>
@@ -489,83 +489,104 @@
                     $user_section_id_current = $row['user_section_id'];
 
 
-                    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                        $targetDir = "uploads/";
-                    
-                        echo var_dump($_FILES);
-                        $fileName = basename($_FILES['filedata']['name']);
-                        
-                        echo $fileName;
-                        
-                        
-                        $targetFilePath = $targetDir . $fileName;
-                        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-
-                        $allowTypes = array('cpp');
-                        if($fileName != NULL){
-                            if(move_uploaded_file($_FILES["filedata"]["tmp_name"], $targetFilePath)){
-                                $assignment_code = $_SESSION['assignment_code'][$num];
-                                $sql_query = $con->query("INSERT into submissions (file_id, file_name, uploaded_on, submission_grade, assignment_name, user_section_id) 
-                                VALUES (NULL, '".$fileName."', NOW(), NULL, '".$assignment_code."', '".$user_section_id_current."')");
-                
-                                if($sql_query){
-                                    $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-                                }
-                                else{
-                                    $statusMsg = "File upload failed, please try again.";
-                                } 
-                            }
-                            else{
-                                $statusMsg = "Sorry, there was an error uploading your file.";
-                            }
-                        }
-                        else{
-                            $statusMsg = 'Sorry, only .cpp files are accepted to upload.';
-                        }
-                    }
-                    else{
-                        $statusMsg = 'Please select a file to upload.';
-                    }
-
                     // if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                    //     $fileName = $_COOKIE['filename'];
-                    //     echo gettype($fileName);
+                    //     $targetDir = "uploads/";
+                    
+                    //     echo var_dump($_FILES);
+                    //     $fileName = basename($_FILES['filedata']['name']);
+                        
+                    //     echo $fileName;
+                        
+                        
+                    //     $targetFilePath = $targetDir . $fileName;
+                    //     $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
 
                     //     $allowTypes = array('cpp');
-                    //     if($fileName != null){
-                            
-                    //         $assignment_code = $_SESSION['assignment_code'][$num];
-                    //         $sql_query = $con->query("INSERT into submissions (file_id, file_name, uploaded_on, submission_grade, assignment_name, user_section_id) 
-                    //         VALUES (NULL, '".$fileName."', NOW(), NULL, '".$assignment_code."', '".$user_section_id_current."')");
-                            
-                    //         if($sql_query){
-                                
-                    //             $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
+                    //     if($fileName != NULL){
+                    //         if(move_uploaded_file($_FILES["filedata"]["tmp_name"], $targetFilePath)){
+                    //             $assignment_code = $_SESSION['assignment_code'][$num];
+                    //             $sql_query = $con->query("INSERT into submissions (file_id, file_name, uploaded_on, submission_grade, assignment_name, user_section_id) 
+                    //             VALUES (NULL, '".$fileName."', NOW(), NULL, '".$assignment_code."', '".$user_section_id_current."')");
+                
+                    //             if($sql_query){
+                    //                 $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
+                    //             }
+                    //             else{
+                    //                 $statusMsg = "File upload failed, please try again.";
+                    //             } 
                     //         }
                     //         else{
-                    //             $statusMsg = "File upload failed, please try again.";
-                    //         } 
+                    //             $statusMsg = "Sorry, there was an error uploading your file.";
+                    //         }
+                    //     }
+                        
+                    // }
+                    $fileName = $_COOKIE['filename'];
+                    if($fileName != "no file"){
+                        
+                        echo gettype($fileName);
+
+                        $allowTypes = array('cpp');
+                        
                             
-                    //     }
-                    //     else{
-                    //         $statusMsg = 'Sorry, only .cpp files are accepted to upload.';
-                    //     }
-                    // }
-                    // else{
-                    //     $statusMsg = 'Please select a file to upload.';
-                    // }
-                    
-                    // echo $statusMsg;
-                
+                        $assignment_code = $_SESSION['asscode'];
+                        $sql_query = $con->query("INSERT into submissions (file_id, file_name, uploaded_on, submission_grade, assignment_name, user_section_id) 
+                        VALUES (NULL, '".$fileName."', NOW(), NULL, '".$assignment_code."', '".$user_section_id_current."')");
+                        
+                    }      
             ?>
     </body>
 </html>
 
+<script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
+        import { getStorage, ref, uploadBytes} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
 
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyA8JTIoITfG5DOYoLy29CnqDi_55-KlqV0",
+            authDomain: "hashlearn-f0b12.firebaseapp.com",
+            projectId: "hashlearn-f0b12",
+            storageBucket: "hashlearn-f0b12.appspot.com",
+            messagingSenderId: "913464562490",
+            appId: "1:913464562490:web:9a2391b6c50aa49f413603",
+            measurementId: "G-V2Z5CJ8TEN"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+        const btn = document.querySelector('#submitbtn');
+
+        btn.addEventListener('click', function(e){
+            e.preventDefault();
+
+            const storage = getStorage(app);
+            var file = document.querySelector('#filedata').files[0];
+            var name = file.name;
+            document.cookie="filename="+ name;
+            const storageRef = ref(storage, name);
+
+        
+
+            var metadata ={
+                contentType: file.type
+            }
+
+            uploadBytes(storageRef, file).then((snapshot) => {
+                window.location.href = "studentviewassignment.php";
+        });
+
+            
+        })
+    </script>
 <script>
-    var file = document.querySelector("#filedata").files[0];
-    var name = file.name;
-    console.log(name);
     var flag = false;
     document.cookie='filename=' + 'no file';
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
