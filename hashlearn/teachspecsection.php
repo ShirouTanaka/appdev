@@ -147,7 +147,7 @@
             }
             #addhw{
                 position: fixed;
-                left: 41.1%;
+                left: 41%;
                 top: 5%;
                 width: 20%;
                 height: 15%;
@@ -333,7 +333,7 @@
             <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
         <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION MEMBERS</span>
+            <span id="addsection-text">EDIT SECTION MEMBERS</span>
         </div>
         <div id="addhw" onclick="navButtonHandle('add hw')">
             <span id="addhw-text">ADD ASSIGNMENT</span>
