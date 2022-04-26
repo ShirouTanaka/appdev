@@ -255,6 +255,14 @@
                 box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
                 transition: 0.3s ease-in-out;
             }
+            #form-dimensions #save-section-button:hover{
+                cursor: pointer;
+                opacity: 1;
+            }
+            #form-dimensions #save-section-button:active{
+                box-shadow: 0px 0px 0px black;
+                transform: scale(0.96);
+            }
             /**/
             #result-dimensions{
                 position: absolute;
