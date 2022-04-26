@@ -168,7 +168,7 @@
                 bottom: 2%;
                 font-size: 2.3vw;
                 color: white;
-                font-family: 'Barlow Condensed', sans-serif;
+                font-family: 'Barlow Condensed', ssans-serif;
                 font-weight: 300;
                 text-align: center;
                 user-select: none;
@@ -333,7 +333,7 @@
             <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
         <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">EDIT SECTION MEMBERS</span>
+            <span id="addsection-text">ADD SECTION MEMBERS</span>
         </div>
         <div id="addhw" onclick="navButtonHandle('add hw')">
             <span id="addhw-text">ADD ASSIGNMENT</span>
