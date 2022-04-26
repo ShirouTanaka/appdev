@@ -203,7 +203,7 @@
                 font-family: 'Barlow Condensed', sans-serif;
                 font-size: 28px;
                 font-weight: 300;
-                margin-top: 0.9em;
+                margin-top: 0.4em;
             }
             #form-wrapper #left-container .input{
                 width: 63%;
@@ -216,15 +216,18 @@
                 border-radius: 12px;
                 border: 2px solid rgba(0, 0, 0, 0.25);
                 outline: none;
-                margin-top: 1.05em;
+                margin-top: 0.62em;
             }
             #form-wrapper #left-container #input1{
-                margin-left: 0.5em;
+                margin-left: 0.6em;
             }
             #form-wrapper #left-container #input2{
-                margin-left: 3em;
+                margin-left: 0.3em;
             }
             #form-wrapper #left-container #input3{
+                margin-left: 3em;
+            }
+            #form-wrapper #left-container #input4{
                 margin-left: 3.4em;
             }
             /*RIGHT*/
@@ -304,9 +307,12 @@
                     margin-left: 1em;
                 }
                 #form-wrapper #left-container #input2{
-                    margin-left: 0em auto;
+                    margin-left: 0.6em;
                 }
                 #form-wrapper #left-container #input3{
+                    margin-left: 0em auto;
+                }
+                #form-wrapper #left-container #input4{
                     margin-left: 0em auto;
                 }
             }
@@ -348,12 +354,14 @@
             <div id="left-container">
                 <span class="labels">Assignment Title:</span>
                 <input type="text" name="hw-title" id="input1" placeholder="Enter title" class="input" required>
+                <span class="labels">Assignment Code:</span>
+                <input type="text" name="hw-code" id="input2"  placeholder="Enter code" class="input" required>
                 <span class="labels">Start Date:</span>
-                <input type="date" name="start-date" id="input2" class="input" required>
+                <input type="date" name="start-date" id="input3" class="input" required>
                 <span class="labels">End Date:</span>
-                <input type="date" name="end-date" id="input3" class="input" required>
+                <input type="date" name="end-date" id="input4" class="input" required>
                 <span class="labels">Due Time:</span>
-                <input type="time" name="due-time" id="input3" class="input" required>
+                <input type="time" name="due-time" id="input4" class="input" required>
             </div>
             <div id="right-container">
                 <span id="textarea-mast">Assignment Description:</span>
@@ -368,6 +376,7 @@
         <?php
             if($_SERVER['REQUEST_METHOD'] == "POST"){
                 $title = $_POST['hw-title'];
+                $code = $_POST['hw-code'];
                 $start_date = $_POST['start-date'];
                 $end_date = $_POST['end-date'];
                 $due_time = $_POST['due-time'];
