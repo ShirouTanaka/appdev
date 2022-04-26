@@ -331,6 +331,7 @@
         <!-- BODY PROPER -->
         <span id="pagemast">ACTIVITY STREAM</span>
         <div id="horizontalline"></div>
+        
         <?php
             $baseTop = 44;
             $assignmentNum = 5;
@@ -432,6 +433,7 @@
         //testing please change to proper assignment page
         document.cookie='number=' + num;
         document.cookie="filename="+ "no file";
+        document.cookie="asscode="+ "no code";
         // document.cookie = "number=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
         window.location.href = "studentviewassignment.php";
     }
