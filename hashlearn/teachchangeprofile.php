@@ -87,7 +87,7 @@
                 user-select: none;
             }
             /*TABS SELECTION*/
-            #activitystream{
+            #viewsection{
                 position: fixed;
                 left: 0%;
                 top: 5%;
@@ -95,7 +95,7 @@
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.9;
+                opacity: 0.8;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -105,7 +105,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #activitystream #activitystream-text{
+            #viewsection #viewsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -115,10 +115,10 @@
                 user-select: none;
                 text-align: center;
             }
-            #activitystream:hover{
+            #viewsection:hover{
                 cursor: pointer;
             }
-            #viewgrades{
+            #addsection{
                 position: fixed;
                 left: 20.5%;
                 top: 5%;
@@ -126,7 +126,7 @@
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.9;
+                opacity: 0.8;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -136,7 +136,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #viewgrades #viewgrades-text{
+            #addsection #addsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -146,7 +146,7 @@
                 text-align: center;
                 user-select: none;
             }
-            #viewgrades:hover{
+            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -341,7 +341,6 @@
                 max-width: auto;
                 height: 90%;
             }
-
         </style>
     </head>
     <body>
@@ -366,15 +365,15 @@
             </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="activitystream" onclick="navButtonHandle('activity stream')">
-            <span id="activitystream-text">ACTIVITY STREAM</span>
+        <div id="viewsection" onclick="navButtonHandle('view section')">
+            <span id="viewsection-text">VIEW SECTION</span>
         </div>
-        <div id="viewgrades" onclick="navButtonHandle('view grades')">
-            <span id="viewgrades-text">VIEW GRADES</span>
+        <div id="addsection" onclick="navButtonHandle('add section')">
+            <span id="addsection-text">ADD SECTION</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
+            <a href="teachchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
@@ -403,20 +402,23 @@
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
-        if(tag === "activity stream"){
-            document.getElementById("viewgrades").style.top = "5%";
-            document.getElementById("viewgrades").style.opacity = "0.8";
+        if(tag === "view section"){
+            document.getElementById("addsection").style.top = "5%";
+            document.getElementById("addsection").style.opacity = "0.9";
 
-            document.getElementById("activitystream").style.top = "7%";
-            document.getElementById("activitystream").style.opacity = "0.9";
-            window.location.href = "studenthome.php";
-        }else if(tag === "view grades"){
-            document.getElementById("activitystream").style.top = "5%";
-            document.getElementById("activitystream").style.opacity = "0.8";
+            document.getElementById("viewsection").style.top = "7%";
+            document.getElementById("viewsection").style.opacity = "1";
 
-            document.getElementById("viewgrades").style.top = "7%";
-            document.getElementById("viewgrades").style.opacity = "0.9";
-            window.location.href = "studentviewgrades.php";
+            window.location.assign("teachhome.php");
+
+        }else if(tag === "add section"){
+            document.getElementById("viewsection").style.top = "5%";
+            document.getElementById("viewsection").style.opacity = "0.9";
+
+            document.getElementById("addsection").style.top = "7%";
+            document.getElementById("addsection").style.opacity = "1";
+
+            window.location.assign("teachaddsection.php");
         }
     }
 
