@@ -264,15 +264,21 @@
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .grade{
+            .assignments-container .grade-container{
+                position: absolute;
+                top: 22%;
+                left: 38.7%;
+                height: 25%;
+                width: 50%;
+                text-align:center;
+                color: black;
+            }
+            .assignments-container .grade-container .grade{
                 position: absolute;
                 font-size: 3vw;
                 color: black;
-                top: 24%;
-                left: 67.5%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
-                text-align: left;
                 user-select: none;
             }
             .assignments-container .datepassed-title{
@@ -378,6 +384,7 @@
                     Print '<span class="due-date">'.$row['assignment_dl'].'</span>';
                     Print '<span class="hw-title">'.$row['assignment_name'].'</span>';
                     Print '<span class="hw-code">HW Code: '.$row['assignment_code'].'</span>';
+                    Print '<div class="grade-container">';
                     Print '<span class="grade">';
                         if (is_null($row['submission_grade'])) {
                             Print "Not Graded";
@@ -385,6 +392,7 @@
                             Print $row['submission_grade'];
                         }
                     Print '</span>';
+                    Print '</div>';
                     Print '<span class="datepassed-title">Date Passed & Time: </span>';
                     Print '<span class="datepassed">'.$row['uploaded_on'].'</span>';
                 Print '</div>';
