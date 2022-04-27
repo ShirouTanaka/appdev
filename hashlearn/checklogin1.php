@@ -52,11 +52,13 @@
                 //now to check the user_type for proper redirection
                 if($_SESSION['user_type'] === 'student'){
                     echo "going to student page";
+                    header('Location: studentHome.php');
                     exit();
                 }
 
                 if($_SESSION['user_type'] === 'professor'){
                     echo "going to instructor page";
+                    header('Location: teachHome.php');
                     exit();
                 }
                 
