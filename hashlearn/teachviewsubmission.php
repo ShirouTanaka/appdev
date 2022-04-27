@@ -1,10 +1,6 @@
 <html>
-    <?php
-        session_start();
-        include 'connect.php';
-    ?>
     <head>
-        <title>Teacher Home Page</title>
+        <title>View Submission</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +10,6 @@
         <style>
             body{
                 overflow-x: hidden;
-            }
-            ::-webkit-scrollbar{
-                width: 8px;
-            }
-            ::-webkit-scrollbar-thumb{
-                background-color: #ff5f5f;
-                border-radius: 20px;
-            }
-            ::-webkit-scrollbar-thumb:hover{
-                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -90,7 +76,7 @@
             #viewsection{
                 position: fixed;
                 left: 0%;
-                top: 7%;
+                top: 5%;
                 width: 20%;
                 height: 15%;
                 background-color: #F02222;
@@ -116,37 +102,6 @@
                 text-align: center;
             }
             #viewsection:hover{
-                cursor: pointer;
-            }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.8;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -218,88 +173,185 @@
                 left: 10%;
                 top: 38%;
             }
-            .sections-container{
+
+            .submission-container{
                 position: absolute;
-                top: 47%;
-                right: 10%;
-                left: 10%;
-                height: 40%;
-                max-height: 120%;
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                column-gap: 20px;
-            }
-            .sections-container .slot{
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-sizing: border-box;
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 15px;
+                right: 8%;
+                left: 8%;
+                top: 40%;
                 display: flex;
-                align-items: center;
+                flex-wrap: wrap;
+                align-content: flex-start;
                 justify-content: center;
+                max-height: 1500px;
+                padding: 0.4em;
+                margin: 0.2em auto;
+            }
+            .submission-container #left-info-box{
+                width: 890px;
+                height: 130px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: flex-start;
+                margin-right: 1em;
+                margin-bottom: 1.2em;
+            }
+            .submission-container #left-info-box .mast-info{
+                width: 100%;
+                font-size: 1.6em;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+                padding: 0.15em;
+            }
+            .submission-container #right-info-box{
+                width: 150px;
+                height: 130px;
+                border: 2px solid #F84646;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 flex-direction: column;
-                transition: 0.2s ease-in-out;
+                margin-bottom: 1.2em;
             }
-            .sections-container .slot:hover{
-                border: 2px solid rgba(240, 34, 34, 0.70);
-                cursor: pointer;
+            .submission-container #right-info-box #grade-mast{
+                font-size: 1.4em;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                width: 100%;
+                text-align: center;
+                user-select: none;
             }
-            .sections-container .slot:active{
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                transform: scale(0.96);
-            }
-            .sections-container .slot #sectionicon{
-                position: relative;
-                max-width: auto;
-                height: 35%;
-                margin-bottom: 20px;
-            }
-            .sections-container .slot #sectionname{
-                position: relative;
-                font-size: 2.7vw;
+            .submission-container #right-info-box #grade{
+                font-size: 3.5em;
                 color: black;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 600;
                 text-align: center;
                 user-select: none;
             }
-            .sections-container .slot #studentcount{
-                position: relative;
-                font-size: 2.3vw;
+            .submission-container #center-info-box{
+                width: 1055px;
+                border-top: 2px solid black;
+                height: 500px;
+                margin-bottom: 1em;
+                margin-top: 1em;
+                display: block;
+            }
+            .submission-container #center-info-box #info-mast{
+                max-width: 1000px;
+                max-height: 300px;
+                font-size: 2em;
                 color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                text-align: center;
+                display: block;
+                user-select: none;
+                padding-top: 1em;
+                margin: 0 auto;
+            }
+            .submission-container #center-info-box #info{
+                max-width: 1000px;
+                max-height: 300px;
+                font-size: 1.9em;
+                color: black;
+                display: block;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 300;
                 text-align: center;
                 user-select: none;
+                padding: 0.8em 2.5em;
             }
+            .submission-container #center-info-box #form-wrapper{
+                max-width: 50%;
+                min-height: 200px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+                margin: 0 auto;
+
+                padding: 0.25em;
+            }
+            .submission-container #center-info-box #form-wrapper #grade-input{
+                width: 95%;
+                min-height: 40px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                color: black;
+                border: none;
+                font-size: 1.5em;
+                border-radius: 15px;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                outline: none;
+                margin: 1em auto;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons{ 
+                width: 200px;
+                min-height: 40px;
+                border-radius: 15px;
+                background-color:#F84646;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                margin: 1em;
+                color: white;
+                font-size: 1.5em;
+                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
+                outline: none;
+                border: none;
+                transition: 0.2s ease-in-out;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons:hover{
+                cursor: pointer;
+                background-color: #F02222;
+            }
+            .submission-container #center-info-box #form-wrapper .buttons:active{
+                transform: scale(0.96);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+            }
+            @media screen and (max-width: 1700px) {
+                .submission-container{
+                    left: 6%;
+                    right: 6%;
+                }
+                .submission-container #left-info-box{
+                    width: 910px;
+                }
+            }
+            @media screen and (max-width: 600px) {
+                .submission-container #left-info-box{
+                    height: 110px;
+                }
+                .submission-container #left-info-box .mast-info{
+                    font-size: 1.3em;
+                }
+                .submission-container #center-info-box #info-mast{
+                    font-size: 1.9em;
+                }
+                .submission-container #center-info-box #info{
+                    font-size: 1.6em;
+                }
+            }
+            
         </style>
     </head>
     <body>
-        <!-- NAV BAR -->
+        <!-- NAVBAR -->
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <!-- <span id="username">Kyle Matthew Degrano</span> -->
-            <span id="username">
-                <?php
-                    $fName = $_SESSION['f_name'];
-                    $mName = $_SESSION['m_name'];
-                    $lName = $_SESSION['l_name'];
-                    echo $lName.", ".$fName." ".$mName;
-                ?>
-            </span>
-            <Span id="mail">
-                <?php
-                    echo $_SESSION['email'];
-                ?>
-            </Span>
+            <span id="username">Kyle Matthew Degrano</span>
+            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SECTION</span>
-        </div>
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
+            <span id="viewsection-text">VIEW SUBMISSIONS</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -307,81 +359,55 @@
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
-        <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVE SECTIONS</span>
+        <span id="pagemast">OOP Introductory HW</span>
         <div id="horizontalline"></div>
-        <?php
-            $user_id_temp = $_SESSION['user_id'];
-            $sql_query = "
-                    SELECT * 
-                    FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    JOIN sections ON user_section.section_id=sections.section_id
-                    WHERE user_section.user_id = $user_id_temp
-            ";
 
-            $result = mysqli_query($con, $sql_query);
-            $total = mysqli_num_rows($result);
-            
-
-            $numSections = $total;
-            $numSectionContainer = ceil($numSections / 4);
-            $baseTop = 47; // 47%
-
-            $cnt = 0;
-            
-            while($row = mysqli_fetch_assoc($result)){
-                $section[] = $row['section_name'];
-                $current_section_id = $row['section_id']; 
-                
-                $sql_query_num = "SELECT * FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    WHERE user_section.section_id =".$current_section_id." AND users.user_type = 'student' 
-                ";
-        
-                $num_result = mysqli_query($con, $sql_query_num);
-
-                $num[] = mysqli_num_rows($num_result);
-            }
-
-            $k = 0;
-            for($i = 0; $i < $numSectionContainer; $i++){
-                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    for($j = 0; $j < 4; $j++){
-                        if($k >= $numSections) break;
-                        Print '<div class="slot">';
-                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                            Print '<span id="sectionname">'.$section[$k].'</span>';
-                            Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
-                        Print '</div>';
-
-                        $k++;
+        <div class="submission-container">
+            <div id="left-info-box">
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">ASSIGNMENT CODE:</span>
+                    <?php Print '<span style="margin-left: 0.6em">FA1.1</span>'; ?>
+                </span>
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">DATE SUBMITTED:</span>
+                    <?php Print '<span style="margin-left: 1.2em">03/29/2022 10:50 P.M.</span>'; ?>
+                </span>
+                <span class="mast-info">
+                    <span style="text-decoration: underline;">SUBMITTED BY:</span>
+                    <?php Print '<span style="margin-left: 2em">Bobby Bobbers B. Bobbingston</span>'; ?>
+                </span>
+            </div>
+            <div id="right-info-box">
+                <span id="grade-mast">Total Points:</span>
+                <?php Print '<span id="grade">100</span>';?>
+            </div>
+            <div id="center-info-box">
+                <span id="info-mast">ASSIGNMENT INFO </span>
+                <?php Print '<span id="info">Referring to the lectures about DI Approaches and Sample GUI App, develop your own application using the sample program attached hereto (SpringGui). Your application should create a different object that is made up of the existing objects (rectangle and circle).</span>'; ?>
+                <!-- GRADING FORM -->
+                <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
+                    <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
+                    <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="VIEW CODE" name="view-code" class="buttons"></a>
+                    <input type="submit" value="GRADE" name="submit" class="buttons">
+                </form>
+                <?php
+                    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                        $grade = $_POST['grade'];
+                        echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
                     }
-                Print '</div>';
-
-                $baseTop = $baseTop + 40 + 5;
-            }            
-        ?>
-    </body>
+                ?>
+            </div>
+        </div>
+    </body> 
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
-
-            window.location.assign("teachaddsection.php");
+            window.location.assign("teachpassedhws.php");
         }
     }
 

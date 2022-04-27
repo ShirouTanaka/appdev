@@ -1,10 +1,6 @@
 <html>
-    <?php
-        session_start();
-        include 'connect.php';
-    ?>
     <head>
-        <title>Teacher Home Page</title>
+        <title>Create Assignment</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +10,6 @@
         <style>
             body{
                 overflow-x: hidden;
-            }
-            ::-webkit-scrollbar{
-                width: 8px;
-            }
-            ::-webkit-scrollbar-thumb{
-                background-color: #ff5f5f;
-                border-radius: 20px;
-            }
-            ::-webkit-scrollbar-thumb:hover{
-                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -90,7 +76,7 @@
             #viewsection{
                 position: fixed;
                 left: 0%;
-                top: 7%;
+                top: 5%;
                 width: 20%;
                 height: 15%;
                 background-color: #F02222;
@@ -116,37 +102,6 @@
                 text-align: center;
             }
             #viewsection:hover{
-                cursor: pointer;
-            }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.8;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -218,88 +173,173 @@
                 left: 10%;
                 top: 38%;
             }
-            .sections-container{
+            #form-wrapper{
                 position: absolute;
-                top: 47%;
-                right: 10%;
-                left: 10%;
-                height: 40%;
-                max-height: 120%;
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                column-gap: 20px;
-            }
-            .sections-container .slot{
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-sizing: border-box;
-                box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 15px;
+                top: 40%;
+                left: 9%;
+                right: 9%;
+                border: 1px solid black;
+                max-height: 1500px;
+                padding: 0.5em;
+                margin: 0.5em auto;
                 display: flex;
-                align-items: center;
+                flex-wrap: wrap;
                 justify-content: center;
-                flex-direction: column;
-                transition: 0.2s ease-in-out;
+                align-items: flex-start;
             }
-            .sections-container .slot:hover{
-                border: 2px solid rgba(240, 34, 34, 0.70);
-                cursor: pointer;
+            /*LEFT*/
+            #form-wrapper #left-container{
+                min-height: 277px;
+                width: 480px;
+                border: 1px solid black;
+                margin: 0.5em;
+                padding: 0.25em;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
             }
-            .sections-container .slot:active{
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                transform: scale(0.96);
-            }
-            .sections-container .slot #sectionicon{
-                position: relative;
-                max-width: auto;
-                height: 35%;
-                margin-bottom: 20px;
-            }
-            .sections-container .slot #sectionname{
-                position: relative;
-                font-size: 2.7vw;
-                color: black;
+            #form-wrapper #left-container .labels{
                 font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 600;
-                text-align: center;
-                user-select: none;
+                font-size: 28px;
+                font-weight: 300;
+                margin-top: 0.4em;
             }
-            .sections-container .slot #studentcount{
-                position: relative;
-                font-size: 2.3vw;
-                color: black;
+            #form-wrapper #left-container .input{
+                width: 63%;
+                min-height: 35px;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 300;
+                color: black;
+                border: none;
+                font-size: 1.5em;
+                border-radius: 12px;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                outline: none;
+                margin-top: 0.62em;
+            }
+            #form-wrapper #left-container #input1{
+                margin-left: 0.6em;
+            }
+            #form-wrapper #left-container #input2{
+                margin-left: 0.3em;
+            }
+            #form-wrapper #left-container #input3{
+                margin-left: 3em;
+            }
+            #form-wrapper #left-container #input4{
+                margin-left: 3.4em;
+            }
+            /*RIGHT*/
+            #form-wrapper #right-container{
+                min-height: 250px;
+                width: 510px;
+                border: 1px solid black;
+                margin: 0.5em;
+                padding: 0.5em;
+                display: block;
+            }
+            #form-wrapper #right-container #textarea-mast{
+                width: 100%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 28px;
+                display: block;
+                margin: 0em auto;
                 text-align: center;
-                user-select: none;
+                font-weight: 300;
+            }
+            #form-wrapper #right-container #textarea{
+                width: 100%;
+                border: 2px solid rgba(0, 0, 0, 0.25);
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 15px;
+                display: block;
+                font-weight: 300;
+                margin: 0.90em auto;
+                border-radius: 10px;
+            }
+            #form-wrapper #right-container #buttons-wrapper{
+                width: 100%;
+                display: block;
+                height: 45px;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+            }
+            #form-wrapper #right-container #buttons-wrapper .buttons{
+                height: 75%;
+                width: 110px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 18px;
+                font-weight: 300;
+                margin: 0.3em 1.5em;
+                background-color: #F84646;
+                border: none;
+                outline: none;
+                color: white;
+                box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.25);
+                border-radius: 8px;
+                transition: 0.2s ease-in-out;
+            }
+            #form-wrapper #right-container #buttons-wrapper .buttons:hover{
+                cursor: pointer;
+                background-color: #F02222;
+            }
+            #form-wrapper #right-container #buttons-wrapper .buttons:active{
+                transform: scale(0.96);
+                box-shadow: -0px 0px 4px rgba(0, 0, 0, 0.25);
+            }
+            /*MEDIA QUERY*/
+            @media screen and (max-width: 1750px) {
+                
+            }
+            @media screen and (max-width: 650px) {
+                #form-wrapper #left-container .labels{
+                    margin-top: 0.95em;
+                    font-size: 1.3em;                }
+                #form-wrapper #left-container .input{
+                    min-height: 30px;
+                    font-size: 1.3em;
+                    width: 59%;
+                }
+                #form-wrapper #left-container #input1{
+                    margin-left: 1em;
+                }
+                #form-wrapper #left-container #input2{
+                    margin-left: 0.6em;
+                }
+                #form-wrapper #left-container #input3{
+                    margin-left: 0em auto;
+                }
+                #form-wrapper #left-container #input4{
+                    margin-left: 0em auto;
+                }
+            }
+            /*SCROLL BAR*/
+            ::-webkit-scrollbar{
+                width: 8px;
+            }
+            ::-webkit-scrollbar-thumb{
+                background-color: #ff5f5f;
+                border-radius: 20px;
+            }
+            ::-webkit-scrollbar-thumb:hover{
+                background-color: #F84646;
             }
         </style>
     </head>
     <body>
-        <!-- NAV BAR -->
+        <!-- NAVBAR -->
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <!-- <span id="username">Kyle Matthew Degrano</span> -->
-            <span id="username">
-                <?php
-                    $fName = $_SESSION['f_name'];
-                    $mName = $_SESSION['m_name'];
-                    $lName = $_SESSION['l_name'];
-                    echo $lName.", ".$fName." ".$mName;
-                ?>
-            </span>
-            <Span id="mail">
-                <?php
-                    echo $_SESSION['email'];
-                ?>
-            </Span>
+            <span id="username">Kyle Matthew Degrano</span>
+            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SECTION</span>
-        </div>
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
+            <span id="viewsection-text">BACK TO ASSIGNMENTS</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
@@ -308,59 +348,40 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVE SECTIONS</span>
+        <span id="pagemast">CREATE ASSIGNMENT</span>
         <div id="horizontalline"></div>
+        <form id="form-wrapper" action="teachaddhw.php" method="POST">
+            <div id="left-container">
+                <span class="labels">Assignment Title:</span>
+                <input type="text" name="hw-title" id="input1" placeholder="Enter title" class="input" required>
+                <span class="labels">Assignment Code:</span>
+                <input type="text" name="hw-code" id="input2"  placeholder="Enter code" class="input" required>
+                <span class="labels">Start Date:</span>
+                <input type="date" name="start-date" id="input3" class="input" required>
+                <span class="labels">End Date:</span>
+                <input type="date" name="end-date" id="input4" class="input" required>
+                <span class="labels">Due Time:</span>
+                <input type="time" name="due-time" id="input4" class="input" required>
+            </div>
+            <div id="right-container">
+                <span id="textarea-mast">Assignment Description:</span>
+                <textarea id="textarea" name="description" rows="8" cols="50" required>
+                </textarea>
+                <div id="buttons-wrapper">
+                    <input type="reset" value="RESET" class="buttons">
+                    <input type="submit" value="SUBMIT" class="buttons">
+                </div>
+            </div>
+        </form>
         <?php
-            $user_id_temp = $_SESSION['user_id'];
-            $sql_query = "
-                    SELECT * 
-                    FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    JOIN sections ON user_section.section_id=sections.section_id
-                    WHERE user_section.user_id = $user_id_temp
-            ";
-
-            $result = mysqli_query($con, $sql_query);
-            $total = mysqli_num_rows($result);
-            
-
-            $numSections = $total;
-            $numSectionContainer = ceil($numSections / 4);
-            $baseTop = 47; // 47%
-
-            $cnt = 0;
-            
-            while($row = mysqli_fetch_assoc($result)){
-                $section[] = $row['section_name'];
-                $current_section_id = $row['section_id']; 
-                
-                $sql_query_num = "SELECT * FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    WHERE user_section.section_id =".$current_section_id." AND users.user_type = 'student' 
-                ";
-        
-                $num_result = mysqli_query($con, $sql_query_num);
-
-                $num[] = mysqli_num_rows($num_result);
+            if($_SERVER['REQUEST_METHOD'] == "POST"){
+                $title = $_POST['hw-title'];
+                $code = $_POST['hw-code'];
+                $start_date = $_POST['start-date'];
+                $end_date = $_POST['end-date'];
+                $due_time = $_POST['due-time'];
+                $description = $_POST['description'];
             }
-
-            $k = 0;
-            for($i = 0; $i < $numSectionContainer; $i++){
-                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    for($j = 0; $j < 4; $j++){
-                        if($k >= $numSections) break;
-                        Print '<div class="slot">';
-                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                            Print '<span id="sectionname">'.$section[$k].'</span>';
-                            Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
-                        Print '</div>';
-
-                        $k++;
-                    }
-                Print '</div>';
-
-                $baseTop = $baseTop + 40 + 5;
-            }            
         ?>
     </body>
 </html>
@@ -368,20 +389,10 @@
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
-
-            window.location.assign("teachaddsection.php");
+            window.location.assign("teachspecsection.php");
         }
     }
 

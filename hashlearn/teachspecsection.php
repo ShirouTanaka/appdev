@@ -1,10 +1,6 @@
 <html>
-    <?php
-        session_start();
-        include 'connect.php';
-    ?>
     <head>
-        <title>Student Home Page</title>
+        <title>Specific Section</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -87,7 +83,7 @@
                 user-select: none;
             }
             /*TABS SELECTION*/
-            #activitystream{
+            #viewsection{
                 position: fixed;
                 left: 0%;
                 top: 5%;
@@ -105,7 +101,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #activitystream #activitystream-text{
+            #viewsection #viewsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -115,10 +111,10 @@
                 user-select: none;
                 text-align: center;
             }
-            #activitystream:hover{
+            #viewsection:hover{
                 cursor: pointer;
             }
-            #viewgrades{
+            #addsection{
                 position: fixed;
                 left: 20.5%;
                 top: 5%;
@@ -136,7 +132,7 @@
                 justify-content: center;
                 transition: 0.2s ease-in-out;
             }
-            #viewgrades #viewgrades-text{
+            #addsection #addsection-text{
                 position: absolute;
                 bottom: 2%;
                 font-size: 2.3vw;
@@ -146,7 +142,38 @@
                 text-align: center;
                 user-select: none;
             }
-            #viewgrades:hover{
+            #addsection:hover{
+                cursor: pointer;
+            }
+            #addhw{
+                position: fixed;
+                left: 41%;
+                top: 5%;
+                width: 20%;
+                height: 15%;
+                background-color: #F02222;
+                z-index: 1;
+                opacity: 0.9;
+                border-bottom-right-radius: 15px;
+                border-bottom-left-radius: 15px;
+                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+                border: 1.5px solid white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s ease-in-out;
+            }
+            #addhw #addhw-text{
+                position: absolute;
+                bottom: 2%;
+                font-size: 2.3vw;
+                color: white;
+                font-family: 'Barlow Condensed', ssans-serif;
+                font-weight: 300;
+                text-align: center;
+                user-select: none;
+            }
+            #addhw:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -171,7 +198,6 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
-                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -299,116 +325,72 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <!-- <span id="username">Kyle Matthew Degrano</span> -->
-            <span id="username">
-                <?php
-                    $fName = $_SESSION['f_name'];
-                    $mName = $_SESSION['m_name'];
-                    $lName = $_SESSION['l_name'];
-                    echo $lName.", ".$fName." ".$mName;
-                ?>
-            </span>
-            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
-            <Span id="mail">
-                <?php
-                    echo $_SESSION['email'];
-                ?>
-            </Span>
+            <span id="username">Kyle Matthew Degrano</span>
+            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="activitystream" onclick="navButtonHandle('activity stream')">
-            <span id="activitystream-text">ACTIVITY STREAM</span>
+        <div id="viewsection" onclick="navButtonHandle('view section')">
+            <span id="viewsection-text">BACK TO SECTIONS</span>
         </div>
-        <div id="viewgrades" onclick="navButtonHandle('view grades')">
-            <span id="viewgrades-text">VIEW GRADES</span>
+        <div id="addsection" onclick="navButtonHandle('add section')">
+            <span id="addsection-text">ADD SECTION MEMBERS</span>
+        </div>
+        <div id="addhw" onclick="navButtonHandle('add hw')">
+            <span id="addhw-text">ADD ASSIGNMENT</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <a href="studentchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
+            <img src="images/edit.png" id="edit" alt="edit profile"/>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVITY STREAM</span>
+        <span id="pagemast">BM1 TASKS | 69 STUDENTS</span>
         <div id="horizontalline"></div>
-        
         <?php
             $baseTop = 44;
             $assignmentNum = 5;
-
-            //this gets the section
-            $user_id_current = $_SESSION['user_id'];
-            $sql_query_section = "
-                    SELECT * 
-                    FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    JOIN sections ON user_section.section_id=sections.section_id
-                    WHERE user_section.user_id = $user_id_current AND users.user_type = 'student'
-            ";
-            $result_section = mysqli_query($con, $sql_query_section);
-            $row_section = mysqli_fetch_assoc($result_section);
-            $section_id_current = $row_section['section_id'];
-
-            $sql_query_assignment = "
-                SELECT * 
-                FROM assignment 
-                JOIN sections ON assignment.section_id=sections.section_id
-                WHERE assignment.section_id = $section_id_current
-            ";
-
-
             
-            
-            $result_assignment = mysqli_query($con, $sql_query_assignment);
-            $total = mysqli_num_rows($result_assignment);
-
-            while($row = mysqli_fetch_assoc($result_assignment)){
-                $upload_date[] = $row['uploaded_on'];
-                $assignment_name[] = $row['assignment_name'];
-                $assignment_description[] = $row['assignment_desc'];
-                $assignment_code[] = $row['assignment_code'];
-                $assignment_dl[] = $row['assignment_dl']; 
-            }
-
-            $_SESSION['assignment_desc'] = $assignment_description;
-            $_SESSION['assignment_dl'] = $assignment_dl;
-            $_SESSION['assignment_code'] = $assignment_code;
-            $_SESSION['assignment_name'] = $assignment_name;
-            
-            $k = 0;
-            for($i = 0; $i < $total; $i++){
-                Print '<a onclick="assignmentLink('.$k.')"><div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">'.$upload_date[$k].'</span>';
+            for($i = 0; $i < $assignmentNum; $i++){
+                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
+                    Print '<span class="date">September 29, 2022</span>';
                     Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">'.$assignment_name[$k].'</span>';
-                    Print '<span class="hw-code">'.$assignment_code[$k].'</span>';
-                    Print '<span class="due-date">Due Date & Time: '.$assignment_dl[$k].'</span>';
-                Print '</div></a>';
+                    Print '<span class="hw-title">OOP Introductory HW</span>';
+                    Print '<span class="hw-code">HW Code: HW1.1</span>';
+                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
+                Print '</div>';
                 
-                $k++;
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
     </body>
 </html>
-
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
-        if(tag === "activity stream"){
-            document.getElementById("viewgrades").style.top = "5%";
-            document.getElementById("viewgrades").style.opacity = "0.8";
+        if(tag === "view section"){
+            document.getElementById("addsection").style.top = "5%";
+            document.getElementById("addsection").style.opacity = "0.9";
 
-            document.getElementById("activitystream").style.top = "7%";
-            document.getElementById("activitystream").style.opacity = "0.9";
-            window.location.href = "studenthome.php";
-        }else if(tag === "view grades"){
-            document.getElementById("activitystream").style.top = "5%";
-            document.getElementById("activitystream").style.opacity = "0.8";
+            document.getElementById("viewsection").style.top = "7%";
+            document.getElementById("viewsection").style.opacity = "1";
 
-            document.getElementById("viewgrades").style.top = "7%";
-            document.getElementById("viewgrades").style.opacity = "0.9";
-            window.location.href = "studentviewgrades.php";
+            window.location.assign("teachhome.php");
+            
+        }else if(tag === "add section"){
+            document.getElementById("viewsection").style.top = "5%";
+            document.getElementById("viewsection").style.opacity = "0.9";
+
+            document.getElementById("addsection").style.top = "7%";
+            document.getElementById("addsection").style.opacity = "1";
+
+            window.location.assign("teachaddsecmembers.php");
+
+        }else if(tag === "add hw"){
+            document.getElementById("addhw").style.top = "7%";
+            document.getElementById("addhw").style.opacity = "1";
+
+            window.location.assign("teachaddhw.php");
         }
     }
 
@@ -428,14 +410,4 @@
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
     }
-
-    function assignmentLink(num){
-        //testing please change to proper assignment page
-        document.cookie='number=' + num;
-        document.cookie="filename="+ "no file";
-        document.cookie="asscode="+ "no code";
-        // document.cookie = "number=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        window.location.href = "studentviewassignment.php";
-    }
 </script>
-

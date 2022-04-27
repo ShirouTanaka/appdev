@@ -224,9 +224,9 @@
                 <div id="password" style="margin-bottom: 5%;">
                     <img src="images/password.png" id="password-icon" alt="password-icon"/>
                 </div>
-                <form action="checklogin1.php" method="POST" id="form-proper">
+                <form action="checkLogin2.php" method="POST" id="form-proper">
                     <input type="text" class="inputs" name="username" style="left: 9.5%; top:25.3%;" placeholder="Enter username" required>
-                    <input type="text" class="inputs" name="password" style="left: 9.5%; top:50.8%;" placeholder="Enter password" required>
+                    <input type="password" class="inputs" name="password" style="left: 9.5%; top:50.8%;" placeholder="Enter password" required>
                    <input type="submit" id="submit-button" value="SIGN IN">
                 </form>
             </div>

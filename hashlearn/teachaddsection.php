@@ -2,9 +2,10 @@
     <?php
         session_start();
         include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
     ?>
     <head>
-        <title>Teacher Home Page</title>
+        <title>Add Section</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,6 +15,7 @@
         <style>
             body{
                 overflow-x: hidden;
+                text-rendering: optimizeLegibility;
             }
             ::-webkit-scrollbar{
                 width: 8px;
@@ -90,12 +92,12 @@
             #viewsection{
                 position: fixed;
                 left: 0%;
-                top: 7%;
+                top: 5%;
                 width: 20%;
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.9;
+                opacity: 0.8;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -116,37 +118,6 @@
                 text-align: center;
             }
             #viewsection:hover{
-                cursor: pointer;
-            }
-            #addsection{
-                position: fixed;
-                left: 20.5%;
-                top: 5%;
-                width: 20%;
-                height: 15%;
-                background-color: #F02222;
-                z-index: 1;
-                opacity: 0.8;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 15px;
-                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-                border: 1.5px solid white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: 0.2s ease-in-out;
-            }
-            #addsection #addsection-text{
-                position: absolute;
-                bottom: 2%;
-                font-size: 2.3vw;
-                color: white;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
-                text-align: center;
-                user-select: none;
-            }
-            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -218,60 +189,163 @@
                 left: 10%;
                 top: 38%;
             }
-            .sections-container{
+            /*FORM PROPER*/
+            #form-dimensions{
                 position: absolute;
-                top: 47%;
                 right: 10%;
+                top: 41%;
                 left: 10%;
-                height: 40%;
-                max-height: 120%;
-                display: grid;
-                grid-template-columns: auto auto auto auto;
-                column-gap: 20px;
+                height: 8%;
+                display: flex;
+                flex-wrap: wrap;
+                align-content: flex-start;
+                justify-content: center;
+                border: 1px solid black;
             }
-            .sections-container .slot{
+            #form-dimensions #sectionname-container{
+                position: relative;
+                width: 770px;
                 border: 2px solid rgba(0, 0, 0, 0.25);
+                border-radius: 15px;
+                height: 70%;
+                margin: 0.3em 0.1em;
+            }
+            #form-dimensions #sectionname-container #section-name-icon{
+                position: absolute;
+                left:1.5%;
+                top: 8%;
+                max-width: auto;
+                height: 85%;
+            }
+            #form-dimensions #sectionname-container #section-line{
+                position: absolute;
+                width: 0%;
+                left: 6.8%;
+                height: 100%;
+                border-left: 2px solid rgba(0, 0, 0, 0.25);
+            }
+            #form-dimensions #sectionname-container #name-input{
+                position: absolute;
+                width: 90%;
+                left: 8.5%;
+                height: 100%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                color: black;
+                border: none;
+                font-size: 23px;
+                background: transparent;
+                outline: none;
+            }
+            #form-dimensions #save-section-button{
+                position: relative;
+                width: 200px;
+                height: 70%;
+                margin-top: 0.25em;
+                margin-bottom: 0.3em;
+                background-color: #F12929;
+                border-radius: 10px;
+                border: none;
+                margin-left: 1.2em;
+                color: white;
+                opacity: 0.90;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                font-size: 23px;
+                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            #form-dimensions #save-section-button:hover{
+                cursor: pointer;
+                opacity: 1;
+            }
+            #form-dimensions #save-section-button:active{
+                box-shadow: 0px 0px 0px black;
+                transform: scale(0.96);
+            }
+            /**/
+            #result-dimensions{
+                position: absolute;
+                right: 10%;
+                top: 53%;
+                left: 10%;
+                max-height: 900px;
+                display: block;
+                padding: 1.5em;
+                border: 1px solid black;
+            }
+            #result-dimensions #_mast{
+                display: block;
+                width: 100%;
+                font-size: 35px;
+                color: black;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                text-align: center;
+                margin-bottom: 0.90em;
+            }
+            #result-dimensions #section-card{
+                height: 350px;
+                width: 350px;
+                border: 2px solid #F84646;
                 box-sizing: border-box;
                 box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
                 border-radius: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                transition: 0.2s ease-in-out;
+                display: block;
+                margin: 0 auto;
             }
-            .sections-container .slot:hover{
-                border: 2px solid rgba(240, 34, 34, 0.70);
-                cursor: pointer;
-            }
-            .sections-container .slot:active{
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                transform: scale(0.96);
-            }
-            .sections-container .slot #sectionicon{
-                position: relative;
+            #result-dimensions #section-card #_icon{
                 max-width: auto;
-                height: 35%;
-                margin-bottom: 20px;
+                height: 25%;
+                display: block;
+                margin-top: 3.5em;
+                margin-bottom: 1em;
+                margin-left: auto;
+                margin-right: auto;
             }
-            .sections-container .slot #sectionname{
-                position: relative;
-                font-size: 2.7vw;
+            #result-dimensions #section-card #_sectionname{
+                font-size: 55px;
                 color: black;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 600;
                 text-align: center;
+                display: block;
                 user-select: none;
             }
-            .sections-container .slot #studentcount{
+            #result-dimensions #section-card #_studentcount{
                 position: relative;
-                font-size: 2.3vw;
+                font-size: 35px;
                 color: black;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 300;
                 text-align: center;
+                display: block;
                 user-select: none;
             }
+            /**/
+            @media screen and (max-width: 650px) {
+                #form-dimensions #sectionname-container #section-name-icon{
+                    top: 20%;
+                    height: 60%;
+                }
+                #result-dimensions{
+                    top: 65%;
+                }
+                #result-dimensions #section-card{
+                    height: 250px;
+                    width: 250px;
+                }
+                #result-dimensions #section-card #_icon{
+                    margin-top: 2.5em;
+                }
+                #result-dimensions #section-card #_sectionname{
+                    font-size: 40px;
+                }
+                #result-dimensions #section-card #_studentcount{
+                    font-size: 30px;
+                }
+            }
+            /**/
         </style>
     </head>
     <body>
@@ -279,28 +353,13 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <!-- <span id="username">Kyle Matthew Degrano</span> -->
-            <span id="username">
-                <?php
-                    $fName = $_SESSION['f_name'];
-                    $mName = $_SESSION['m_name'];
-                    $lName = $_SESSION['l_name'];
-                    echo $lName.", ".$fName." ".$mName;
-                ?>
-            </span>
-            <Span id="mail">
-                <?php
-                    echo $_SESSION['email'];
-                ?>
-            </Span>
+            <span id="username">Kyle Matthew Degrano</span>
+            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SECTION</span>
-        </div>
-        <div id="addsection" onclick="navButtonHandle('add section')">
-            <span id="addsection-text">ADD SECTION</span>
-        </div>
+            <span id="viewsection-text">VIEW SECTIONS</span>
+        </div> 
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
             <img src="images/edit.png" id="edit" alt="edit profile"/>
@@ -308,80 +367,58 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">ACTIVE SECTIONS</span>
+        <span id="pagemast">ADD A SECTION</span>
         <div id="horizontalline"></div>
-        <?php
-            $user_id_temp = $_SESSION['user_id'];
-            $sql_query = "
-                    SELECT * 
-                    FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    JOIN sections ON user_section.section_id=sections.section_id
-                    WHERE user_section.user_id = $user_id_temp
-            ";
-
-            $result = mysqli_query($con, $sql_query);
-            $total = mysqli_num_rows($result);
-            
-
-            $numSections = $total;
-            $numSectionContainer = ceil($numSections / 4);
-            $baseTop = 47; // 47%
-
-            $cnt = 0;
-            
-            while($row = mysqli_fetch_assoc($result)){
-                $section[] = $row['section_name'];
-                $current_section_id = $row['section_id']; 
-                
-                $sql_query_num = "SELECT * FROM user_section
-                    JOIN users ON user_section.user_id=users.user_id
-                    WHERE user_section.section_id =".$current_section_id." AND users.user_type = 'student' 
-                ";
-        
-                $num_result = mysqli_query($con, $sql_query_num);
-
-                $num[] = mysqli_num_rows($num_result);
-            }
-
-            $k = 0;
-            for($i = 0; $i < $numSectionContainer; $i++){
-                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    for($j = 0; $j < 4; $j++){
-                        if($k >= $numSections) break;
-                        Print '<div class="slot">';
-                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                            Print '<span id="sectionname">'.$section[$k].'</span>';
-                            Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
-                        Print '</div>';
-
-                        $k++;
+        <form action="teachaddsection.php" id="form-dimensions" method="POST">
+            <div id="sectionname-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/1907/1907568.png" id="section-name-icon" alt="section name icon"/>
+                <div id="section-line"></div>
+                <input type="text" id="name-input" name="section-name" placeholder="Enter Section Name" required>
+            </div>
+            <input type="file" class="hw-submissionbox" id="filedata" name="filedata" value="CHOOSE FILE">
+            <input type="submit" value="SAVE SECTION" name="submit" id="save-section-button">
+        </form>
+        <div id="result-dimensions">
+            <?php
+                if($_SERVER['REQUEST_METHOD'] == "POST"){
+                    if(isset($_POST["submit"])){
+                        echo "<script>console.log('entered2');</script>";
+                        $fileName = $_FILES['filedata']['name'];
+                        echo var_dump($_FILES);
+                        echo $fileName;
                     }
-                Print '</div>';
+                    $section_name = $_POST['section-name'];
+                    $sql_query_add_section = "INSERT INTO sections (section_id, section_name, module_num, course_title, course_code)
+                    VALUES ( NULL ,'".$section_name."', 2, 'Computer Programming Laboratory 1', 'CS126L')
+                    ";
+        
+                    $result_add_section = mysqli_query($con, $sql_query_add_section);
 
-                $baseTop = $baseTop + 40 + 5;
-            }            
-        ?>
+                    $last_id = $con->insert_id;
+
+                    $sql_query_add_user_section = "INSERT INTO user_section (user_section_id ,user_id, section_id)
+                    VALUES (NULL,".$current_user_id.", ".$last_id.")
+                    ";
+                    $result = mysqli_query($con, $sql_query_add_user_section);
+                    Print '<span id="_mast">SECTION CREATED: </span>';
+                    Print '<div id="section-card">';
+                        Print '<img src="images/sectionicon.png" id="_icon" alt="sectionicon"/>';
+                        Print '<span id="_sectionname">'.$section_name.'</span>';
+                        Print '<span id="_studentcount">STUDENT COUNT: 0</span>';
+                    Print '</div>';
+                }
+            ?>
+        </div>
     </body>
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
-            document.getElementById("addsection").style.top = "5%";
-            document.getElementById("addsection").style.opacity = "0.9";
-
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
-        }else if(tag === "add section"){
-            document.getElementById("viewsection").style.top = "5%";
-            document.getElementById("viewsection").style.opacity = "0.9";
-
-            document.getElementById("addsection").style.top = "7%";
-            document.getElementById("addsection").style.opacity = "1";
-
-            window.location.assign("teachaddsection.php");
+            window.location.assign("teachhome.php");
         }
     }
 
@@ -401,4 +438,13 @@
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
     }
+
+    /*function confirmation(){
+        let text = "Finalize and return to teacher home page?";
+        if(confirm(text)){
+            window.location.assign("teachhome.php");
+        }else{
+            window.location.assign("teachaddsection.php");
+        }
+    }*/
 </script>
