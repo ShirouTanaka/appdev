@@ -202,7 +202,7 @@
             #pagemast{
                 position: absolute;
                 left: 10%;
-                top: 20%;
+                top: 30%;
                 width: 50%;
                 font-size: 2.7vw;
                 color: black;
@@ -217,13 +217,13 @@
                 width: 40%;
                 height: 0%;
                 left: 10%;
-                top: 28%;
+                top: 38%;
             }
             .assignments-container{
                 position: absolute;
                 right: 10%;
                 left: 10%;
-                top:32%;
+                top:42%;
                 height: 65%;
                 border: 2px solid rgba(0, 0, 0, 0.25);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
