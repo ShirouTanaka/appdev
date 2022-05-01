@@ -406,7 +406,7 @@
                 <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
                     <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
                     <textarea id="code-area" name="code-submission" rows="10" cols="50"><?php // CODE SUBMISSION GOES HERE ?></textarea> 
-                    <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="VIEW CODE" name="view-code" class="buttons"></a>
+                    <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="RUN CODE" name="view-code" class="buttons"></a>
                     <input type="submit" value="GRADE" name="submit" class="buttons">
                 </form>
                 <?php
