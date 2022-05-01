@@ -438,4 +438,3 @@
         window.location.href = "studentviewassignment.php";
     }
 </script>
-

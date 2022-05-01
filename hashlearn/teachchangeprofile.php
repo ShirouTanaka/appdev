@@ -1,6 +1,10 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
-        <title>Create Assignment</title>
+        <title>Student Change Profile Page</title>
         <meta charset="UTF-8">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -91,7 +95,7 @@
                 height: 15%;
                 background-color: #F02222;
                 z-index: 1;
-                opacity: 0.9;
+                opacity: 0.8;
                 border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 15px;
                 box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -112,6 +116,37 @@
                 text-align: center;
             }
             #viewsection:hover{
+                cursor: pointer;
+            }
+            #addsection{
+                position: fixed;
+                left: 20.5%;
+                top: 5%;
+                width: 20%;
+                height: 15%;
+                background-color: #F02222;
+                z-index: 1;
+                opacity: 0.8;
+                border-bottom-right-radius: 15px;
+                border-bottom-left-radius: 15px;
+                box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
+                border: 1.5px solid white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s ease-in-out;
+            }
+            #addsection #addsection-text{
+                position: absolute;
+                bottom: 2%;
+                font-size: 2.3vw;
+                color: white;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 300;
+                text-align: center;
+                user-select: none;
+            }
+            #addsection:hover{
                 cursor: pointer;
             }
             /* EDIT AND LOGOUT CARD */
@@ -136,6 +171,7 @@
             #rightcard #edit{
                 position: absolute;
                 top: 35%;
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -183,159 +219,127 @@
                 left: 10%;
                 top: 38%;
             }
-            #form-wrapper{
+            #change-form-container{
                 position: absolute;
-                top: 40%;
-                left: 9%;
-                right: 9%;
-                border: 1px solid black;
-                max-height: 1500px;
-                padding: 0.5em;
-                margin: 0.5em auto;
+                left: 6%;
+                top:0%;
+                width: 53%;
+                height: 100%;
                 display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: flex-start;
-            }
-            /*LEFT*/
-            #form-wrapper #left-container{
-                min-height: 277px;
-                width: 480px;
-                border: 1px solid black;
-                margin: 0.5em;
-                padding: 0.25em;
-                display: flex;
-                flex-wrap: wrap;
-                align-content: flex-start;
+                align-items: center;
                 justify-content: center;
             }
-            #form-wrapper #left-container .labels{
-                font-family: 'Barlow Condensed', sans-serif;
-                font-size: 28px;
-                font-weight: 300;
-                margin-top: 0.4em;
+            #change-form-container #form-wrapper{
+                position: relative;
+                width: 90%;
+                height: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                margin-bottom: 60px;
             }
-            #form-wrapper #left-container .input{
-                width: 63%;
-                min-height: 35px;
+            #change-form-container #form-wrapper #form-proper{
+                position: absolute;
+                left: 0%;
+                top: 0%;
+                right: 0%;
+                height: 100%;
+            }
+            
+            #change-form-container #form-wrapper #form-proper #submit-button{
+                height: 13%;
+                width: 95.5%;
+                position: absolute;
+                top: 120%;
+                bottom: 5%;
+                left: 2%;
+                background-color: #F12929;
+                border-radius: 15px;
+                border: none;
+                color: white;
+                opacity: 0.90;
                 font-family: 'Barlow Condensed', sans-serif;
-                font-weight: 300;
+                font-weight: 400;
+                font-size: 2vw;
+                box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.25);
+                transition: 0.3s ease-in-out;
+            }
+            #change-form-container #form-wrapper #form-proper #submit-button:hover{
+                opacity: 1;
+                cursor: pointer;
+            }
+            #change-form-container #form-wrapper #form-proper #submit-button:active{
+                box-shadow: 0px 0px 0px black;
+                transform: scale(0.96);
+            }
+
+            #change-form-container #form-wrapper #form-proper .inputs{
+                position: absolute;
+                width: 87%;
+                height: 13%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
                 color: black;
                 border: none;
-                font-size: 1.5em;
-                border-radius: 12px;
-                border: 2px solid rgba(0, 0, 0, 0.25);
+                font-size: 2vw;
+                background: transparent;
                 outline: none;
-                margin-top: 0.62em;
-            }
-            #form-wrapper #left-container #input1{
-                margin-left: 0.6em;
-            }
-            #form-wrapper #left-container #input2{
-                margin-left: 0.3em;
-            }
-            #form-wrapper #left-container #input3{
-                margin-left: 3em;
-            }
-            #form-wrapper #left-container #input4{
-                margin-left: 3.4em;
-            }
-            /*RIGHT*/
-            #form-wrapper #right-container{
-                min-height: 250px;
-                width: 510px;
-                border: 1px solid black;
-                margin: 0.5em;
-                padding: 0.5em;
-                display: block;
-            }
-            #form-wrapper #right-container #textarea-mast{
-                width: 100%;
-                font-family: 'Barlow Condensed', sans-serif;
-                font-size: 28px;
-                display: block;
-                margin: 0em auto;
-                text-align: center;
-                font-weight: 300;
-            }
-            #form-wrapper #right-container #textarea{
-                width: 100%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                font-family: 'Barlow Condensed', sans-serif;
-                font-size: 15px;
-                display: block;
-                font-weight: 300;
-                margin: 0.90em auto;
                 border-radius: 10px;
             }
-            #form-wrapper #right-container #buttons-wrapper{
-                width: 100%;
-                display: block;
-                height: 45px;
-                display: flex;
-                flex-wrap: wrap;
-                align-content: flex-start;
-                justify-content: center;
-            }
-            #form-wrapper #right-container #buttons-wrapper .buttons{
-                height: 75%;
-                width: 110px;
+            #change-form-container #form-wrapper #change-username{
+                position: absolute;
+                font-size: 2.2vw;
+                color: black;
+                top: 35%;
+                left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
-                font-size: 18px;
-                font-weight: 300;
-                margin: 0.3em 1.5em;
-                background-color: #F84646;
-                border: none;
-                outline: none;
-                color: white;
-                box-shadow: -3px 3px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 8px;
-                transition: 0.2s ease-in-out;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
             }
-            #form-wrapper #right-container #buttons-wrapper .buttons:hover{
-                cursor: pointer;
-                background-color: #F02222;
+            #change-form-container #form-wrapper #username{
+                position: relative;
+                border: 2px solid #aaa9a9;
+                top:22%;
+                height: 13%;
+                width: 95%;
+                border-radius: 15px;
+                margin-bottom: 5%;
             }
-            #form-wrapper #right-container #buttons-wrapper .buttons:active{
-                transform: scale(0.96);
-                box-shadow: -0px 0px 4px rgba(0, 0, 0, 0.25);
+            #change-form-container #form-wrapper #username #username-icon{
+                position: absolute;
+                left: 1%;
+                top: 5%;
+                max-width: auto;
+                height: 90%;
             }
-            /*MEDIA QUERY*/
-            @media screen and (max-width: 1750px) {
-                
+            #change-form-container #form-wrapper #change-password{
+                position: absolute;
+                font-size: 2.2vw;
+                color: black;
+                top: 73%;
+                left: 2%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
             }
-            @media screen and (max-width: 650px) {
-                #form-wrapper #left-container .labels{
-                    margin-top: 0.95em;
-                    font-size: 1.3em;                }
-                #form-wrapper #left-container .input{
-                    min-height: 30px;
-                    font-size: 1.3em;
-                    width: 59%;
-                }
-                #form-wrapper #left-container #input1{
-                    margin-left: 1em;
-                }
-                #form-wrapper #left-container #input2{
-                    margin-left: 0.6em;
-                }
-                #form-wrapper #left-container #input3{
-                    margin-left: 0em auto;
-                }
-                #form-wrapper #left-container #input4{
-                    margin-left: 0em auto;
-                }
+            #change-form-container #form-wrapper #password{
+                position: relative;
+                border: 2px solid #aaa9a9;
+                top: 37%;
+                height: 13%;
+                width: 95%;
+                border-radius: 15px;
+                margin-bottom: 5%;
             }
-            /*SCROLL BAR*/
-            ::-webkit-scrollbar{
-                width: 8px;
-            }
-            ::-webkit-scrollbar-thumb{
-                background-color: #ff5f5f;
-                border-radius: 20px;
-            }
-            ::-webkit-scrollbar-thumb:hover{
-                background-color: #F84646;
+            #change-form-container #form-wrapper #password #password-icon{
+                position: absolute;
+                left: 1%;
+                top: 5%;
+                max-width: auto;
+                height: 90%;
             }
         </style>
     </head>
@@ -344,65 +348,77 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">BACK TO ASSIGNMENTS</span>
+            <span id="viewsection-text">VIEW SECTION</span>
+        </div>
+        <div id="addsection" onclick="navButtonHandle('add section')">
+            <span id="addsection-text">ADD SECTION</span>
         </div>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="teachchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">CREATE ASSIGNMENT</span>
+        <span id="pagemast">Change Profile</span>
         <div id="horizontalline"></div>
-        <form id="form-wrapper" action="teachaddhw.php" method="POST">
-            <div id="left-container">
-                <span class="labels">Assignment Title:</span>
-                <input type="text" name="hw-title" id="input1" placeholder="Enter title" class="input" required>
-                <span class="labels">Assignment Code:</span>
-                <input type="text" name="hw-code" id="input2"  placeholder="Enter code" class="input" required>
-                <span class="labels">Start Date:</span>
-                <input type="date" name="start-date" id="input3" class="input" required>
-                <span class="labels">End Date:</span>
-                <input type="date" name="end-date" id="input4" class="input" required>
-                <span class="labels">Due Time:</span>
-                <input type="time" name="due-time" id="input4" class="input" required>
-            </div>
-            <div id="right-container">
-                <span id="textarea-mast">Assignment Description:</span>
-                <textarea id="textarea" name="description" rows="8" cols="50" required>
-                </textarea>
-                <div id="buttons-wrapper">
-                    <input type="reset" value="RESET" class="buttons">
-                    <input type="submit" value="SUBMIT" class="buttons">
+        <div id="change-form-container">
+            <div id="form-wrapper">
+                <span id="change-username">Change Username</span>
+                <div id="username" style="margin-bottom: 5%;">
+                    <img src="images/user.png" id="username-icon" alt="username-icon"/>
                 </div>
+                <span id="change-password">Change Password:</span>
+                <div id="password" style="margin-bottom: 5%;">
+                    <img src="images/password.png" id="password-icon" alt="password-icon"/>
+                </div>
+                <form action="checkLogin2.php" method="POST" id="form-proper">
+                    <input type="text" class="inputs" name="username" style="left: 9.5%; top:48.8%;" placeholder="Enter new username" required>
+                    <input type="text" class="inputs" name="password" style="left: 9.5%; top:86.8%;" placeholder="Enter new password" required>
+                    <input type="submit" id="submit-button" value="SIGN IN">
+                </form>
             </div>
-        </form>
-        <?php
-            if($_SERVER['REQUEST_METHOD'] == "POST"){
-                $title = $_POST['hw-title'];
-                $code = $_POST['hw-code'];
-                $start_date = $_POST['start-date'];
-                $end_date = $_POST['end-date'];
-                $due_time = $_POST['due-time'];
-                $description = $_POST['description'];
-            }
-        ?>
+        </div>
     </body>
 </html>
 <script>
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
+            document.getElementById("addsection").style.top = "5%";
+            document.getElementById("addsection").style.opacity = "0.9";
+
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
 
-            window.location.assign("teachspecsection.php");
+            window.location.assign("teachhome.php");
+
+        }else if(tag === "add section"){
+            document.getElementById("viewsection").style.top = "5%";
+            document.getElementById("viewsection").style.opacity = "0.9";
+
+            document.getElementById("addsection").style.top = "7%";
+            document.getElementById("addsection").style.opacity = "1";
+
+            window.location.assign("teachaddsection.php");
         }
     }
 

@@ -141,7 +141,8 @@
             }
             #rightcard #edit{
                 position: absolute;
-                top: 35%;
+                top: 35%;   
+                left: 30%;
                 max-width: auto;
                 height: 20%;
                 transition: 0.2s ease-in-out;
@@ -353,8 +354,21 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -362,7 +376,7 @@
         </div> 
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
-            <img src="images/edit.png" id="edit" alt="edit profile"/>
+            <a href="teachchangeprofile.php"><img src="images/edit.png" id="edit" alt="edit profile"/></a>
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 

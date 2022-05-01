@@ -202,7 +202,7 @@
             #pagemast{
                 position: absolute;
                 left: 10%;
-                top: 20%;
+                top: 30%;
                 width: 50%;
                 font-size: 2.7vw;
                 color: black;
@@ -217,17 +217,15 @@
                 width: 40%;
                 height: 0%;
                 left: 10%;
-                top: 28%;
+                top: 38%;
             }
             .assignments-container{
                 position: absolute;
                 right: 10%;
                 left: 10%;
-                top:32%;
-                height: 65%;
-                border: 2px solid rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
-                border-radius: 20px;
+                top:42%;
+                height: 55%;
+                border: 2px solid black;
             }
 
             .assignments-container .hw-info-title{
@@ -335,7 +333,7 @@
                 position: absolute;
                 font-size: 2.2vw;
                 color: black;
-                top: 67%;
+                top: 57%;
                 left: 2%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
@@ -349,13 +347,13 @@
                 width: 73%;
                 height: 0%;
                 left: 25%;
-                top: 71.5%;
+                top: 61.5%;
             }
             .assignments-container .hw-submissionbox{
                 height: 6%;
                 width: 30.5%;
                 position: absolute;
-                top: 77%;
+                top: 67%;
                 bottom: 5%;
                 left: 2%;
                 background-color: #F12929;
@@ -382,7 +380,7 @@
                 height: 13%;
                 width: 20.5%;
                 position: absolute;
-                top: 80%;
+                top: 70%;
                 bottom: 5%;
                 left: 75%;
                 background-color: #F12929;

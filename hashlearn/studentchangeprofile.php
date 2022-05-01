@@ -1,4 +1,8 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
         <title>Student Change Profile Page</title>
         <meta charset="UTF-8">
@@ -345,8 +349,21 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="activitystream" onclick="navButtonHandle('activity stream')">

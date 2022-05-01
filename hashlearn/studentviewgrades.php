@@ -1,4 +1,8 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+    ?>
     <head>
         <title>Student View Grades Page</title>
         <meta charset="UTF-8">
@@ -260,15 +264,21 @@
                 text-align: left;
                 user-select: none;
             }
-            .assignments-container .grade{
+            .assignments-container .grade-container{
+                position: absolute;
+                top: 22%;
+                left: 38.7%;
+                height: 25%;
+                width: 50%;
+                text-align:center;
+                color: black;
+            }
+            .assignments-container .grade-container .grade{
                 position: absolute;
                 font-size: 3vw;
                 color: black;
-                top: 24%;
-                left: 67.5%;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
-                text-align: left;
                 user-select: none;
             }
             .assignments-container .datepassed-title{
@@ -310,8 +320,21 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <!-- <span id="username">Kyle Matthew Degrano</span> -->
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <!-- <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span> -->
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="activitystream" onclick="navButtonHandle('activity stream')">
@@ -333,14 +356,45 @@
             $baseTop = 44;
             $assignmentNum = 5;
             
-            for($i = 0; $i < $assignmentNum; $i++){
+            $user_id_current = $_SESSION['user_id'];
+
+            // Get user_section_id of current user
+            $sql_query_section = "
+                    SELECT * 
+                    FROM user_section
+                    JOIN users ON user_section.user_id=users.user_id
+                    JOIN sections ON user_section.section_id=sections.section_id
+                    WHERE user_section.user_id = $user_id_current AND users.user_type = 'student'
+            ";
+            $result_section = mysqli_query($con, $sql_query_section);
+            $row_section = mysqli_fetch_assoc($result_section);
+            $user_section_id_current = $row_section['user_section_id'];
+
+            $sql_query_submissions = "
+                SELECT * FROM submissions
+                JOIN assignment ON assignment.assignment_code = submissions.assignment_name
+                WHERE submissions.assignment_name = assignment.assignment_code AND submissions.user_section_id = $user_section_id_current;
+            ";
+
+            $result_submissions = mysqli_query($con, $sql_query_submissions);
+            $total = mysqli_num_rows($result_submissions);
+
+            while($row = mysqli_fetch_assoc($result_submissions)) {
                 Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="due-date">September 29, 2022</span>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="grade">100/100</span>';
+                    Print '<span class="due-date">'.$row['assignment_dl'].'</span>';
+                    Print '<span class="hw-title">'.$row['assignment_name'].'</span>';
+                    Print '<span class="hw-code">HW Code: '.$row['assignment_code'].'</span>';
+                    Print '<div class="grade-container">';
+                    Print '<span class="grade">';
+                        if (is_null($row['submission_grade'])) {
+                            Print "Not Graded";
+                        } else {
+                            Print $row['submission_grade'];
+                        }
+                    Print '</span>';
+                    Print '</div>';
                     Print '<span class="datepassed-title">Date Passed & Time: </span>';
-                    Print '<span class="datepassed"> 03/29/2022 4:59 PM</span>';
+                    Print '<span class="datepassed">'.$row['uploaded_on'].'</span>';
                 Print '</div>';
                 
                 $baseTop = $baseTop + 15 + 3.4;
