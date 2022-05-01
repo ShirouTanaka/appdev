@@ -238,7 +238,7 @@
             .submission-container #center-info-box{
                 width: 1055px;
                 border-top: 2px solid black;
-                height: 500px;
+                max-height: 1200px;
                 margin-bottom: 1em;
                 margin-top: 1em;
                 display: block;
@@ -269,15 +269,23 @@
                 padding: 0.8em 2.5em;
             }
             .submission-container #center-info-box #form-wrapper{
-                max-width: 50%;
+                max-width: 80%;
                 min-height: 200px;
                 display: flex;
                 flex-wrap: wrap;
                 align-content: flex-start;
                 justify-content: center;
                 margin: 0 auto;
-
                 padding: 0.25em;
+            }
+            .submission-container #center-info-box #form-wrapper #code-area{
+                width: 95%;
+                min-height: 200px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 20px;
+                font-weight: 400;
+                border-radius: 15px;
+                color: black;
             }
             .submission-container #center-info-box #form-wrapper #grade-input{
                 width: 95%;
@@ -387,6 +395,7 @@
                 <!-- GRADING FORM -->
                 <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
                     <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
+                    <textarea id="code-area" name="code-submission" rows="10" cols="50"><?php // CODE SUBMISSION GOES HERE ?></textarea> 
                     <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="VIEW CODE" name="view-code" class="buttons"></a>
                     <input type="submit" value="GRADE" name="submit" class="buttons">
                 </form>
