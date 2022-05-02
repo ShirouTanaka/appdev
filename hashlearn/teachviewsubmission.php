@@ -512,8 +512,7 @@
         if(tag === "view section"){
             document.getElementById("viewsection").style.top = "7%";
             document.getElementById("viewsection").style.opacity = "1";
-
-            window.location.assign("teachpassedhws.php");
+            window.location.href = "teachpassedhws.php";
         }
     }
 
