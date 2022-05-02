@@ -21,11 +21,11 @@
                 width: 8px;
             }
             ::-webkit-scrollbar-thumb{
-                background-color: #cecece;
+                background-color: #ff5f5f;
                 border-radius: 15px;
             }
             ::-webkit-scrollbar-thumb:hover{
-                background-color: #bdbdbd;
+                background-color: #F84646;
             }
             #navbar-body{
                 position: fixed;
@@ -200,7 +200,6 @@
                 max-height: 1200px;
                 display: block;
                 padding: 1.5em;
-                border: 1px solid black;
             }
             #av-students-wrapper #av-students-mast{
                 text-align: center;
@@ -292,16 +291,16 @@
             }
             /*AD WRAPPER*/
             #prime-container #ad-students-wrapper{
-                /* position: absolute;
-                right: 100px;
-                top: 43em;
-                left: 100px; */
                 margin:0 auto;
                 max-height: 1200px;
                 display: block;
                 padding: 1.5em;
                 border: 1px solid black;
-        
+                top: 120%;
+                left: 100px;
+                max-height: 1200px;
+                display: block;
+                padding: 1.5em;
             }
             #ad-students-wrapper #ad-student-mast{
                 text-align: center;
@@ -442,7 +441,7 @@
                 }
                 /*AD MEDIA QUERIES*/
                 #ad-students-wrapper{
-                    top: 128%;
+                    top: 110%;
                 }
                 #ad-students-wrapper #ad-student-mast{
                     font-size: 22px;
