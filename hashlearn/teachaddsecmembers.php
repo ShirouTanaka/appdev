@@ -13,6 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- CSS STYLES -->
         <style>
+            
             body{
                 overflow-x: hidden;
             }
@@ -191,7 +192,7 @@
             #av-students-wrapper{
                 position: absolute;
                 right: 100px;
-                top: 41%;
+                top: 19em;
                 left: 100px;
                 max-height: 1200px;
                 display: block;
@@ -290,12 +291,13 @@
             #ad-students-wrapper{
                 position: absolute;
                 right: 100px;
-                top: 145%;
+                top: 43em;
                 left: 100px;
                 max-height: 1200px;
                 display: block;
                 padding: 1.5em;
                 border: 1px solid black;
+        
             }
             #ad-students-wrapper #ad-student-mast{
                 text-align: center;
@@ -464,6 +466,35 @@
                     font-size: 19px;
                 }
             }
+
+            #prime-container{
+                position: absolute;
+                top:15em;
+                border: 1px solid black;
+                left: 5%;
+                right: 5%;
+                padding: 1.5em;
+                max-height: 1500px;
+                display: block;
+            }
+
+            #prime-container #av-students-wrapper{
+                max-height: 1200px;
+                display: block;
+                padding: 1.5em;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 2em;
+                border: 1px solid black;
+            }
+
+            #prime-container #ad-students-wrapper{
+                max-height: 1200px;
+                display: block;
+                margin: 0 auto;
+                border:1px solid black;
+                padding: 1.5em;
+            }
         </style>
     </head>
     <body>
@@ -546,6 +577,7 @@
                 <input type="submit" value="ADD MEMBERS" id="submit-button" name="submit_btn">
             </div>
         </form>
+        
         <?php
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -557,10 +589,8 @@
                         Print '<span id="ad-student-mast">ADDED STUDENTS</span>';
                         Print '<div id="ad-students-container">';
                             foreach($_POST['studentitem'] as $value){
-                                #Print '<div class="ad-item">';
-                                #    Print '<span id="ad-student-name">'.$value.'</span>';
-                                #Print '</div>';
-
+                                
+                            
                                 $sql_query_student = "
                                     SELECT *
                                     FROM users 
@@ -569,7 +599,11 @@
                                 $result_student = mysqli_query($con, $sql_query_student);
                                 $student = mysqli_fetch_assoc($result_student);
 
-                                Print $student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'<br>';
+                                Print '<div class="ad-item">';
+                                    Print '<span id="ad-student-name">'.$student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'</span>';
+                                Print '</div>';
+
+                                #Print $student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'<br>';
                             }
                         Print '</div>';
                         Print '<div id="ad-submission-container">';
@@ -578,10 +612,11 @@
                         Print '</div>';
                     Print '</div>';
                 }else{
-                    echo '<script>alert("Atleast one student should be added to the section");</script>';
+                    echo '<script>alert("At least one student should be added to the section");</script>';
                 }
             }
         ?>
+        
     </body>
 </html>
 <script>
