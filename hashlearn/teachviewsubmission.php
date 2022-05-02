@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
+    ?>
     <head>
         <title>View Submission</title>
         <meta charset="UTF-8">
@@ -364,8 +369,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -377,22 +393,48 @@
             <a href="login.php"><img src="images/logout.png" id="logout" alt="logout profile"/></a>
         </div>
 
-        <span id="pagemast">OOP Introductory HW</span>
+        <!-- BODY PROPER -->
+
+        <?php
+            $section_id = $_COOKIE['section_id'];
+            $assignment_id = $_COOKIE['assignment_id'];
+            $assignment_code = $_COOKIE['assignment_code'];
+            $file_id = $_COOKIE["file_id"];
+            $student_name = $_COOKIE["student_name"];
+
+            $sql_query_submission = "
+                SELECT *
+                FROM submissions
+                WHERE file_id = $file_id
+            ";
+            $result_submission = mysqli_query($con, $sql_query_submission);
+            $submission = mysqli_fetch_assoc($result_submission);
+
+            $sql_query_assignment = "
+                SELECT *
+                FROM assignment
+                WHERE assignment_id = $assignment_id
+            ";
+            $result_assignment = mysqli_query($con, $sql_query_assignment);
+            $assignment = mysqli_fetch_assoc($result_assignment);
+        ?>
+
+        <span id="pagemast"><?php Print $assignment["assignment_name"]?></span>
         <div id="horizontalline"></div>
 
         <div class="submission-container">
             <div id="left-info-box">
                 <span class="mast-info">
                     <span style="text-decoration: underline;">ASSIGNMENT CODE:</span>
-                    <?php Print '<span style="margin-left: 0.6em">FA1.1</span>'; ?>
+                    <?php Print '<span style="margin-left: 0.6em">'.$assignment["assignment_code"].'</span>'; ?>
                 </span>
                 <span class="mast-info">
                     <span style="text-decoration: underline;">DATE SUBMITTED:</span>
-                    <?php Print '<span style="margin-left: 1.2em">03/29/2022 10:50 P.M.</span>'; ?>
+                    <?php Print '<span style="margin-left: 1.2em">'.$submission["uploaded_on"].'</span>'; ?>
                 </span>
                 <span class="mast-info">
                     <span style="text-decoration: underline;">SUBMITTED BY:</span>
-                    <?php Print '<span style="margin-left: 2em">Bobby Bobbers B. Bobbingston</span>'; ?>
+                    <?php Print '<span style="margin-left: 2em">'.$student_name.'</span>'; ?>
                 </span>
             </div>
             <div id="right-info-box">
@@ -401,7 +443,7 @@
             </div>
             <div id="center-info-box">
                 <span id="info-mast">ASSIGNMENT INFO </span>
-                <?php Print '<span id="info">Referring to the lectures about DI Approaches and Sample GUI App, develop your own application using the sample program attached hereto (SpringGui). Your application should create a different object that is made up of the existing objects (rectangle and circle).</span>'; ?>
+                <?php Print '<span id="info">'.$assignment["assignment_desc"].'</span>'; ?>
                 <!-- GRADING FORM -->
                 <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
                     <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
@@ -412,6 +454,11 @@
                 <?php
                     if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         $grade = $_POST['grade'];
+                        $con->query("
+                            UPDATE submissions
+                            SET submission_grade = $grade
+                            WHERE file_id = $file_id
+                            ");
                         echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
                     }
                 ?>
