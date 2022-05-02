@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
+    ?>
     <head>
         <title>Create Assignment</title>
         <meta charset="UTF-8">
@@ -344,8 +349,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -367,11 +383,9 @@
                 <span class="labels">Assignment Code:</span>
                 <input type="text" name="hw-code" id="input2"  placeholder="Enter code" class="input" required>
                 <span class="labels">Start Date:</span>
-                <input type="date" name="start-date" id="input3" class="input" required>
+                <input type="datetime-local" name="start-date" id="input3" class="input" required>
                 <span class="labels">End Date:</span>
-                <input type="date" name="end-date" id="input4" class="input" required>
-                <span class="labels">Due Time:</span>
-                <input type="time" name="due-time" id="input4" class="input" required>
+                <input type="datetime-local" name="end-date" id="input4" class="input" required>
             </div>
             <div id="right-container">
                 <span id="textarea-mast">Assignment Description:</span>
@@ -385,12 +399,22 @@
         </form>
         <?php
             if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+                $section_id =  $_COOKIE["section_id"];
+
                 $title = $_POST['hw-title'];
                 $code = $_POST['hw-code'];
                 $start_date = $_POST['start-date'];
                 $end_date = $_POST['end-date'];
                 $due_time = $_POST['due-time'];
                 $description = $_POST['description'];
+
+                //IMPORTANT: pls replace '1' at the end with module number in form (not yet implemented)
+                $con->query("
+                    INSERT INTO assignment (assignment_name, assignment_desc, assignment_code, uploaded_on, assignment_dl, section_id, module_num)
+                    VALUES ('$title', '$description', '$code', '$start_date', '$end_date', $section_id, 1)
+                    ");
+                echo '<script>alert("Assignment created!");</script>';
             }
         ?>
     </body>

@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
+    ?>
     <head>
         <title>Specific Section</title>
         <meta charset="UTF-8">
@@ -294,8 +299,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -308,21 +324,41 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">SUBMISSIONS IN FA2.3</span>
-        <div id="horizontalline"></div>
         <?php
+
             $baseTop = 44;
             $assignmentNum = 5;
             
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="submissions-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="hwcode">FA2.3</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="submitted-by">Submitted by: Bobby Bobby</span>';
-                    Print '<span class="submitted-on">Submitted on: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
-                
+            // Fetch submissions for this assignment within this section
+            
+            $section_id = $_COOKIE['section_id'];
+            $assignment_id = $_COOKIE['assignment_id'];
+            $assignment_code = $_COOKIE['assignment_code'];
+
+            Print '<span id="pagemast">SUBMISSIONS IN '.$assignment_code.'</span>';
+            Print '<div id="horizontalline"></div>';
+
+            $sql_query_submissions = "
+                SELECT *, assignment.assignment_name AS title, assignment.uploaded_on AS assignment_upload_date, submissions.uploaded_on AS submission_upload_date
+                FROM submissions
+                JOIN user_section ON user_section.user_section_id = submissions.user_section_id
+                JOIN assignment ON assignment.assignment_code = submissions.assignment_name
+                JOIN users ON users.user_id = user_section.user_id
+                WHERE user_section.section_id = $section_id AND assignment.assignment_id = $assignment_id
+                ";
+
+            $result_submissions = mysqli_query($con, $sql_query_submissions);
+            while($row = mysqli_fetch_assoc($result_submissions)) {
+                Print '<a onclick="submissionLink('.$row["file_id"].', `'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'`)">';
+                    Print '<div class="submissions-container" style="top:'.$baseTop.'%;">';
+                        Print '<span class="hwcode">'.$row["assignment_code"].'</span>';
+                        Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
+                        Print '<span class="hw-title">'.$row["title"].'</span>';
+                        Print '<span class="submitted-by">Submitted by: '.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
+                        Print '<span class="submitted-on">Submitted on: '.$row["submission_upload_date"].'</span>';
+                    Print '</div>';
+                Print '</a>';
+
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
@@ -354,5 +390,11 @@
 
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
+    }
+
+    function submissionLink(file_id, student_name) {
+        document.cookie = 'file_id = ' + file_id;
+        document.cookie = 'student_name = ' + student_name;
+        window.location.href = "teachviewsubmission.php";
     }
 </script>

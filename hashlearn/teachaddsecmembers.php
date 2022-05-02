@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
+    ?>
     <head>
         <title>Add Section Members</title>
         <meta charset="UTF-8">
@@ -466,8 +471,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -480,36 +496,80 @@
         </div>
         
         <!-- BODY PROPER -->
-        <span id="pagemast">ADD SECTION MEMBERS</span>
+
+        <?php 
+            $section_id = $_COOKIE['section_id'];
+            $sectionNum = $_COOKIE['student_count'];
+
+            $sql_query_section   = "
+                SELECT *
+                FROM sections
+                WHERE section_id = $section_id
+                ";
+            
+            $result_section = mysqli_query($con, $sql_query_section);
+            $section = mysqli_fetch_assoc($result_section);
+        ?>
+
+        <span id="pagemast">ADD SECTION MEMBERS (<?php Print $section["section_name"]?>)</span>
         <div id="horizontalline"></div>
         <form id="av-students-wrapper" method="POST">
             <span id="av-students-mast">AVAILABLE STUDENTS</span>
             <div id="av-students-container">
                 <?php
-                    $available_students = array("Kyle Matthew A. Degrano", "Lenz Baron S. Balita", "Andrei Daniel A. Pamoso", "Lance Williams G. Navarro", "Maria Cassandra M. Lindio");
 
-                    for($i = 0; $i < count($available_students); $i++){
+                    // Select students who do not have a section yet;
+
+                    $sql_query_students = "
+                        SELECT *, users.user_id AS id
+                        FROM users 
+                        LEFT JOIN user_section ON user_section.user_id = users.user_id
+                        WHERE user_section.user_id IS NULL
+                    ";
+                    $result_students = mysqli_query($con, $sql_query_students);
+
+                    while($row = mysqli_fetch_assoc($result_students)) {
                         Print '<div class="av-item">';
-                            Print '<span id="student-name">'.$available_students[$i].'</span>';
-                            Print '<input type="checkbox" class="checkbox" name="studentitem[]" value="'.$available_students[$i].'">';
+                            Print '<span id="student-name">'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
+                            Print '<input type="checkbox" class="checkbox" name="studentitem[]" value="'.$row["id"].'"';
+                            if (!empty($_POST['studentitem'])) {
+                                if (in_array($row["id"], $_POST['studentitem'])) {
+                                    Print 'checked';
+                                }
+                            }
+                            Print '>';
                         Print '</div>';
                     }
                 ?>
             </div>
             <div id="av-submission-container">
-                <input type="submit" value="ADD MEMBERS" id="submit-button" name="submit">
+                <input type="submit" value="ADD MEMBERS" id="submit-button" name="submit_btn">
             </div>
         </form>
         <?php
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+
+
+
                 if(!empty($_POST['studentitem'])){
                     Print '<div id="ad-students-wrapper">';
                         Print '<span id="ad-student-mast">ADDED STUDENTS</span>';
                         Print '<div id="ad-students-container">';
                             foreach($_POST['studentitem'] as $value){
-                                Print '<div class="ad-item">';
-                                    Print '<span id="ad-student-name">'.$value.'</span>';
-                                Print '</div>';
+                                #Print '<div class="ad-item">';
+                                #    Print '<span id="ad-student-name">'.$value.'</span>';
+                                #Print '</div>';
+
+                                $sql_query_student = "
+                                    SELECT *
+                                    FROM users 
+                                    WHERE user_id = $value
+                                    ";
+                                $result_student = mysqli_query($con, $sql_query_student);
+                                $student = mysqli_fetch_assoc($result_student);
+
+                                Print $student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'<br>';
                             }
                         Print '</div>';
                         Print '<div id="ad-submission-container">';
@@ -562,7 +622,9 @@
     function confirmation(){
         let text = "Finalize and return to assignments page?";
         if(confirm(text)){
-            window.location.assign("teachspecsection.php");
+            const form = document.getElementById("av-students-wrapper");
+            form.action = "addstudent.php";
+            form.submit();
         }
     }
 </script>
