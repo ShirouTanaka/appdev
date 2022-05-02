@@ -189,11 +189,14 @@
                 left: 10%;
                 top: 38%;
             }
-            #av-students-wrapper{
-                position: absolute;
+            #prime-container #av-students-wrapper{
+                /* position: absolute;
                 right: 100px;
                 top: 19em;
-                left: 100px;
+                left: 100px; */
+                margin-left:auto;
+                margin-right:auto;
+                margin-bottom:2em;
                 max-height: 1200px;
                 display: block;
                 padding: 1.5em;
@@ -288,11 +291,12 @@
                 transform: scale(0.96);
             }
             /*AD WRAPPER*/
-            #ad-students-wrapper{
-                position: absolute;
+            #prime-container #ad-students-wrapper{
+                /* position: absolute;
                 right: 100px;
                 top: 43em;
-                left: 100px;
+                left: 100px; */
+                margin:0 auto;
                 max-height: 1200px;
                 display: block;
                 padding: 1.5em;
@@ -326,7 +330,7 @@
                 overflow-x: hidden;
                 overflow-y: scroll;
             }
-            #ad-students-wrapper #ad-students-container .ad-item{
+            #ad-students-wrapper #ad-students-container #ad-item{
                 border: 2px solid #F84646;
                 height: 45px;
                 width: 100%;
@@ -334,19 +338,21 @@
                 border-radius: 15px;
                 transition: 0.2s ease-in-out;
                 display: flex;
-                justify-content: center;
+                justify-content:center;
                 opacity: 0.6;
                 align-items: center;
             }
-            #ad-students-wrapper #ad-students-container .ad-item #ad-student-name{
+            
+            #ad-students-wrapper #ad-students-container #ad-item #ad-student-name{
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
                 color: black;
                 font-size: 1.7em;
                 user-select: none;
                 margin-left: 0.5em;
+                
             }
-            #ad-students-wrapper #ad-students-container .ad-item:hover{
+            #ad-students-wrapper #ad-students-container #ad-item:hover{
                 cursor: pointer;
                 opacity: 1;
                 box-shadow: -1px 2px 4px rgba(0, 0, 0, 0.25);
@@ -444,10 +450,10 @@
                 #ad-students-wrapper #ad-students-container{
                     width: 80%;
                 }
-                #ad-students-wrapper #ad-students-container .ad-item{
+                #ad-students-wrapper #ad-students-container #ad-item{
                     height: 30px;
                 }
-                #ad-students-wrapper #ad-students-container .ad-item #ad-student-name{
+                #ad-students-wrapper #ad-students-container #ad-item #ad-student-name{
                     font-size: 1.2em;
                 }
                 #ad-students-wrapper #ad-submission-container{
@@ -469,31 +475,13 @@
 
             #prime-container{
                 position: absolute;
-                top:15em;
-                border: 1px solid black;
+                top:19em;
+       
                 left: 5%;
                 right: 5%;
                 padding: 1.5em;
                 max-height: 1500px;
                 display: block;
-            }
-
-            #prime-container #av-students-wrapper{
-                max-height: 1200px;
-                display: block;
-                padding: 1.5em;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 2em;
-                border: 1px solid black;
-            }
-
-            #prime-container #ad-students-wrapper{
-                max-height: 1200px;
-                display: block;
-                margin: 0 auto;
-                border:1px solid black;
-                padding: 1.5em;
             }
         </style>
     </head>
@@ -544,79 +532,80 @@
 
         <span id="pagemast">ADD SECTION MEMBERS (<?php Print $section["section_name"]?>)</span>
         <div id="horizontalline"></div>
-        <form id="av-students-wrapper" method="POST">
-            <span id="av-students-mast">AVAILABLE STUDENTS</span>
-            <div id="av-students-container">
-                <?php
+        <div id="prime-container">
+            <form id="av-students-wrapper" method="POST">
+                <span id="av-students-mast">AVAILABLE STUDENTS</span>
+                <div id="av-students-container">
+                    <?php
 
-                    // Select students who do not have a section yet;
+                        // Select students who do not have a section yet;
 
-                    $sql_query_students = "
-                        SELECT *, users.user_id AS id
-                        FROM users 
-                        LEFT JOIN user_section ON user_section.user_id = users.user_id
-                        WHERE user_section.user_id IS NULL
-                    ";
-                    $result_students = mysqli_query($con, $sql_query_students);
+                        $sql_query_students = "
+                            SELECT *, users.user_id AS id
+                            FROM users 
+                            LEFT JOIN user_section ON user_section.user_id = users.user_id
+                            WHERE user_section.user_id IS NULL
+                        ";
+                        $result_students = mysqli_query($con, $sql_query_students);
 
-                    while($row = mysqli_fetch_assoc($result_students)) {
-                        Print '<div class="av-item">';
-                            Print '<span id="student-name">'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
-                            Print '<input type="checkbox" class="checkbox" name="studentitem[]" value="'.$row["id"].'"';
-                            if (!empty($_POST['studentitem'])) {
-                                if (in_array($row["id"], $_POST['studentitem'])) {
-                                    Print 'checked';
+                        while($row = mysqli_fetch_assoc($result_students)) {
+                            Print '<div class="av-item">';
+                                Print '<span id="student-name">'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
+                                Print '<input type="checkbox" class="checkbox" name="studentitem[]" value="'.$row["id"].'"';
+                                if (!empty($_POST['studentitem'])) {
+                                    if (in_array($row["id"], $_POST['studentitem'])) {
+                                        Print 'checked';
+                                    }
                                 }
-                            }
-                            Print '>';
-                        Print '</div>';
-                    }
-                ?>
-            </div>
-            <div id="av-submission-container">
-                <input type="submit" value="ADD MEMBERS" id="submit-button" name="submit_btn">
-            </div>
-        </form>
-        
-        <?php
-            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                                Print '>';
+                            Print '</div>';
+                        }
+                    ?>
+                </div>
+                <div id="av-submission-container">
+                    <input type="submit" value="ADD MEMBERS" id="submit-button" name="submit_btn">
+                </div>
+            </form>
+                    
+            <?php
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
 
-                if(!empty($_POST['studentitem'])){
-                    Print '<div id="ad-students-wrapper">';
-                        Print '<span id="ad-student-mast">ADDED STUDENTS</span>';
-                        Print '<div id="ad-students-container">';
-                            foreach($_POST['studentitem'] as $value){
+                    if(!empty($_POST['studentitem'])){
+                        Print '<div id="ad-students-wrapper">';
+                            Print '<span id="ad-student-mast">ADDED STUDENTS</span>';
+                            Print '<div id="ad-students-container">';
+                                foreach($_POST['studentitem'] as $value){
+                                    
                                 
-                            
-                                $sql_query_student = "
-                                    SELECT *
-                                    FROM users 
-                                    WHERE user_id = $value
-                                    ";
-                                $result_student = mysqli_query($con, $sql_query_student);
-                                $student = mysqli_fetch_assoc($result_student);
+                                    $sql_query_student = "
+                                        SELECT *
+                                        FROM users 
+                                        WHERE user_id = $value
+                                        ";
+                                    $result_student = mysqli_query($con, $sql_query_student);
+                                    $student = mysqli_fetch_assoc($result_student);
 
-                                Print '<div class="ad-item">';
-                                    Print '<span id="ad-student-name">'.$student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'</span>';
-                                Print '</div>';
+                                    Print '<div id="ad-item">';
+                                        Print '<span id="ad-student-name">'.$student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'</span>';
+                                    Print '</div>';
 
-                                #Print $student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'<br>';
-                            }
+                                    #Print $student["l_name"].', '.$student["f_name"].' '.$student["m_name"].'<br>';
+                                }
+                            Print '</div>';
+                            Print '<div id="ad-submission-container">';
+                                Print '<button id="redo-button" onclick="confirmreselect()">RESELECT</button>';
+                                Print '<button id="finalize-button" onclick="confirmation()">FINALIZE</button>';
+                            Print '</div>';
                         Print '</div>';
-                        Print '<div id="ad-submission-container">';
-                            Print '<button id="redo-button" onclick="confirmreselect()">RESELECT</button>';
-                            Print '<button id="finalize-button" onclick="confirmation()">FINALIZE</button>';
-                        Print '</div>';
-                    Print '</div>';
-                }else{
-                    echo '<script>alert("At least one student should be added to the section");</script>';
+                    }else{
+                        echo '<script>alert("At least one student should be added to the section");</script>';
+                    }
                 }
-            }
-        ?>
-        
+            ?>
+        </div>
     </body>
 </html>
 <script>
