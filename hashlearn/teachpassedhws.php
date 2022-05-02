@@ -281,6 +281,17 @@
                 text-align: left;
                 user-select: none;
             }
+            .submissions-container .grade{
+                position: absolute;
+                font-size: 3vw;
+                color: black;
+                top: 21%;
+                left: 75%;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                text-align: left;
+                user-select: none;
+            }
             .submissions-container:hover{
                 cursor: pointer;   
                 box-shadow: -8px 8px 4px rgba(0, 0, 0, 0.25);
@@ -356,6 +367,14 @@
                         Print '<span class="hw-title">'.$row["title"].'</span>';
                         Print '<span class="submitted-by">Submitted by: '.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
                         Print '<span class="submitted-on">Submitted on: '.$row["submission_upload_date"].'</span>';
+                        
+                        if($row["submission_grade"] != null){
+                            Print '<span class="grade">Score: '.$row["submission_grade"].'</span>';
+                        }
+                        else{
+                            Print '<span class="grade">Not Graded</span>'; 
+                        }
+                        
                     Print '</div>';
                 Print '</a>';
 
