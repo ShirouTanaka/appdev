@@ -417,6 +417,21 @@
             ";
             $result_assignment = mysqli_query($con, $sql_query_assignment);
             $assignment = mysqli_fetch_assoc($result_assignment);
+
+            // CODE SUBMISSION GOES HERE 
+                            //should work in tandem with the compiler.php where this one would retrieve the file and enter the contents
+                            include 'connect.php';
+
+                            $sql_query = $con->query("SELECT * FROM submissions WHERE file_id=".$file_id."");
+
+                            if($sql_query->num_rows > 0){
+                                while($row = $sql_query->fetch_assoc()){
+                                
+                                    
+                                $filename = $row["file_name"];
+                                    
+                                }
+                            }
         ?>
 
         <span id="pagemast"><?php Print $assignment["assignment_name"]?></span>
@@ -446,13 +461,30 @@
                 <?php Print '<span id="info">'.$assignment["assignment_desc"].'</span>'; ?>
                 <!-- GRADING FORM -->
                 <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
-                    <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required>
-                    <textarea id="code-area" name="code-submission" rows="10" cols="50"><?php // CODE SUBMISSION GOES HERE ?></textarea> 
-                    <a href="https://www.jdoodle.com/online-compiler-c++/" target="_blank" rel="noopener noreferrer"><input type="button" value="RUN CODE" name="view-code" class="buttons"></a>
+                    <!-- <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required> -->
+                    <textarea id="code-area" name="code-submission" rows="10" cols="50">
+                    </textarea>
+                    
+                    <form method="POST" action="https://www.jdoodle.com/api/redirect-to-post/online-compiler-c++">
+                        <!-- <a href="https://www.jdoodle.com/api/redirect-to-post/online-compiler-c++" target="_blank" rel="noopener noreferrer"> -->
+                            <input type="submit" value="RUN CODE" name="view-code" class="buttons">
+                        <!-- </a> -->
+                    </form>
+                    
                     <input type="submit" value="GRADE" name="submit" class="buttons">
                 </form>
                 <?php
-                    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    // if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    //     $grade = $_POST['grade'];
+                    //     $con->query("
+                    //         UPDATE submissions
+                    //         SET submission_grade = $grade
+                    //         WHERE file_id = $file_id
+                    //         ");
+                    //     echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
+                    // }
+
+                    if(isset($_POST['GRADE'])){
                         $grade = $_POST['grade'];
                         $con->query("
                             UPDATE submissions
@@ -461,12 +493,24 @@
                             ");
                         echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
                     }
+                    if(isset($_POST['RUN CODE'])){
+                    }
                 ?>
             </div>
         </div>
     </body> 
 </html>
-<script>
+
+<script type="text/javascript">
+    var filename = "<?php echo $filename; ?>"
+</script>
+
+<script type="module">
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
+    import { getStorage, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
+
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
@@ -493,4 +537,37 @@
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
     }
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyA8JTIoITfG5DOYoLy29CnqDi_55-KlqV0",
+    authDomain: "hashlearn-f0b12.firebaseapp.com",
+    projectId: "hashlearn-f0b12",
+    storageBucket: "hashlearn-f0b12.appspot.com",
+    messagingSenderId: "913464562490",
+    appId: "1:913464562490:web:9a2391b6c50aa49f413603",
+    measurementId: "G-V2Z5CJ8TEN"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const storage = getStorage(app);
+  const textarea = document.querySelector("#code-area");
+  getDownloadURL(ref(storage, filename))
+  .then((url) =>{
+      // `url` is the download URL for 'images/stars.jpg'
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() { 
+    if (xhr.readyState == 4 && xhr.status == 200)
+    textarea.value += xhr.responseText; //get file and convert into text
+  }
+    xhr.onload = (event) => {
+      const blob = xhr.response;
+    };
+    xhr.open('GET', url);
+    xhr.send();
+
+    
+  })
 </script>
+

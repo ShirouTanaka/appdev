@@ -389,18 +389,11 @@
                 <div id="section-line"></div>
                 <input type="text" id="name-input" name="section-name" placeholder="Enter Section Name" required>
             </div>
-            <input type="file" class="hw-submissionbox" id="filedata" name="filedata" value="CHOOSE FILE">
             <input type="submit" value="SAVE SECTION" name="submit" id="save-section-button">
         </form>
         <div id="result-dimensions">
             <?php
                 if($_SERVER['REQUEST_METHOD'] == "POST"){
-                    if(isset($_POST["submit"])){
-                        echo "<script>console.log('entered2');</script>";
-                        $fileName = $_FILES['filedata']['name'];
-                        echo var_dump($_FILES);
-                        echo $fileName;
-                    }
                     $section_name = $_POST['section-name'];
                     $sql_query_add_section = "INSERT INTO sections (section_id, section_name, module_num, course_title, course_code)
                     VALUES ( NULL ,'".$section_name."', 2, 'Computer Programming Laboratory 1', 'CS126L')
