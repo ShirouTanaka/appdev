@@ -1,4 +1,9 @@
 <html>
+    <?php
+        session_start();
+        include 'connect.php';
+        $current_user_id= $_SESSION['user_id'];
+    ?>
     <head>
         <title>Specific Section</title>
         <meta charset="UTF-8">
@@ -325,8 +330,19 @@
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
             <div onclick="profileClick()" id="profilepic"></div>
-            <span id="username">Kyle Matthew Degrano</span>
-            <Span id="mail">kmadegrano@mymail.mapua.edu.ph</Span>
+            <span id="username">
+                <?php
+                    $fName = $_SESSION['f_name'];
+                    $mName = $_SESSION['m_name'];
+                    $lName = $_SESSION['l_name'];
+                    echo $lName.", ".$fName." ".$mName;
+                ?>
+            </span>
+            <Span id="mail">
+                <?php
+                    echo $_SESSION['email'];
+                ?>
+            </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
         <div id="viewsection" onclick="navButtonHandle('view section')">
@@ -345,21 +361,46 @@
         </div>
 
         <!-- BODY PROPER -->
-        <span id="pagemast">BM1 TASKS | 69 STUDENTS</span>
-        <div id="horizontalline"></div>
+
         <?php
+
+            $sectionID = $_COOKIE['section_id'];
+            $sectionNum = $_COOKIE['student_count'];
+
+            $sql_query_sections = "
+                SELECT *
+                FROM sections
+                WHERE section_id = $sectionID
+                ";
+            
+            // Should only be 1 result since section ID is unique
+            $result_sections = mysqli_query($con, $sql_query_sections);
+            $row = mysqli_fetch_assoc($result_sections);
+
+            Print '<span id="pagemast">'.$row["section_name"].' TASKS | '.$sectionNum.' STUDENT/S</span>';
+            Print '<div id="horizontalline"></div>';
+
+            // Get list of assignments for this section
+            $sql_query_assignments = "
+                    SELECT * 
+                    FROM assignment
+                    WHERE section_id = $sectionID
+            ";
+            $result_assignments = mysqli_query($con, $sql_query_assignments);
+
             $baseTop = 44;
             $assignmentNum = 5;
             
-            for($i = 0; $i < $assignmentNum; $i++){
-                Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
-                    Print '<span class="date">September 29, 2022</span>';
-                    Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                    Print '<span class="hw-title">OOP Introductory HW</span>';
-                    Print '<span class="hw-code">HW Code: HW1.1</span>';
-                    Print '<span class="due-date">Due Date & Time: 03/29/2022 11:59 PM</span>';
-                Print '</div>';
-                
+            while($row = mysqli_fetch_assoc($result_assignments)) {
+                Print '<a onclick="assignmentLink('.$row["assignment_id"].', `'.$row["assignment_code"].'`)">';
+                    Print '<div class="assignments-container" style="top:'.$baseTop.'%;">';
+                        Print '<span class="date">'.$row["uploaded_on"].'</span>';
+                        Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
+                        Print '<span class="hw-title">'.$row["assignment_name"].'</span>';
+                        Print '<span class="hw-code">HW Code: '.$row["assignment_code"].'</span>';
+                        Print '<span class="due-date">Due Date & Time: '.$row["assignment_dl"].'</span>';
+                    Print '</div>';
+                Print '</a>';
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
@@ -409,5 +450,11 @@
 
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
+    }
+
+    function assignmentLink(assignment_id, assignment_code) {
+        document.cookie = 'assignment_id = ' + assignment_id;
+        document.cookie = 'assignment_code = ' + assignment_code;
+        window.location.href = "teachpassedhws.php";
     }
 </script>

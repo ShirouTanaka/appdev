@@ -333,6 +333,7 @@
             
             while($row = mysqli_fetch_assoc($result)){
                 $section[] = $row['section_name'];
+                $section_ids[] = $row['section_id'];
                 $current_section_id = $row['section_id']; 
                 
                 $sql_query_num = "SELECT * FROM user_section
@@ -347,18 +348,20 @@
 
             $k = 0;
             for($i = 0; $i < $numSectionContainer; $i++){
-                Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
-                    for($j = 0; $j < 4; $j++){
-                        if($k >= $numSections) break;
-                        Print '<div class="slot">';
-                            Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
-                            Print '<span id="sectionname">'.$section[$k].'</span>';
-                            Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
-                        Print '</div>';
+                    Print '<div class="sections-container" style="left:10%;top:'.$baseTop.'%;">';
+                        for($j = 0; $j < 4; $j++){
+                            if($k >= $numSections) break;
+                            Print '<a onclick="sectionLink('.$section_ids[$k].', '.$num[$k].')">';
+                                Print '<div class="slot">';
+                                    Print '<img src="images/sectionicon.png" id="sectionicon" alt="sectionicon"/>';
+                                    Print '<span id="sectionname">'.$section[$k].'</span>';
+                                    Print '<span id="studentcount">STUDENT COUNT:'.$num[$k].'</span>';
+                                Print '</div>';
+                            Print '</a>';
 
-                        $k++;
-                    }
-                Print '</div>';
+                            $k++;
+                        }
+                    Print '</div>';
 
                 $baseTop = $baseTop + 40 + 5;
             }            
@@ -401,5 +404,11 @@
 
             flag = false; // RIGHT CARD IS NOT EXTENDED
         }
+    }
+
+    function sectionLink(section_id, student_count){
+        document.cookie = 'section_id = ' + section_id;
+        document.cookie = 'student_count = ' + student_count;
+        window.location.href = "teachspecsection.php";
     }
 </script>
