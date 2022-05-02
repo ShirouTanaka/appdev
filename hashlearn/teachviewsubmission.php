@@ -368,6 +368,7 @@
         <!-- NAVBAR -->
         <div id="navbar-body">
             <img src="images/smallerlogo.png" id="logo" alt="hashlearn logo"/>
+ 
             <div onclick="profileClick()" id="profilepic"></div>
             <span id="username">
                 <?php
@@ -384,9 +385,11 @@
             </Span>
         </div>
         <!-- TABS SELECTION BENEATH -->
-        <div id="viewsection" onclick="navButtonHandle('view section')">
-            <span id="viewsection-text">VIEW SUBMISSIONS</span>
-        </div>
+        <a href="teachpassedhws.php">
+            <div id="viewsection" onclick="navButtonHandle('view section')">
+                <span id="viewsection-text">VIEW SUBMISSIONS</span>
+            </div>
+        </a>
         <!-- RIGHT CARD EDIT PROFILE AND LOGOUT -->
         <div id="rightcard">
             <img src="images/edit.png" id="edit" alt="edit profile"/>
