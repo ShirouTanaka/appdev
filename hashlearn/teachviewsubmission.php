@@ -460,18 +460,16 @@
                 <span id="info-mast">ASSIGNMENT INFO </span>
                 <?php Print '<span id="info">'.$assignment["assignment_desc"].'</span>'; ?>
                 <!-- GRADING FORM -->
-                <form id="form-wrapper" action="teachviewsubmission.php" method="POST">
-                    <!-- <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade" required> -->
-                    <textarea id="code-area" name="code-submission" rows="10" cols="50">
-                    </textarea>
-                    
-                    <form method="POST" action="https://www.jdoodle.com/api/redirect-to-post/online-compiler-c++">
+                <form id="form-wrapper" action="/submit" method="POST">
+                    <input type="number" id="grade-input" min="0" max="100" name="grade" placeholder="Enter grade">
+                    <textarea id="code-area"  name="initScript" rows="10" cols="50" readonly></textarea>
+                        
                         <!-- <a href="https://www.jdoodle.com/api/redirect-to-post/online-compiler-c++" target="_blank" rel="noopener noreferrer"> -->
-                            <input type="submit" value="RUN CODE" name="view-code" class="buttons">
+                            
                         <!-- </a> -->
-                    </form>
                     
-                    <input type="submit" value="GRADE" name="submit" class="buttons">
+                    <input type="submit" value="RUN CODE" name="view-code" class="buttons" target="_blank" formaction="https://www.jdoodle.com/api/redirect-to-post/online-compiler-c++">
+                    <input type="submit" value="GRADE" name="submit" class="buttons" formaction="teachviewsubmission.php">
                 </form>
                 <?php
                     // if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -484,7 +482,7 @@
                     //     echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
                     // }
 
-                    if(isset($_POST['GRADE'])){
+                    if($_SERVER['REQUEST_METHOD'] and isset($_POST["submit"])){
                         $grade = $_POST['grade'];
                         $con->query("
                             UPDATE submissions
@@ -492,8 +490,6 @@
                             WHERE file_id = $file_id
                             ");
                         echo '<script>alert("GRADE HAS BEEN RECORDED");</script>';
-                    }
-                    if(isset($_POST['RUN CODE'])){
                     }
                 ?>
             </div>
