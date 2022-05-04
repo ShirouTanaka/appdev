@@ -275,7 +275,7 @@
             }
             .assignments-container .grade-container .grade{
                 position: absolute;
-                font-size: 3vw;
+                font-size: 2.5vw;
                 color: black;
                 font-family: 'Barlow Condensed', sans-serif;
                 font-weight: 400;
@@ -389,6 +389,7 @@
                         if (is_null($row['submission_grade'])) {
                             Print "Not Graded";
                         } else {
+                            Print "Score: ";
                             Print $row['submission_grade'];
                         }
                     Print '</span>';
