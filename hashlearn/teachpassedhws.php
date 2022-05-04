@@ -308,6 +308,33 @@
                 width: 100%;
             }
 
+            
+            #footer #buttons{
+                width: 250px;
+                min-height: 50px;
+                text-decoration:none;
+                border-radius: 15px;
+                /* background-color:#47B458; */
+                background-color:#06c258;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 400;
+                margin: 1em;
+                color: white;
+                font-size: 1.5em;
+                box-shadow: -5px 5px 4px rgba(0, 0, 0, 0.25);
+                outline: none;
+                border: none;
+                transition: 0.2s ease-in-out;
+            }
+
+            #footer #buttons:hover{
+                cursor: pointer;
+                background-color: #059142;
+            }
+            #footer #buttons:active{
+                transform: scale(0.96);
+                box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+            }
         </style>
     </head>
     <body>
@@ -364,31 +391,36 @@
                 ";
 
             $result_submissions = mysqli_query($con, $sql_query_submissions);
-            while($row = mysqli_fetch_assoc($result_submissions)) {
-                Print '<a onclick="submissionLink('.$row["file_id"].', `'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'`,`'.$row["assignment_name"].'`)">';
-                    Print '<div class="submissions-container" style="top:'.$baseTop.'%;">';
-                        Print '<span class="hwcode">'.$row["assignment_code"].'</span>';
-                        Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
-                        Print '<span class="hw-title">'.$row["title"].'</span>';
-                        Print '<span class="submitted-by">Submitted by: '.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
-                        Print '<span class="submitted-on">Submitted on: '.$row["submission_upload_date"].'</span>';
-                        
-                        if($row["submission_grade"] != null){
-                            Print '<span class="grade">Score: '.$row["submission_grade"].'</span>';
-                        }
-                        else{
-                            Print '<span class="grade">Not Graded</span>'; 
-                        }
-                        
-                    Print '</div>';
-                Print '</a>';
-
-                $baseTop = $baseTop + 15 + 3.4;
+            if($result_submissions->num_rows > 0){
+                while($row = mysqli_fetch_assoc($result_submissions)) {
+                    Print '<a onclick="submissionLink('.$row["file_id"].', `'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'`,`'.$row["assignment_name"].'`)">';
+                        Print '<div class="submissions-container" style="top:'.$baseTop.'%;">';
+                            Print '<span class="hwcode">'.$row["assignment_code"].'</span>';
+                            Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
+                            Print '<span class="hw-title">'.$row["title"].'</span>';
+                            Print '<span class="submitted-by">Submitted by: '.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'</span>';
+                            Print '<span class="submitted-on">Submitted on: '.$row["submission_upload_date"].'</span>';
+                            
+                            if($row["submission_grade"] != null){
+                                Print '<span class="grade">Score: '.$row["submission_grade"].'</span>';
+                            }
+                            else{
+                                Print '<span class="grade">Not Graded</span>'; 
+                            }
+                            
+                        Print '</div>';
+                    Print '</a>';
+                    ?>
+                    <div id="footer">
+                        <button onclick="window.location='export.php';" id="buttons">Export</button>
+                    </div>
+                    <?php
+                    $baseTop = $baseTop + 15 + 3.4;
+                }
             }
+            
         ?>
-        <div id="footer">
-            <a href="export.php">Export</a>
-        </div>
+        
         
     </body>
 </html>
