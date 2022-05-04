@@ -302,6 +302,11 @@
                 transform: scale(0.96);
                 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
             }
+            #footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
 
         </style>
     </head>
@@ -360,7 +365,7 @@
 
             $result_submissions = mysqli_query($con, $sql_query_submissions);
             while($row = mysqli_fetch_assoc($result_submissions)) {
-                Print '<a onclick="submissionLink('.$row["file_id"].', `'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'`)">';
+                Print '<a onclick="submissionLink('.$row["file_id"].', `'.$row["l_name"].', '.$row["f_name"].' '.$row["m_name"].'`,`'.$row["assignment_name"].'`)">';
                     Print '<div class="submissions-container" style="top:'.$baseTop.'%;">';
                         Print '<span class="hwcode">'.$row["assignment_code"].'</span>';
                         Print '<img src="https://cdn-icons-png.flaticon.com/512/711/711284.png" class="hw-icon" alt="hw icon"/>';
@@ -381,6 +386,10 @@
                 $baseTop = $baseTop + 15 + 3.4;
             }
         ?>
+        <div id="footer">
+            <a href="export.php">Export</a>
+        </div>
+        
     </body>
 </html>
 <script>

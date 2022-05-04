@@ -447,7 +447,7 @@
                 Print '<span class="hw-title">'.$_SESSION['assignment_name'][$num].'</span>';
                 Print '<span class="hw-code">HW Code: '.$_SESSION['assignment_code'][$num].'</span>';
                 Print '<span class="grade-title">Points:</span>';
-                Print '<span class="grade">100</span>';
+                Print '<span class="grade">'.$_SESSION['assignment_total'][$num].'</span>';
                 Print '<span class="due-date-title">Due Date: </span>';
                 Print '<span class="due-date">'. $_SESSION['assignment_dl'][$num].'</span>';
                 Print '<span class="hw-info-title">Assignment Info</span>';

@@ -367,14 +367,15 @@
                 $assignment_name[] = $row['assignment_name'];
                 $assignment_description[] = $row['assignment_desc'];
                 $assignment_code[] = $row['assignment_code'];
-                $assignment_dl[] = $row['assignment_dl']; 
+                $assignment_dl[] = $row['assignment_dl'];
+                $assignment_total[] = $row['totalNum']; 
             }
 
             $_SESSION['assignment_desc'] = $assignment_description;
             $_SESSION['assignment_dl'] = $assignment_dl;
             $_SESSION['assignment_code'] = $assignment_code;
             $_SESSION['assignment_name'] = $assignment_name;
-            
+            $_SESSION['assignment_total'] = $assignment_total;
             $k = 0;
             for($i = 0; $i < $total; $i++){
                 Print '<a onclick="assignmentLink('.$k.')"><div class="assignments-container" style="top:'.$baseTop.'%;">';
