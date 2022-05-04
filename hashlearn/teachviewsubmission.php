@@ -496,16 +496,7 @@
         </div>
     </body> 
 </html>
-
-<script type="text/javascript">
-    var filename = "<?php echo $filename; ?>"
-</script>
-
-<script type="module">
-
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
-    import { getStorage, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
+<script>
 
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
@@ -516,7 +507,7 @@
         }
     }
 
-    function profileClick(){ // WHEN CLICKING USER PROFILE
+   function profileClick(){ // WHEN CLICKING USER PROFILE
         if(flag === false){ // TURN TO TRUE THEN EXTEND
             document.getElementById("rightcard").style.height = "23%"
             document.getElementById("logout").style.opacity = "1";
@@ -533,6 +524,17 @@
         }
     }
 
+</script>
+
+<script type="text/javascript">
+    var filename = "<?php echo $filename; ?>"
+</script>
+
+<script>
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
+    import { getStorage, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
+    
     const firebaseConfig = {
     apiKey: "AIzaSyA8JTIoITfG5DOYoLy29CnqDi_55-KlqV0",
     authDomain: "hashlearn-f0b12.firebaseapp.com",
