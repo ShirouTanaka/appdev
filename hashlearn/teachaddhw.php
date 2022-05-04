@@ -382,6 +382,8 @@
                 <input type="text" name="hw-title" id="input1" placeholder="Enter title" class="input" required>
                 <span class="labels">Assignment Code:</span>
                 <input type="text" name="hw-code" id="input2"  placeholder="Enter code" class="input" required>
+                <span class="labels">Total Points:</span>
+                <input type="number" name="hw-total" id="input2"  placeholder="Enter total points" class="input" required>
                 <span class="labels">Start Date:</span>
                 <input type="datetime-local" name="start-date" id="input3" class="input" required>
                 <span class="labels">End Date:</span>
@@ -408,11 +410,12 @@
                 $end_date = $_POST['end-date'];
                 $due_time = $_POST['due-time'];
                 $description = $_POST['description'];
+                $total = $_POST['hw-total'];
 
                 //IMPORTANT: pls replace '1' at the end with module number in form (not yet implemented)
                 $con->query("
-                    INSERT INTO assignment (assignment_name, assignment_desc, assignment_code, uploaded_on, assignment_dl, section_id, module_num)
-                    VALUES ('$title', '$description', '$code', '$start_date', '$end_date', $section_id, 1)
+                    INSERT INTO assignment (assignment_name, assignment_desc, assignment_code, uploaded_on, assignment_dl, section_id, totalNum)
+                    VALUES ('$title', '$description', '$code', '$start_date', '$end_date', $section_id, $total)
                     ");
                 echo '<script>alert("Assignment created!");</script>';
             }

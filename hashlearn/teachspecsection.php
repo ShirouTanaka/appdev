@@ -376,7 +376,7 @@
             // Should only be 1 result since section ID is unique
             $result_sections = mysqli_query($con, $sql_query_sections);
             $row = mysqli_fetch_assoc($result_sections);
-
+            $_SESSION['section-name'] = $row["section_name"];
             Print '<span id="pagemast">'.$row["section_name"].' TASKS | '.$sectionNum.' STUDENT/S</span>';
             Print '<div id="horizontalline"></div>';
 

@@ -457,7 +457,7 @@
             </div>
             <div id="right-info-box">
                 <span id="grade-mast">Total Points:</span>
-                <?php Print '<span id="grade">100</span>';?>
+                <?php Print '<span id="grade">'.$assignment["totalNum"].'</span>';?>
             </div>
             <div id="center-info-box">
                 <span id="info-mast">ASSIGNMENT INFO </span>
@@ -532,7 +532,7 @@
     var filename = "<?php echo $filename; ?>"
 </script>
 
-<script>
+<script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
     import { getStorage, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
