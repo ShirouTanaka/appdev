@@ -500,7 +500,6 @@
     </body> 
 </html>
 <script>
-
     var flag = false;
     function navButtonHandle(tag){ // FOR NAVBUTTON ANIMATION AND MOUSE EVENT HANDLING
         if(tag === "view section"){
@@ -537,7 +536,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js";
     import { getStorage, ref, getDownloadURL} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js";
-    
+
     const firebaseConfig = {
     apiKey: "AIzaSyA8JTIoITfG5DOYoLy29CnqDi_55-KlqV0",
     authDomain: "hashlearn-f0b12.firebaseapp.com",
