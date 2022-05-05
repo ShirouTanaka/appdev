@@ -35,7 +35,7 @@
             $excelData .= implode("\t", array_values($lineData)) . "\n"; 
         } 
     }else{ 
-        $excelData .= 'No records found...'. "\n"; 
+        echo '<script>alert("NO RECORDS FOUND");</script>'; 
     } 
 
 
