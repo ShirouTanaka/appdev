@@ -1,1 +1,1 @@
-
+A web application that works similarly to Blackboard, where professors can create courses and post assignments, and students can submit and view assignments. The website can also compile C++ files for professors so they can avoid downloading the file.
